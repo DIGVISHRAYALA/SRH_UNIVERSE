@@ -1,0 +1,229 @@
+.scorecard {
+  padding: 20px;
+
+  .scorecard-header {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 1.4rem;
+      color: orange;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid orange;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+  }
+}
+
+.score-details {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+
+  span {
+    font-weight: bold;
+    color: orange;
+  }
+}
+
+.scoreboard {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.inning {
+  background: #1f1f1f;
+  padding: 15px 20px;
+  border-left: 6px solid orange;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin: 0 10px;
+
+  &:hover {
+    background: #292929;
+    transform: scale(1.01);
+    background-color: #ffa500;
+  }
+
+  .team-name {
+    font-weight: bold;
+    color: #ffa500;
+    font-size: 1.1rem;
+  }
+
+  .team-score {
+    font-size: 1.1rem;
+    color: white;
+  }
+}
+
+.unified-score {
+  width: 100%;
+  background: #202020;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+  padding: 20px 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.01);
+    background: #292929;
+  }
+
+  .teams {
+    display: flex;
+    justify-content: center;
+    padding:-100px -200px;
+
+    .inner-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+
+    .team-box {
+      flex: 1;
+      text-align: center;
+
+    //   .team-name {
+    //     font-weight: bold;
+    //     font-size: 1.3rem;
+    //     color: #ffa500;
+    //   }
+        .team-name {
+  //font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: bold;
+  // Default SRH orange
+  color: #ffa500;
+
+  // Special team color overrides
+  &.kkr {
+    color: #8c00fe; // KKR purple
+  }
+}
+
+
+
+      .team-score {
+        font-size: 1.2rem;
+        color: rgb(255, 255, 255);
+        margin-top: 4px;
+        //font-weight: bold;
+      }
+    }
+
+    .match-meta {
+      flex: 1;
+      text-align: center;
+
+      .match-number {
+        font-size: 1rem;
+        color: rgb(255, 255, 255);
+        //font-weight: bold;
+      }
+
+      .match-date {
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-top: 5px;
+        //font-weight: bold;
+      }
+
+      .match-result {
+        margin-top: 10px;
+        color: orange;
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .scorecard {
+    padding: 10px;
+
+    .scorecard-header {
+      h2 {
+        font-size: 1.1rem;
+        padding-bottom: 4px;
+      }
+    }
+  }
+
+  .score-details {
+    font-size: 0.95rem;
+
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  .scoreboard {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+
+    .inning {
+      margin: 10px 0;
+      padding: 12px 15px;
+      flex-direction: column;
+      
+
+
+      .team-name, .team-score {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .unified-score {
+    padding: 15px 10px;
+
+    .teams {
+      flex-direction: column;
+
+      .inner-container {
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+      }
+
+      .team-box,
+      .match-meta {
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+
+        .team-name {
+          font-size: 1.1rem;
+        }
+
+        .team-score {
+          font-size: 1.1rem;
+        }
+
+        .match-number,
+        .match-date,
+        .match-result {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+

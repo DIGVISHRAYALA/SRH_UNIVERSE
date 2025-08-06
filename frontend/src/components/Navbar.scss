@@ -1,0 +1,134 @@
+// SCSS Variables
+$orange-main: #ff7518;
+$orange-deep: #ff8c00;
+$white: #ffffff;
+$black: #1a1a1a;
+
+// Navbar Styling
+.navbar {
+  background: linear-gradient(to right, $black, $orange-main); // Black to Rust Orange
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: background 0.4s ease-in-out;
+
+//   .logo {
+//     font-size: 2rem;
+//     font-weight: 700;
+//     color: $white;
+//     font-family: 'Segoe UI', sans-serif;
+//     cursor: pointer;
+//     transition: transform 0.3s ease, color 0.3s ease;
+
+//     &:hover {
+//       transform: scale(1.08);
+//       color: #fffde7;
+//     }
+//   }
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $white;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.12);
+    color: rgba($orange-deep, 0.9); // pumpkin orange with slight opacity
+    //font-size: 2.3rem;
+    text-shadow: 0 0 10px rgba($orange-main, 0.6); // soft glowing border effect
+  }
+}
+
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+
+    a {
+      color: $white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s ease;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: $white;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: #fffde7;
+
+        &::before {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  
+  // Mobile Responsive
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    gap: 0.8rem;
+
+    .logo {
+      font-size: 1.7rem;
+      margin-bottom: 0.6rem;
+      text-align: center;
+
+      &:hover {
+        transform: scale(1.08);
+        color: rgba($orange-deep, 0.9);
+        text-shadow: 0 0 8px rgba($orange-main, 0.5);
+      }
+    }
+  }
+    .nav-links {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 0.8rem;
+
+      a {
+        font-size: 1rem;
+        padding: 0.4rem 0;
+        text-align: center;
+
+        &::before {
+          height: 1.5px;
+        }
+      }
+    }
+  }
+}
+
+.nav-logo {
+  transform: translateY(-6px);
+  height:110px;
+  width: auto;
+  margin: 0 2rem;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-6px) scale(1.05);
+  }
+}

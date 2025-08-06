@@ -1,0 +1,67 @@
+.score-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #000;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  .match-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: orange;
+  }
+
+  .team-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    img {
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid orange;
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  .score-box {
+    background: #111;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+
+    .inning {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .details {
+    font-size: 0.95rem;
+    color: #ccc;
+
+    p {
+      margin: 0.4rem 0;
+
+      strong {
+        color: #fff;
+      }
+    }
+  }
+}

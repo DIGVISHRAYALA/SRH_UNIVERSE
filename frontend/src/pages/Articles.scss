@@ -1,0 +1,386 @@
+// .articles {
+//   padding: 2rem;
+//   background-color: #fff5ee;
+//   color: #111;
+
+//   h1 {
+//     text-align: center;
+//     margin-bottom: 2rem;
+//     color: #e65c00;
+//   }
+
+//   .article-box {
+//     margin-bottom: 2rem;
+//     padding: 1rem;
+//     background-color: #fff;
+//     border-radius: 10px;
+//     box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+//     transition: transform 0.2s ease;
+
+//     &:hover {
+//       transform: translateY(-4px);
+//     }
+
+//     h2 {
+//       color: #222;
+//       margin-bottom: 0.5rem;
+//     }
+
+//     p {
+//       font-size: 1rem;
+//       color: #444;
+//     }
+
+//     .divider {
+//       margin-top: 1rem;
+//       border: none;
+//       border-top: 2px dashed #ccc;
+//     }
+//   }
+// }
+// @media (max-width: 600px) {
+//   .articles {
+//     padding: 1rem;
+
+//     h1 {
+//       font-size: 1.5rem;
+//       margin-bottom: 1.5rem;
+//     }
+
+//     .article-box {
+//       padding: 1rem;
+//       margin: 1rem 0;
+//       border-radius: 10px;
+//       box-shadow: 0 4px 10px rgba(255, 140, 0, 0.1);
+
+//       h2 {
+//         font-size: 1.2rem;
+//         margin-bottom: 0.3rem;
+//       }
+
+//       p {
+//         font-size: 0.95rem;
+//         line-height: 1.5;
+//       }
+
+//       .divider {
+//         margin-top: 1rem;
+//       }
+//     }
+//   }
+// }
+
+
+
+// .articles {
+//   padding: 2rem;
+//   background-color: #fff5ee;
+//   color: #111;
+
+//   h1 {
+//     text-align: center;
+//     margin-bottom: 2rem;
+//     color: #e65c00;
+//   }
+
+//   .article-box {
+//     margin-bottom: 2rem;
+//     padding: 1rem;
+//     background-color: #fff;
+//     border-radius: 10px;
+//     box-shadow: 0 0 10px rgba(255, 140, 0, 0.15);
+//     transition: transform 0.2s ease;
+//     position: relative; /* so absolute children can position relative to this box */
+
+//     &:hover { transform: translateY(-4px); }
+
+//     h2 {
+//       color: #222;
+//       margin-bottom: 0.5rem;
+//       font-size: 1.25rem;
+//     }
+
+//     /* wrapper to hold the paragraph and the positioned button */
+//     .content-wrap {
+//       position: relative;
+//       /* add bottom padding so absolute button doesn't overlap meta text */
+//       padding-bottom: 0.8rem;
+//     }
+
+//     .article-content {
+//       font-size: 1rem;
+//       color: #444;
+//       line-height: 1.5;
+//       margin: 0.4rem 0;
+//       transition: all 0.25s ease;
+//       word-break: break-word;
+//     }
+
+//     /* clamp to exactly 2 lines using -webkit-line-clamp */
+//     // .clamped {
+//     //   display: -webkit-box;
+//     //   -webkit-box-orient: vertical;
+//     //   -webkit-line-clamp: 2;
+//     //   overflow: hidden;
+//     //   text-overflow: ellipsis;
+//     //   /* add right padding so the absolute button won't cover text */
+//     //   padding-right: 5.5rem; /* adjust if your button width changes */
+//     //   position: relative;
+//     // }
+
+//     .clamped {
+//   display: -webkit-box;
+//   -webkit-box-orient: vertical;
+//   -webkit-line-clamp: 2;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   /* removed padding-right to eliminate extra gap */
+//   position: relative;
+// }
+
+
+//     /* Expand to full */
+//     .expanded {
+//       display: block;
+//       -webkit-line-clamp: unset;
+//       overflow: visible;
+//       padding-right: 0;
+//     }
+
+//     /* small gradient fade at the bottom right to visually indicate clipping */
+//     .clamped::after {
+//       content: "";
+//       position: absolute;
+//       right: 0.6rem;
+//       bottom: 0;
+//       width: 4rem;
+//       height: 2.2rem; /* roughly the height of one line to create a fade */
+//       pointer-events: none;
+//       background: linear-gradient(to left, #fff 10%, rgba(255,245,238,0));
+//       border-radius: 2px;
+//     }
+
+//     /* button positioned over the end of the second line */
+//     .read-toggle {
+//       position: absolute;
+//       right: 0.6rem;
+//       bottom: 0.15rem; /* nudges vertically to align with the second line end */
+//       background: #ffffff; /* keep same as card so it looks inline */
+//       border: none;
+//       color: #ff6600;
+//       font-weight: 600;
+//       cursor: pointer;
+//       padding: 0 6px;
+//       line-height: 1.2;
+//       border-radius: 4px;
+//       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+//       transition: color 0.12s ease, transform 0.12s ease;
+//     }
+
+//     .read-toggle:hover {
+//       color: #e65c00;
+//       transform: translateY(-1px);
+//     }
+
+//     .meta {
+//       font-size: 0.85rem;
+//       color: #777;
+//       margin-top: 0.6rem;
+//     }
+
+//     .divider {
+//       margin-top: 1rem;
+//       border: none;
+//       border-top: 2px dashed #ccc;
+//     }
+//   }
+// }
+
+// /* Responsive adjustments */
+// @media (max-width: 600px) {
+//   .articles {
+//     padding: 1rem;
+
+//     h1 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+//     .article-box {
+//       padding: 1rem;
+//       margin: 1rem 0;
+//       box-shadow: 0 4px 10px rgba(255, 140, 0, 0.1);
+
+//       h2 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+
+//       .article-content { font-size: 0.98rem; line-height: 1.45; }
+
+//       /* on small screens make room for button */
+//       .clamped { padding-right: 5.2rem; }
+
+//       .read-toggle { right: 0.6rem; bottom: 0.2rem; }
+//     }
+//   }
+// }
+
+
+.articles {
+  padding: 2rem;
+  background-color: #fff5ee;
+  color: #111;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #e65c00;
+  }
+
+  .article-box {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.15);
+    transition: transform 0.2s ease;
+    position: relative; /* so absolute children can position relative to this box */
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      color: #222;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    /* wrapper to hold the paragraph and the positioned button */
+    .content-wrap {
+      position: relative;
+      /* bottom padding so absolute button doesn't overlap meta text */
+      padding-bottom: 0.8rem;
+    }
+
+    .article-content {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+      margin: 0.4rem 0;
+      transition: all 0.25s ease;
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    /* -----------------------
+       CLAMP: standard + vendor-prefixed
+       Put standard property first, then vendor prefixed for compatibility
+       ----------------------- */
+    .clamped {
+      /* Standard (future-proof) */
+      line-clamp: 2;
+
+      /* WebKit implementation */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+    }
+
+    /* Expanded state: show full content */
+    .expanded {
+      /* Unset clamps */
+      line-clamp: unset;
+      -webkit-line-clamp: unset;
+
+      /* Let paragraph behave normally */
+      display: block;
+      overflow: visible;
+    }
+
+    /* subtle fade to indicate clipped content (narrow so it doesn't push text) */
+    // .clamped::after {
+    //   content: "";
+    //   position: absolute;
+    //   right: 0.6rem;
+    //   bottom: 0;
+    //   width: 2.6rem;      /* narrow to avoid pushing text left */
+    //   height: 2.2rem;    /* approx one line height */
+    //   pointer-events: none;
+    //   background: linear-gradient(to left, #fff 20%, rgba(255,245,238,0));
+    //   border-radius: 2px;
+    // }
+
+    /* Read more button positioned over the end of the second line */
+    .read-toggle {
+      position: absolute;
+      right: 0.6rem;
+      bottom: 0.15rem; /* nudge vertically to align with the second line end */
+      background: #fff; /* match card background so overlap is seamless */
+      border: none;
+      color: #ff6600;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0 6px;
+      line-height: 1.2;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: color 0.12s ease, transform 0.12s ease;
+    }
+
+    .read-toggle:hover {
+      color: #e65c00;
+      transform: translateY(-1px);
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 0.6rem;
+    }
+
+    .divider {
+      margin-top: 1rem;
+      border: none;
+      border-top: 2px dashed #ccc;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .articles {
+    padding: 1rem;
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-box {
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(255, 140, 0, 0.1);
+
+      h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .article-content {
+        font-size: 0.98rem;
+        line-height: 1.45;
+      }
+
+      /* Remove any padding-right (prevents gap). Button still overlaps cleanly */
+      // .clamped {
+      //   /* keep same clamp behavior, no added right padding */
+      // }
+
+      .read-toggle {
+        right: 0.6rem;
+        bottom: 0.2rem;
+      }
+    }
+  }
+}
