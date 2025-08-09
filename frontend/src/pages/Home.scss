@@ -1,3 +1,10 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;          // PREVENT horizontal overflow (hides accidental extra width)
+  -webkit-overflow-scrolling: touch;
+}
+
 .home {
   width: 100%;
   min-height: 100vh;
@@ -122,7 +129,7 @@
 
       .read-more {
         align-self: flex-end;
-        color: orange;
+        color: rgb(255, 244, 244);
         font-weight: bold;
         font-size: 1rem;
         text-decoration: none;
@@ -130,8 +137,8 @@
         transition: all 0.3s ease;
 
         &:hover {
-          color: white;
-          text-shadow: 0 0 10px rgba(255, 100, 0, 0.8);
+          color: rgb(255, 255, 255);
+          text-shadow: 0 0 10px rgb(248, 248, 248);
         }
       }
     }
@@ -177,6 +184,12 @@
         padding: 12px;
       }
     }
+    .rank {
+    color: #ffffff; // white for visibility on orange background
+    font-weight: bold;
+    margin-right: 0.4rem;
+    font-size: 0.95rem; // slightly smaller on mobile
+    }
 
     .welcome-section {
       h2 {
@@ -196,4 +209,10 @@
       }
     }
   }
+}
+
+.rank {
+  color: #ffffff; // bright orange
+  font-weight: bold;
+  margin-right: 0.4rem;
 }

@@ -110,7 +110,7 @@
 
   // Special team color overrides
   &.kkr {
-    color: #8c00fe; // KKR purple
+    color: #9500ff; // KKR purple
   }
 }
 
@@ -152,15 +152,88 @@
   }
 }
 
-@media (max-width: 768px) {
+// @media (max-width: 768px) {
+//   .scorecard {
+//     padding: 10px;
+
+//     .scorecard-header {
+//       h2 {
+//         font-size: 1.1rem;
+//         padding-bottom: 4px;
+//       }
+//     }
+//   }
+
+//   .score-details {
+//     font-size: 0.95rem;
+
+//     span {
+//       font-size: 1rem;
+//     }
+//   }
+
+//   .scoreboard {
+//     flex-direction: column;
+//     align-items: center;
+//     padding: 0 10px;
+
+//     .inning {
+//       margin: 10px 0;
+//       padding: 12px 15px;
+//       flex-direction: column;
+      
+
+
+//       .team-name, .team-score {
+//         font-size: 1rem;
+//         margin-bottom: 5px;
+//       }
+//     }
+//   }
+
+//   .unified-score {
+//     padding: 15px 10px;
+
+//     .teams {
+//       flex-direction: column;
+
+//       .inner-container {
+//         flex-direction: column;
+//         padding: 0;
+//         width: 100%;
+//       }
+
+//       .team-box,
+//       .match-meta {
+//         width: 100%;
+//         padding: 10px 0;
+//         text-align: center;
+
+//         .team-name {
+//           font-size: 1.1rem;
+//         }
+
+//         .team-score {
+//           font-size: 1.1rem;
+//         }
+
+//         .match-number,
+//         .match-date,
+//         .match-result {
+//           font-size: 1rem;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// Responsive adjustments for mobile
+@media screen and (max-width: 768px) {
   .scorecard {
     padding: 10px;
 
-    .scorecard-header {
-      h2 {
-        font-size: 1.1rem;
-        padding-bottom: 4px;
-      }
+    .scorecard-header h2 {
+      font-size: 1.1rem;
     }
   }
 
@@ -173,57 +246,57 @@
   }
 
   .scoreboard {
-    flex-direction: column;
-    align-items: center;
     padding: 0 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
 
     .inning {
-      margin: 10px 0;
-      padding: 12px 15px;
-      flex-direction: column;
-      
+      flex: 0 0 auto; // Prevent shrink
+      padding: 10px 15px;
+      margin: 0 5px;
 
-
-      .team-name, .team-score {
-        font-size: 1rem;
-        margin-bottom: 5px;
+      .team-name,
+      .team-score {
+        font-size: 0.95rem;
       }
     }
   }
 
   .unified-score {
-    padding: 15px 10px;
+    padding: 10px 0;
 
     .teams {
-      flex-direction: column;
+      padding: 0 10px;
 
       .inner-container {
-        flex-direction: column;
-        padding: 0;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
         width: 100%;
-      }
+        padding: 0 10px;
+        gap: 12px;
 
-      .team-box,
-      .match-meta {
-        width: 100%;
-        padding: 10px 0;
-        text-align: center;
+        .team-box,
+        .match-meta {
+          flex: 0 0 auto;
+          width: 33%;
+          text-align: center;
 
-        .team-name {
-          font-size: 1.1rem;
-        }
+          .team-name {
+            font-size: 1rem;
+          }
 
-        .team-score {
-          font-size: 1.1rem;
-        }
+          .team-score {
+            font-size: 1rem;
+          }
 
-        .match-number,
-        .match-date,
-        .match-result {
-          font-size: 1rem;
+          .match-number,
+          .match-date,
+          .match-result {
+            font-size: 0.85rem;
+          }
         }
       }
     }
   }
 }
-

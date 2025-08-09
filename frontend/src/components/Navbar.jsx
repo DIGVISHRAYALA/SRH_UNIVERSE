@@ -25,7 +25,10 @@ import './Navbar.scss';
 function Navbar() {
   return (
     <nav className="navbar">
-      <h2 className="logo">SRH UNIVERSE</h2>
+      <h2 className="logo">
+        <span>    SRH</span>
+        <span> UNIVERSE</span>
+      </h2>
         <img src="/srh_universe_assets/srh_universe_logo_bgrmv.png" alt="SRH Logo" className="nav-logo" />
       {/* <div className="center-img">
         <img

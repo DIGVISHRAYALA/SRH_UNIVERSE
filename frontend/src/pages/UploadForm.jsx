@@ -219,13 +219,14 @@
 
 // export default UploadForm;
 
-// // UploadForm.jsx
+// // // UploadForm.jsx
 import React, { useState,useEffect} from 'react';
 import axios from 'axios';
 import './UploadForm.scss';
 
- axios.defaults.baseURL = 'http://localhost:5000';
-// axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+ //axios.defaults.baseURL = 'http://localhost:5000';
+ axios.defaults.baseURL = 'http://10.250.180.187:5000';
+//axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 
 const UploadForm = () => {
@@ -386,7 +387,8 @@ const UploadForm = () => {
       {uploadedVideos.map((video) => (
   <div key={video._id}>
     <p><strong>{video.title}</strong></p>
-    <a href={`http://localhost:5000/videos/${video._id}/download`} download>
+    {/* <a href={`http://localhost:5000/videos/${video._id}/download`} download> */}
+    <a href={`http://10.250.180.187:5000/videos/${video._id}/download`} download>
       Download
     </a>
     <p>Downloads: {video.downloadCount}</p>
@@ -396,19 +398,36 @@ const UploadForm = () => {
   </div>
 ))}
 
+{/* {uploadedVideos.map((video) => {
+  const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+  return (
+    <div key={video._id}>
+      <p><strong>{video.title}</strong></p>
+      <a href={`${baseURL}/videos/${video._id}/download`} download>
+        Download
+      </a>
+      <p>Downloads: {video.downloadCount}</p>
+      <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
+      <button onClick={() => handleDeleteVideo(video._id)}>Delete</button>
+      <hr />
+    </div>
+  );
+})} */}
+
+
 
       <hr />
 
       <h2>Articles</h2>
-      {/* {articles.map((article) => (
+      {articles.map((article) => (
         <div key={article._id}>
           <h4>{article.title}</h4>
           <p>{article.content}</p>
           <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
           <hr />
         </div>
-      ))} */}
-      {articles.map((article) => (
+      ))}
+      {/* {articles.map((article) => (
   <div key={article._id}>
     <h4>{article.title}</h4>
     <p>{article.content}</p>
@@ -416,11 +435,15 @@ const UploadForm = () => {
     <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
     <hr />
   </div>
-))}
+))} */}
 
     </div>
   );
 };
 
 export default UploadForm;
+
+
+
+
 
