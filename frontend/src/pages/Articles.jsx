@@ -476,12 +476,12 @@ const Articles = () => {
           />
         )} */}
         <h1>Latest Articles</h1>
-<div className="search-container">
+{/* <div className="search-container">
   <span
     className="search-icon"
     onClick={() => setShowSearch(prev => !prev)}
   >
-    🔍︎
+    🔍︎ 
   </span>
   {showSearch && (
     <input
@@ -493,7 +493,26 @@ const Articles = () => {
       autoFocus
     />
   )}
+</div> */}
+
+<div className="search-container">
+  <span
+    className="search-icon"
+    onClick={() => setShowSearch(prev => !prev)}
+  >
+    🔍︎
+  </span>
+  {(showSearch || window.innerWidth <= 600) && (
+    <input
+      type="text"
+      className="search-bar"
+      placeholder="Search..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  )}
 </div>
+
 
       </div>
 

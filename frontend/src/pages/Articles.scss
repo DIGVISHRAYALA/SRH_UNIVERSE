@@ -348,12 +348,35 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+    .articles .articles-header .search-container .search-bar {
+    width: 100px !important;  /* smaller width */
+    font-size: 0.8rem !important;
+    padding: 4px 5px !important;
+    margin-left: 10px !important; /* move slightly right */
+  }
+
+  .articles-header .search-icon {
+    display: none !important; /* hide emoji */
+  }
+
+  // .articles-header .search-bar {
+  //   display: block !important; /* always visible */
+  //   width: 10px;
+  //   font-size: 0.85rem;
+  //   margin-left: 10px;
+  //   padding: 4px 6px;
+
+  // }
   .articles {
     padding: 1rem;
-
+    // .articles-header {
+    //   justify-content: flex-start !important; /* <-- CHANGE THIS FROM center TO flex-start */
+    // }
     h1 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
+      text-align: left;
+      margin-left: -70px;
     }
 
     .article-box {
@@ -384,6 +407,15 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
 
 .article-image img {
   max-width: 100%;
