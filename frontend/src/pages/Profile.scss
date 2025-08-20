@@ -1,0 +1,114 @@
+.profile-box {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #d32f2f; // SRH red
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0.6rem 0;
+
+    b {
+      color: #333;
+    }
+  }
+
+  h3 {
+    margin: 2rem 0 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #444;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+      box-shadow: 0 0 6px rgba(211, 47, 47, 0.25);
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    background: #d32f2f;
+    color: #fff;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #b71c1c;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // Success / error messages (optional enhancement if you replace alerts later)
+  .message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+
+    &.success {
+      background: #e6f4ea;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+    }
+
+    &.error {
+      background: #fdecea;
+      color: #c62828;
+      border: 1px solid #f5c6c6;
+    }
+  }
+
+  // 📱 Responsive
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    input, button {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+
+
+

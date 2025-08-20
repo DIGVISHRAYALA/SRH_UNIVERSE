@@ -298,7 +298,7 @@ $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
   }
 }
 
-/* Sidebar (Side-panel) */
+// /* Sidebar (Side-panel) */
 .sidebar {
   position: fixed;
   top: 0;
@@ -312,8 +312,12 @@ $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
   z-index: 999;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0rem;
+
+/* Sidebar (Side-panel) */
+/* Sidebar (Side-panel) */
+  /* Sidebar (Side-panel) */
+
 
   &.open {
     right: 0;
@@ -393,4 +397,37 @@ $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
   .nav-links {
     display: none;
   }
+}
+
+.sidebar {
+  .logout-link {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    margin: 0.25rem 0;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+
+
+.logout-btn {
+  background-color: #ff8800; /* Red background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding around text */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer; /* Indicate it's clickable */
+  font-size: 16px; /* Font size */
+  text-decoration: none; /* Remove underline if it's a link */
+  display: inline-block; /* Allows padding and other box model properties */
+}
+
+.logout-btn:hover {
+  background-color: #ff5900; /* Darker red on hover */
 }

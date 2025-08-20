@@ -1,488 +1,12 @@
-// // server.js
-// const express = require('express');
-// const cors = require('cors');
-// const multer = require('multer');
-// const path = require('path');
-// const fs = require('fs');
-// const mongoose = require('mongoose');
-// const Video = require('./models/Video');
 
-// const app = express();
-// const PORT = 5000;
 
-// // === Middlewares ===
-// app.use(cors());
-// app.use(express.json());
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const bcrypt = require('bcryptjs');
 
-// // === Connect to MongoDB ===
-// mongoose.connect('mongodb://127.0.0.1:27017/srh_universe', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log("✅ MongoDB connected"))
-// .catch((err) => console.error("❌ MongoDB connection failed", err));
-
-// // === Multer storage setup ===
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     const uploadPath = path.join(__dirname, 'uploads');
-//     if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
-//     cb(null, 'uploads/');
-//   },
-//   filename: function (req, file, cb) {
-//     const uniqueName = `${Date.now()}-${file.originalname}`;
-//     cb(null, uniqueName);
-//   },
-// });
-
-// const upload = multer({ storage: storage });
-
-// // === POST /upload - Upload a video ===
-// app.post('/upload', upload.single('video'), (req, res) => {
-//   const { title } = req.body;
-//   const file = req.file;
-
-//   if (!file) return res.status(400).json({ message: 'No file uploaded' });
-
-//   const newVideo = new Video({
-//     title,
-//     filename: file.filename,
-//     path: `/uploads/${file.filename}`,
-//   });
-
-//   newVideo.save()
-//     .then((savedVideo) => {
-//       console.log("✅ Video metadata saved to MongoDB:", savedVideo);
-//       res.status(200).json({ message: 'Uploaded successfully!', video: savedVideo });
-//     })
-//     .catch((err) => {
-//       console.error('❌ Error saving to DB:', err);
-//       res.status(500).json({ message: 'Failed to save video' });
-//     });
-// });
-
-// // === GET /videos - Get all uploaded videos ===
-// app.get('/videos', async (req, res) => {
-//   try {
-//     const allVideos = await Video.find().sort({ uploadedAt: -1 }); // Latest first
-//     res.status(200).json(allVideos);
-//   } catch (err) {
-//     console.error('❌ Error fetching videos:', err);
-//     res.status(500).json({ message: 'Failed to fetch videos' });
-//   }
-// });
-
-// // === Start Server ===
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running at http://localhost:${PORT}`);
-// });
-
-// server.js
-// const express = require('express');
-// const cors = require('cors');
-// const multer = require('multer');
-// const path = require('path');
-// const fs = require('fs');
-// const mongoose = require('mongoose');
-// const dotenv = require('dotenv');
-// const Video = require('./models/Video');
-// const Article = require('./models/Article');
-
-// // Load .env
-// dotenv.config();
-
-// const app = express();
-// const PORT = 5000;
-
-// // === Middleware ===
-// app.use(cors());
-// app.use(express.json());
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// // === MongoDB Connection ===
-// mongoose.connect('mongodb://127.0.0.1:27017/srh_universe', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log("MongoDB connected"))
-// .catch((err) => console.error("MongoDB connection failed", err));
-
-// // === Multer Setup ===
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const uploadPath = path.join(__dirname, 'uploads');
-//     if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
-//     cb(null, 'uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     const uniqueName = `${Date.now()}-${file.originalname}`;
-//     cb(null, uniqueName);
-//   },
-// });
-// const upload = multer({ storage });
-
-// // === POST /upload ===
-// app.post('/upload', upload.single('video'), (req, res) => {
-//   const { title } = req.body;
-//   const file = req.file;
-
-//   if (!file) return res.status(400).json({ message: 'No file uploaded' });
-
-//   const newVideo = new Video({
-//     title,
-//     filename: file.filename,
-//     path: `/uploads/${file.filename}`,
-//   });
-
-//   newVideo.save()
-//     .then(savedVideo => {
-//       console.log("Video metadata saved to MongoDB:", savedVideo);
-//       res.status(200).json({ message: 'Uploaded successfully!', video: savedVideo });
-//     })
-//     .catch(err => {
-//       console.error('Error saving to DB:', err);
-//       res.status(500).json({ message: 'Failed to save video' });
-//     });
-// });
-
-// // === GET /videos ===
-// app.get('/videos', async (req, res) => {
-//   try {
-//     const allVideos = await Video.find().sort({ uploadedAt: -1 });
-//     res.status(200).json(allVideos);
-//   } catch (err) {
-//     console.error('Error fetching videos:', err);
-//     res.status(500).json({ message: 'Failed to fetch videos' });
-//   }
-// });
-
-
-// app.get('/videos/:id/download', async (req, res) => {
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).send('Video not found');
-
-//     // Increment download count
-//     video.downloadCount += 1;
-//     await video.save();
-
-//     res.download(path.join(__dirname, video.path));
-//   } catch (err) {
-//     res.status(500).send('Server error');
-//   }
-// });
-
-// // === DELETE /videos/:id (Admin Only) ===
-// app.delete('/videos/:id', async (req, res) => {
-//   const adminPassword = req.headers['x-admin-password']; // Custom header
-
-//   if (!adminPassword || adminPassword !== process.env.ADMIN_PASSWORD) {
-//     return res.status(401).json({ message: 'Unauthorized access' });
-//   }
-
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).json({ message: 'Video not found' });
-
-//     // Delete file from disk
-//     const filePath = path.join(__dirname, video.path);
-//     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-
-//     // Delete from DB
-//     await Video.findByIdAndDelete(req.params.id);
-//     res.status(200).json({ message: 'Video deleted successfully' });
-//   } catch (err) {
-//     console.error('Error deleting video:', err);
-//     res.status(500).json({ message: 'Failed to delete video' });
-//   }
-// });
-
-// // Create Article
-// app.post('/api/articles', async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const article = new Article({ title, content });
-//     await article.save();
-//     res.status(201).json(article);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Failed to upload article' });
-//   }
-// });
-
-// // Get Articles (latest first)
-// app.get('/api/articles', async (req, res) => {
-//   try {
-//     const articles = await Article.find().sort({ createdAt: -1 });
-//     res.json(articles);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Failed to fetch articles' });
-//   }
-// });
-
-// // Delete Article
-// app.delete('/api/articles/:id', async (req, res) => {
-//   try {
-//     await Article.findByIdAndDelete(req.params.id);
-//     res.json({ message: 'Deleted successfully' });
-//   } catch (err) {
-//     res.status(500).json({ error: 'Failed to delete article' });
-//   }
-// });
-
-// // PUT: Edit article
-// app.put('/api/articles/:id', async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const article = await Article.findByIdAndUpdate(
-//       req.params.id,
-//       { title, content },
-//       { new: true }
-//     );
-//     res.json(article);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Failed to edit article' });
-//   }
-// });
-
-
-// app.put('/videos/:id', async (req, res) => {
-//   try {
-//     const { title } = req.body;
-//     const video = await Video.findByIdAndUpdate(
-//       req.params.id,
-//       { title, lastEditedAt: new Date() },
-//       { new: true }
-//     );
-//     res.json(video);
-//   } catch (err) {
-//     res.status(500).json({ message: 'Failed to update video' });
-//   }
-// });
-
-
-// // === Start Server ===
-// app.listen(PORT, () => {
-//   console.log(`Server running at http://localhost:${PORT}`);
-// });
-
-
-
-
-
-
-
-// // server.js
-// const express = require('express');
-// const cors = require('cors');
-// const multer = require('multer');
-// const path = require('path');
-// const fs = require('fs');
-// const mongoose = require('mongoose');
-// const dotenv = require('dotenv');
-// const os = require('os');
-// const Video = require('./models/Video');
-// const Article = require('./models/Article');
-
-// // Load .env
-// dotenv.config();
-
-// const app = express();
-// const PORT = process.env.PORT || 5000;
-// const MONGO_URL = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/srh_universe';
-
-// // === Middleware ===
-// // For dev: allow all origins. In production restrict origins.
-// app.use(cors());
-// app.use(express.json());
-// // serve uploaded files
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// // === MongoDB Connection ===
-// mongoose.connect(MONGO_URL, {
-//   // since newer drivers ignore the options you had, we can pass none or leave as is
-// })
-// .then(() => console.log("MongoDB connected"))
-// .catch((err) => console.error("MongoDB connection failed", err));
-
-// // === Multer Setup ===
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const uploadPath = path.join(__dirname, 'uploads');
-//     if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
-//     cb(null, 'uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     const uniqueName = `${Date.now()}-${file.originalname}`;
-//     cb(null, uniqueName);
-//   },
-// });
-// const upload = multer({ storage });
-
-// // === POST /upload ===
-// app.post('/upload', upload.single('video'), (req, res) => {
-//   const { title } = req.body;
-//   const file = req.file;
-
-//   if (!file) return res.status(400).json({ message: 'No file uploaded' });
-
-//   const newVideo = new Video({
-//     title,
-//     filename: file.filename,
-//     path: `/uploads/${file.filename}`,
-//   });
-
-//   newVideo.save()
-//     .then(savedVideo => {
-//       console.log("Video metadata saved to MongoDB:", savedVideo);
-//       res.status(200).json({ message: 'Uploaded successfully!', video: savedVideo });
-//     })
-//     .catch(err => {
-//       console.error('Error saving to DB:', err);
-//       res.status(500).json({ message: 'Failed to save video' });
-//     });
-// });
-
-// // === GET /videos ===
-// app.get('/videos', async (req, res) => {
-//   try {
-//     const allVideos = await Video.find().sort({ uploadedAt: -1 });
-//     res.status(200).json(allVideos);
-//   } catch (err) {
-//     console.error('Error fetching videos:', err);
-//     res.status(500).json({ message: 'Failed to fetch videos' });
-//   }
-// });
-
-// app.get('/videos/:id/download', async (req, res) => {
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).send('Video not found');
-
-//     // Increment download count
-//     video.downloadCount = (video.downloadCount || 0) + 1;
-//     await video.save();
-
-//     res.download(path.join(__dirname, video.path));
-//   } catch (err) {
-//     console.error('Download error:', err);
-//     res.status(500).send('Server error');
-//   }
-// });
-
-// // === DELETE /videos/:id (Admin Only) ===
-// app.delete('/videos/:id', async (req, res) => {
-//   const adminPassword = req.headers['x-admin-password']; // Custom header
-
-//   if (!adminPassword || adminPassword !== process.env.ADMIN_PASSWORD) {
-//     return res.status(401).json({ message: 'Unauthorized access' });
-//   }
-
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).json({ message: 'Video not found' });
-
-//     // Delete file from disk
-//     const filePath = path.join(__dirname, video.path);
-//     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-
-//     // Delete from DB
-//     await Video.findByIdAndDelete(req.params.id);
-//     res.status(200).json({ message: 'Video deleted successfully' });
-//   } catch (err) {
-//     console.error('Error deleting video:', err);
-//     res.status(500).json({ message: 'Failed to delete video' });
-//   }
-// });
-
-// // Create Article
-// app.post('/api/articles', async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const article = new Article({ title, content });
-//     await article.save();
-//     res.status(201).json(article);
-//   } catch (err) {
-//     console.error('Error creating article:', err);
-//     res.status(500).json({ error: 'Failed to upload article' });
-//   }
-// });
-
-// // Get Articles (latest first)
-// app.get('/api/articles', async (req, res) => {
-//   try {
-//     const articles = await Article.find().sort({ createdAt: -1 });
-//     res.json(articles);
-//   } catch (err) {
-//     console.error('Error fetching articles:', err);
-//     res.status(500).json({ error: 'Failed to fetch articles' });
-//   }
-// });
-
-// // Delete Article
-// app.delete('/api/articles/:id', async (req, res) => {
-//   try {
-//     await Article.findByIdAndDelete(req.params.id);
-//     res.json({ message: 'Deleted successfully' });
-//   } catch (err) {
-//     console.error('Error deleting article:', err);
-//     res.status(500).json({ error: 'Failed to delete article' });
-//   }
-// });
-
-// // PUT: Edit article
-// app.put('/api/articles/:id', async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const article = await Article.findByIdAndUpdate(
-//       req.params.id,
-//       { title, content },
-//       { new: true }
-//     );
-//     res.json(article);
-//   } catch (err) {
-//     console.error('Error editing article:', err);
-//     res.status(500).json({ error: 'Failed to edit article' });
-//   }
-// });
-
-// app.put('/videos/:id', async (req, res) => {
-//   try {
-//     const { title } = req.body;
-//     const video = await Video.findByIdAndUpdate(
-//       req.params.id,
-//       { title, lastEditedAt: new Date() },
-//       { new: true }
-//     );
-//     res.json(video);
-//   } catch (err) {
-//     console.error('Error updating video:', err);
-//     res.status(500).json({ message: 'Failed to update video' });
-//   }
-// });
-
-// // === Start Server ===
-// app.listen(PORT, '0.0.0.0', () => {
-//   // print helpful info so you can connect from mobile
-//   const nets = os.networkInterfaces();
-//   let pretty = [];
-//   Object.keys(nets).forEach(ifname => {
-//     nets[ifname].forEach(net => {
-//       if (net.family === 'IPv4' && !net.internal) {
-//         pretty.push(`${ifname}: ${net.address}`);
-//       }
-//     });
-//   });
-//   console.log(`Server listening on port ${PORT}`);
-//   if (pretty.length) console.log('Network addresses:', pretty.join(', '));
-//   console.log('Use http://<your-ip>:' + PORT + ' from other devices on the same LAN');
-// });
-
-
-
-
-
-
+const jwt = require('jsonwebtoken');
+const User = require('./models/User');
+function generateToken(user) {
+  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+}
 
 const express = require('express');
 const cors = require('cors');
@@ -682,6 +206,137 @@ app.put('/api/articles/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to edit article' });
   }
 });
+
+
+
+// === AUTH ROUTES ===
+// Register
+// Register route
+// Register route
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    // check duplicate username/email
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username or email already exists' });
+    }
+
+    const user = new User({ username, email, password });
+    await user.save();
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
+
+    res.status(201).json({
+      token,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (err) {
+    console.error('Register error:', err);
+    res.status(500).json({ message: 'Registration failed' });
+  }
+});
+
+
+// Login route
+// Login route
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { usernameOrEmail, password } = req.body;
+
+    // allow login via username OR email
+    const user = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }]
+    });
+
+    if (!user) return res.status(400).json({ message: 'User not found' });
+
+    const validPass = await bcrypt.compare(password, user.password);
+    if (!validPass) return res.status(400).json({ message: 'Invalid password' });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
+
+    res.json({
+      token,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    res.status(500).json({ message: 'Login failed' });
+  }
+});
+
+
+// server.js (replace your current /api/auth/login with this)
+
+
+
+
+// Get current user
+app.get('/api/auth/me', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'No token' });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+
+    res.json(user);
+  } catch (err) {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+});
+
+
+
+// Middleware: check JWT
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1]; // "Bearer <token>"
+  if (!token) return res.status(401).json({ message: 'No token provided' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // { id: "...", email: "..." }
+    next();
+  } catch {
+    res.status(403).json({ message: 'Invalid token' });
+  }
+};
+
+// Get current user
+app.get('/api/auth/me', authMiddleware, async (req, res) => {
+  const user = await User.findById(req.user.id).select('-password'); // exclude password
+  res.json(user);
+});
+
+
+
+
+app.put('/api/auth/change-password', authMiddleware, async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const user = await User.findById(req.user.id);
+
+    const isMatch = await user.matchPassword(oldPassword);
+    if (!isMatch) return res.status(400).json({ message: 'Old password incorrect' });
+
+    user.password = newPassword; // ✅ schema hook will hash it
+    await user.save();
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error updating password' });
+  }
+});
+
+
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
