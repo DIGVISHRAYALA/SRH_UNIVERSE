@@ -92,6 +92,38 @@ const Videos = () => {
 //   );
 // };
 
+
+const handleDownload = async (videoId) => {
+  try {
+    // Call backend to trigger download and increment counter
+    const res = await axios.get(`/videos/${videoId}/download`, {
+      responseType: "blob", // ensures file is downloaded
+    });
+
+    // Create a blob link for file download
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "video.mp4"); // optional: replace with real filename if you store it
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // Update downloadCount in UI immediately
+    setVideoList((prev) =>
+      prev.map((v) =>
+        v._id === videoId
+          ? { ...v, downloadCount: (v.downloadCount || 0) + 1 }
+          : v
+      )
+    );
+  } catch (err) {
+    console.error("Error downloading video:", err);
+  }
+};
+
+
+
 return (
   <div className="videos">
     <div className="videos-header">
@@ -131,17 +163,26 @@ return (
             <source src={`http://10.151.94.186:5000${vid.path}`} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <a
+          {/* <a
             href={`http://10.151.94.186:5000${vid.path}`}
             download={vid.filename}
             className="download-btn"
           >
             Download
-          </a>
+          </a> */}
+
+<button
+  onClick={() => handleDownload(vid._id)}
+  className="download-btn"
+>
+  Download
+</button>
+
           <p>Downloads: {vid.downloadCount}</p>
           <p>Uploaded: {formatDate(vid.uploadedAt)}</p>
         </div>
       ))}
+
     </div>
   </div>
 );

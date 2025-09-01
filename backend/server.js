@@ -849,7 +849,36 @@ app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) =
 
 
 
-app.get("/api/articles", authMiddleware, async (req, res) => {
+// app.get("/api/articles", authMiddleware, async (req, res) => {
+//   try {
+//     const userId = req.user.id;
+//     const articles = await Article.find().sort({ createdAt: -1 });
+
+//     const formatted = articles.map(a => ({
+//       ...a.toObject(),
+//       likesCount: a.likes.length,
+//       liked: a.likes.some(id => id.toString() === userId)
+//     }));
+
+//     res.json(formatted);
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to fetch articles" });
+//   }
+// });
+
+
+// 🔹 Open route for everyone (basic article data)
+app.get("/api/articles", async (req, res) => {
+  try {
+    const articles = await Article.find().sort({ createdAt: -1 });
+    res.json(articles);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch articles" });
+  }
+});
+
+// 🔹 Authenticated route for like-status
+app.get("/api/articles/auth", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const articles = await Article.find().sort({ createdAt: -1 });

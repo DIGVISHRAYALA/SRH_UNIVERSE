@@ -1363,6 +1363,7 @@ import axios from '../utils/axiosInstance';
 import './Articles.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';   // ✅ FontAwesome import
 
+
 const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.151.94.186:5000';
 
 const Articles = () => {
@@ -1374,24 +1375,63 @@ const Articles = () => {
   const [activeCommentId, setActiveCommentId] = useState(null);
   const [toast, setToast] = useState(null);
   const refs = useRef({});
-
+  const token = localStorage.getItem("token");
+  const isLoggedIn = !!token;
   // 🔍 Search states
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // useEffect(() => {
+  //   fetchArticles();
+
+  // }, [token, isLoggedIn]);
+
+
   useEffect(() => {
     fetchArticles();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, isLoggedIn]);
+  
+
+  // const fetchArticles = () => {
+  //   axios.get('/api/articles')
+  //     .then(res => {
+  //       const sorted = (res.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  //       setArticles(sorted);
+  //     })
+  //     .catch(err => console.error('Error fetching articles:', err));
+  // };
+
+
+
+  // const fetchArticles = () => {
+  //   const url = isLoggedIn ? "/api/articles/auth" : "/api/articles";
+  //   axios
+  //     .get(url, isLoggedIn ? { headers: { Authorization: `Bearer ${token}` } } : {})
+  //     .then(res => {
+  //       const sorted = (res.data || []).sort(
+  //         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  //       );
+  //       setArticles(sorted);
+  //     })
+  //     .catch(err => console.error("Error fetching articles:", err));
+  // };
+
 
   const fetchArticles = () => {
-    axios.get('/api/articles')
+    const url = isLoggedIn ? "/api/articles/auth" : "/api/articles";
+    axios
+      .get(url, isLoggedIn ? { headers: { Authorization: `Bearer ${token}` } } : {})
       .then(res => {
-        const sorted = (res.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const sorted = (res.data || []).sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         setArticles(sorted);
       })
-      .catch(err => console.error('Error fetching articles:', err));
+      .catch(err => console.error("Error fetching articles:", err));
   };
-
+  
+  
   // ✅ Toast helper
   const showToast = (msg) => {
     setToast(msg);
@@ -1480,39 +1520,60 @@ const Articles = () => {
   };
 
   // Likes handler
+  // const handleLike = async (id) => {
+  //   try {
+  //     const res = await axios.post(`/api/articles/${id}/like`);
+  //     setArticles(prev =>
+  //       prev.map(a =>
+  //         a._id === id
+  //           ? {
+  //               ...a,
+  //               likes: res.data.likes,
+  //               likesCount: res.data.likesCount,
+  //               liked: res.data.liked
+  //             }
+  //           : a
+  //       )
+  //     );
+  //   } catch (err) {
+  //     console.error("Error liking article:", err);
+  //   }
+  // };
+
+
   const handleLike = async (id) => {
+    if (!isLoggedIn) {
+      showToast("please login to get these features");
+      return;
+    }
     try {
-      const res = await axios.post(`/api/articles/${id}/like`);
+      const res = await axios.post(
+        `/api/articles/${id}/like`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setArticles(prev =>
-        prev.map(a =>
-          a._id === id
-            ? {
-                ...a,
-                likes: res.data.likes,
-                likesCount: res.data.likesCount,
-                liked: res.data.liked
-              }
-            : a
-        )
+        prev.map(a => (a._id === id ? { ...a, ...res.data } : a))
       );
     } catch (err) {
       console.error("Error liking article:", err);
     }
   };
+  
 
   //Comments handler
-  const handleComment = async (id, comment) => {
-    if (!comment.trim()) return;
-    try {
-      const res = await axios.post(`/api/articles/${id}/comment`, { text: comment });
-      setArticles(prev =>
-        prev.map(a => a._id === id ? { ...a, comments: res.data.comments } : a)
-      );
-      showToast("COMMENT POSTED SUCCESSFULLY");
-    } catch (err) {
-      console.error('ERROR IN ADDING COMMENT', err);
-    }
-  };
+  // const handleComment = async (id, comment) => {
+  //   if (!comment.trim()) return;
+  //   try {
+  //     const res = await axios.post(`/api/articles/${id}/comment`, { text: comment });
+  //     setArticles(prev =>
+  //       prev.map(a => a._id === id ? { ...a, comments: res.data.comments } : a)
+  //     );
+  //     showToast("COMMENT POSTED SUCCESSFULLY");
+  //   } catch (err) {
+  //     console.error('ERROR IN ADDING COMMENT', err);
+  //   }
+  // };
   
   const handleDeleteComment = async (articleId, commentId) => {
     try {
@@ -1527,6 +1588,28 @@ const Articles = () => {
       console.error("ERROR IN DELETING COMMENT", err);
     }
   };
+
+
+  const handleComment = async (id, comment) => {
+    if (!isLoggedIn) {
+      showToast("please login to get these features");
+      return;
+    }
+    if (!comment.trim()) return;
+    try {
+      const res = await axios.post(
+        `/api/articles/${id}/comment`,
+        { text: comment },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setArticles(prev =>
+        prev.map(a => (a._id === id ? { ...a, comments: res.data.comments } : a))
+      );
+      showToast("COMMENT POSTED SUCCESSFULLY");
+    } catch (err) {
+      console.error("ERROR IN ADDING COMMENT", err);
+    }
+  };  
 
   // Filtered articles
   const filteredArticles = searchTerm
@@ -1632,17 +1715,30 @@ const Articles = () => {
                 ></i>
                 <span className="count">{article.likesCount || 0}</span>
 
-                <i
+                {/* <i
                   className="fa-regular fa-comment"
                   onClick={(e) => {
                     e.stopPropagation(); 
                     toggleComments(article._id);
                   }}
-                ></i>
+                ></i> */}
+                <i
+  className="fa-regular fa-comment"
+  onClick={(e) => {
+    e.stopPropagation(); 
+    if (!isLoggedIn) {
+      showToast("please login to get these features");
+      return;
+    }
+    toggleComments(article._id);
+  }}
+></i>
+<span className="count">{isLoggedIn ? (article.comments?.length || 0) : 0}</span>
+
               </div>
 
               {/* Comments Section */}
-              {showComments && (
+              {showComments && isLoggedIn && (
                 <div className="comments-section">
                   <ul className="comments-list">
                     {(article.comments || []).map((c) => {
