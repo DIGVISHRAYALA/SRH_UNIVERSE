@@ -31,6 +31,7 @@ import './App.scss';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+
 function App() {
   return (
     <Router>
@@ -42,8 +43,8 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/admin" element={<UploadForm />} />
           <Route path="/login" element={<Login />} />
-  <Route path="/register" element={<Register />} />
-  <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

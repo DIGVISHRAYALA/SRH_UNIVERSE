@@ -1,8 +1,58 @@
+// .auth-box {
+//   max-width: 400px;
+//   margin: 60px auto;
+//   padding: 30px;
+//   //background: #fff;
+//   background: linear-gradient(135deg, #ff8800, #ff5e00, #212121);
+//   border-radius: 12px;
+//   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+//   text-align: center;
+
+//   h2 {
+//     margin-bottom: 20px;
+//     color: #333;
+//   }
+
+//   input {
+//     display: block;
+//     width: 100%;
+//     margin: 10px 0;
+//     padding: 12px;
+//     border: 1px solid #ddd;
+//     border-radius: 8px;
+//     font-size: 14px;
+//   }
+
+//   button {
+//     margin-top: 15px;
+//     padding: 12px;
+//     width: 100%;
+//     background: linear-gradient(135deg, #000000, #000000);
+//     border: none;
+//     border-radius: 8px;
+//     color: white;
+//     font-size: 15px;
+//     font-weight: bold;
+//     cursor: pointer;
+//     transition: 0.3s ease;
+
+//     &:hover {
+//       background: linear-gradient(135deg, #ef7000, #ff4b2b);
+//     }
+//   }
+// }
+
+
+
+
+
+
+
 .auth-box {
   max-width: 400px;
   margin: 60px auto;
   padding: 30px;
-  background: #fff;
+  background: linear-gradient(135deg, #ff8800, #ff5e00, #212121);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
@@ -20,13 +70,34 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .input-with-eye {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10px 0;
+
+    input {
+      flex: 1;
+      padding-right: 40px; // space for eye
+    }
+
+    span {
+      position: absolute;
+      right: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #333;
+    }
   }
 
   button {
     margin-top: 15px;
     padding: 12px;
     width: 100%;
-    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    background: linear-gradient(135deg, #000000, #000000);
     border: none;
     border-radius: 8px;
     color: white;
@@ -36,7 +107,7 @@
     transition: 0.3s ease;
 
     &:hover {
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      background: linear-gradient(135deg, #ef7000, #ff4b2b);
     }
   }
 }

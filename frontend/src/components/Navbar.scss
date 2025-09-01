@@ -416,18 +416,49 @@ $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
 
 
 
-.logout-btn {
-  background-color: #ff8800; /* Red background */
-  color: white; /* White text */
-  padding: 10px 20px; /* Padding around text */
-  border: none; /* No border */
-  border-radius: 5px; /* Slightly rounded corners */
-  cursor: pointer; /* Indicate it's clickable */
-  font-size: 16px; /* Font size */
-  text-decoration: none; /* Remove underline if it's a link */
-  display: inline-block; /* Allows padding and other box model properties */
-}
+// .logout-btn {
+//   background-color: #ff8800; /* Red background */
+//   color: white; /* White text */
+//   padding: 10px 20px; /* Padding around text */
+//   border: none; /* No border */
+//   border-radius: 5px; /* Slightly rounded corners */
+//   cursor: pointer; /* Indicate it's clickable */
+//   font-size: 16px; /* Font size */
+//   text-decoration: none; /* Remove underline if it's a link */
+//   display: inline-block; /* Allows padding and other box model properties */
+// }
 
-.logout-btn:hover {
-  background-color: #ff5900; /* Darker red on hover */
+// .logout-btn:hover {
+//   background-color: #ff5900; /* Darker red on hover */
+// }
+
+
+
+
+
+/* Logout Button Styling */
+.logout-btn {
+  background: linear-gradient(135deg, #fc6907); // gradient orange
+  color: $white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px; // pill shaped
+  cursor: pointer;
+  margin: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: linear-gradient(135deg, #ff6200);
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  }
 }

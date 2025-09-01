@@ -1,114 +1,356 @@
-.profile-box {
-  max-width: 600px;
-  margin: 2rem auto;
+// .profile-box {
+//   max-width: 600px;
+//   margin: 2rem auto;
+//   padding: 2rem;
+//   background: #fff;
+//   border-radius: 12px;
+//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+//   h2 {
+//     text-align: center;
+//     margin-bottom: 1.5rem;
+//     color: #d32f2f; // SRH red
+//     font-size: 1.8rem;
+//     font-weight: 600;
+//   }
+
+//   p {
+//     font-size: 1rem;
+//     margin: 0.6rem 0;
+
+//     b {
+//       color: #333;
+//     }
+//   }
+
+//   h3 {
+//     margin: 2rem 0 1rem;
+//     font-size: 1.3rem;
+//     font-weight: 500;
+//     color: #444;
+//   }
+
+//   input {
+//     display: block;
+//     width: 100%;
+//     padding: 0.75rem;
+//     margin-bottom: 1rem;
+//     border: 1px solid #ccc;
+//     border-radius: 8px;
+//     font-size: 1rem;
+//     transition: all 0.2s ease;
+
+//     &:focus {
+//       outline: none;
+//       border-color: #d32f2f;
+//       box-shadow: 0 0 6px rgba(211, 47, 47, 0.25);
+//     }
+//   }
+
+//   button {
+//     display: block;
+//     width: 100%;
+//     background: #d32f2f;
+//     color: #fff;
+//     padding: 0.8rem;
+//     font-size: 1rem;
+//     font-weight: 500;
+//     border: none;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     transition: all 0.2s ease;
+
+//     &:hover {
+//       background: #b71c1c;
+//       transform: translateY(-1px);
+//     }
+
+//     &:active {
+//       transform: scale(0.98);
+//     }
+//   }
+
+//   // Success / error messages (optional enhancement if you replace alerts later)
+//   .message {
+//     margin-top: 1rem;
+//     padding: 0.75rem;
+//     border-radius: 8px;
+//     font-size: 0.95rem;
+//     text-align: center;
+
+//     &.success {
+//       background: #e6f4ea;
+//       color: #2e7d32;
+//       border: 1px solid #c8e6c9;
+//     }
+
+//     &.error {
+//       background: #fdecea;
+//       color: #c62828;
+//       border: 1px solid #f5c6c6;
+//     }
+//   }
+
+//   // 📱 Responsive
+//   @media (max-width: 480px) {
+//     padding: 1.5rem;
+
+//     h2 {
+//       font-size: 1.5rem;
+//     }
+
+//     h3 {
+//       font-size: 1.1rem;
+//     }
+
+//     input, button {
+//       font-size: 0.95rem;
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+// /* Full page background */
+// .profile-container {
+//   min-height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background: #fff5ee;
+//   // background: linear-gradient(135deg, #ff8800, #ff5e00, #212121); // orange family + black
+//   background-size: cover;
+//   padding: 2rem;
+// }
+
+// /* Profile Box */
+// .profile-box {
+//   max-width: 600px;
+//   width: 100%;
+//   padding: 2rem;
+//   // background: #fff;
+//   background: linear-gradient(135deg, #ff8800, #ff5e00, #212121);
+//   border-radius: 12px;
+//   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+
+//   h2 {
+//     text-align: center;
+//     margin-bottom: 1.5rem;
+//     color: #232121; // User Profile text in orange
+//     font-size: 1.8rem;
+//     font-weight: 700;
+//   }
+
+//   p {
+//     font-size: 1rem;
+//     margin: 0.6rem 0;
+//     color:rgb(44, 41, 41);
+//     b {
+//       color: #232121;
+//     }
+//   }
+
+//   h3 {
+//     margin: 2rem 0 1rem;
+//     font-size: 1.25rem;
+//     font-weight: 600;
+//     color: #2d2b2b;
+//   }
+
+//   .input-with-eye {
+//     position: relative;
+//     margin-bottom: 1rem;
+
+//     input {
+//       width: 100%;
+//       padding: 0.75rem 2rem 0.75rem 0.75rem;
+//       border: 1px solid #ccc;
+//       border-radius: 8px;
+//       font-size: 1rem;
+//       box-sizing: border-box;
+
+//       &:focus {
+//         outline: none;
+//         border-color: orange;
+//         box-shadow: 0 0 6px rgba(255, 152, 0, 0.4);
+//       }
+//     }
+
+//     span {
+//       position: absolute;
+//       right: 12px;
+//       top: 50%;
+//       transform: translateY(-50%);
+//       cursor: pointer;
+//       font-size: 1.2rem;
+//       color: #444;
+
+//       &:hover {
+//         color: orange;
+//       }
+//     }
+//   }
+
+//   button {
+//     width: 100%;
+//     background: #000; // Black button
+//     color: #fff;
+//     padding: 0.8rem;
+//     font-size: 1rem;
+//     font-weight: 600;
+//     border: none;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     transition: all 0.2s ease;
+
+//     &:hover {
+//       background: #333;
+//       transform: translateY(-1px);
+//     }
+
+//     &:active {
+//       transform: scale(0.98);
+//     }
+//   }
+// }
+
+
+
+
+.profile-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;  // ✅ centers horizontally
+  align-items: center;      // ✅ centers vertically
+  background: #fff5ee;      // or your gradient/bg
   padding: 2rem;
-  background: #fff;
+}
+
+
+
+
+.profile-box {
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  // background: #fff;
+  background: linear-gradient(135deg, #ff8800, #ff5e00, #212121);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+
+
+// .profile-box {
+//   max-width: 600px;
+//   width: 100%;
+//   padding: 2rem;
+//   background: linear-gradient(135deg, #ff8800, #ff5e00);
+//   border-radius: 16px;
+//   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
 
   h2 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #d32f2f; // SRH red
-    font-size: 1.8rem;
-    font-weight: 600;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
   }
 
+  /* Profile details styled as cards */
   p {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    color: #fff;
+    backdrop-filter: blur(6px);
     font-size: 1rem;
-    margin: 0.6rem 0;
+    display: flex;
+    justify-content: space-between;
 
     b {
-      color: #333;
+      color: #ffefba; // golden-yellow for labels
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
   }
 
   h3 {
     margin: 2rem 0 1rem;
     font-size: 1.3rem;
-    font-weight: 500;
-    color: #444;
+    font-weight: 700;
+    color: #fff;
+    border-top: 2px solid rgba(255,255,255,0.4);
+    padding-top: 1rem;
   }
 
-  input {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
+  .input-with-eye {
+    position: relative;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.2s ease;
 
-    &:focus {
-      outline: none;
-      border-color: #d32f2f;
-      box-shadow: 0 0 6px rgba(211, 47, 47, 0.25);
+    input {
+      width: 100%;
+      padding: 0.75rem 2rem 0.75rem 0.75rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+        border: 2px solid #ffefba; // golden border
+        background: rgba(255,255,255,0.25);
+        box-shadow: 0 0 10px rgba(255, 239, 186, 0.6);
+      }
+
+      &::placeholder {
+        color: #f1f1f1;
+      }
+    }
+
+    span {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #fff;
+
+      &:hover {
+        color: #ffefba;
+      }
     }
   }
 
   button {
-    display: block;
     width: 100%;
-    background: #d32f2f;
+    background: linear-gradient(135deg, #000, #000000);
     color: #fff;
-    padding: 0.8rem;
-    font-size: 1rem;
-    font-weight: 500;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
 
     &:hover {
-      background: #b71c1c;
-      transform: translateY(-1px);
+      background: linear-gradient(135deg, #000000, #000);
+      transform: translateY(-2px);
     }
 
     &:active {
-      transform: scale(0.98);
-    }
-  }
-
-  // Success / error messages (optional enhancement if you replace alerts later)
-  .message {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    text-align: center;
-
-    &.success {
-      background: #e6f4ea;
-      color: #2e7d32;
-      border: 1px solid #c8e6c9;
-    }
-
-    &.error {
-      background: #fdecea;
-      color: #c62828;
-      border: 1px solid #f5c6c6;
-    }
-  }
-
-  // 📱 Responsive
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    h3 {
-      font-size: 1.1rem;
-    }
-
-    input, button {
-      font-size: 0.95rem;
+      transform: scale(0.97);
     }
   }
 }
-
-
-
 

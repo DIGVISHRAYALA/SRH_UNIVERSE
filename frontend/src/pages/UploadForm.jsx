@@ -4,7 +4,7 @@ import axios from 'axios';
 import './UploadForm.scss';
 
 // Change this to your backend base URL
-const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.250.180.187:5000';
+const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.151.94.186:5000';
 axios.defaults.baseURL = API_BASE;
 
 const UploadForm = () => {
