@@ -51,3 +51,32 @@
     }
   }
 }
+
+
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff9933;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: black;
+      color: orange;
+    }
+
+    &:hover {
+      background: rgb(0, 0, 0);
+    }
+  }
+}

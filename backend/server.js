@@ -824,19 +824,43 @@ app.put("/api/auth/change-password", authMiddleware, async (req, res) => {
 });
 
 /* ----------------------------- ARTICLE ROUTES ---------------------------- */
+// app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) => {
+//   try {
+//     const { title, content } = req.body;
+//     const imagePath = req.file ? `/uploads/articles/${req.file.filename}` : null;
+
+//     const article = new Article({ title, content, image: imagePath });
+//     await article.save();
+
+//     res.status(201).json(article);
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to upload article" });
+//   }
+// });
+
+
+
 app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, titleTelugu, contentTelugu } = req.body;
     const imagePath = req.file ? `/uploads/articles/${req.file.filename}` : null;
 
-    const article = new Article({ title, content, image: imagePath });
-    await article.save();
+    const article = new Article({
+      title,
+      content,
+      titleTelugu,
+      contentTelugu,
+      image: imagePath
+    });
 
+    await article.save();
     res.status(201).json(article);
   } catch (err) {
-    res.status(500).json({ error: "Failed to upload article" });
+    console.error("Error uploading article:", err);
+    res.status(500).json({ message: "Failed to upload article" });
   }
 });
+
 
 // app.get("/api/articles", async (req, res) => {
 //   try {

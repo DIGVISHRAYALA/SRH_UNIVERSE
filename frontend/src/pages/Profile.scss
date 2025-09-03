@@ -354,3 +354,25 @@
   }
 }
 
+
+
+.toast-message {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(255, 77, 0);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: fadeInOut 2s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
+}

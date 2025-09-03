@@ -97,10 +97,21 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  
+
+  const showToast = (message) => {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 2000); // 2 seconds
+  };
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
-      alert("Passwords do not match ❌");
+      showToast("Passwords do not match");
       return;
     }
     try {
@@ -110,10 +121,10 @@ function Register() {
       localStorage.setItem("userId", res.data.id);
       localStorage.setItem('user', JSON.stringify(res.data));
       window.dispatchEvent(new Event('authChange'));
-      alert('Successfully registered ✅');
+      showToast('Successfully registered');
       navigate('/');
     } catch (err) {
-      alert(err.response?.data?.message || 'Registration failed ❌');
+      showToast(err.response?.data?.message || 'Registration failed');
     }
   };
 
