@@ -31,9 +31,14 @@ function Home() {
         <div className="welcome-box">
           <h2>Hello! Hope you're doing well.</h2>
           <p>
-            This website is dedicated to helping you easily find and download exclusive SRH edits and updates.
+            {/* This website is dedicated to helping you easily find and download exclusive SRH edits and updates.
             From exciting match moments to creative edits – everything is just one click away.
-            Let’s stay connected and celebrate our passion for SRH together!
+            Let’s stay connected and celebrate our passion for SRH together! */}
+            This website is dedicated to helping you easily find and download exclusive SRH edits
+             and updates. From exciting match moments to creative edits – everything is just one 
+             click away. Along with this, you can also explore articles related to SRH, and join
+              live game talk with other users regarding matches and more. Let’s stay connected and
+               celebrate our passion for SRH together!
           </p>
           <div className="social-icons">
             <a href="https://www.instagram.com/srh_universe?igsh=bjl3YzN5b2lkZGxk" target="_blank" rel="noopener noreferrer">

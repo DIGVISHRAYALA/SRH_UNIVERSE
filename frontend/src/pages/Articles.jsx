@@ -2235,7 +2235,7 @@ import axios from '../utils/axiosInstance';
 import './Articles.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.120.45.186:5000';
+const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.209.36.186:5000';
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);

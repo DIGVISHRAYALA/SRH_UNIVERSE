@@ -4,7 +4,7 @@
 // import './UploadForm.scss';
 
 // // Change this to your backend base URL
-// const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.110.39.186:5000';
+// const API_BASE = process.env.REACT_APP_BASE_URL || 'http://172.25.151.186:5000';
 // axios.defaults.baseURL = API_BASE;
 
 // const UploadForm = () => {
@@ -21,6 +21,13 @@
 //   const [articleContent, setArticleContent] = useState('');
 //   const [articleImage, setArticleImage] = useState(null);
 //   const [articles, setArticles] = useState([]);
+
+//   // Telugu fields
+//   const [articleTitleTelugu, setArticleTitleTelugu] = useState('');
+//   const [articleContentTelugu, setArticleContentTelugu] = useState('');
+
+//   // Active section state
+//   const [activeSection, setActiveSection] = useState('videos'); // 'videos' or 'articles'
 
 //   // Admin login
 //   const handleLogin = () => {
@@ -64,6 +71,8 @@
 //     const formData = new FormData();
 //     formData.append('title', articleTitle);
 //     formData.append('content', articleContent);
+//     formData.append('titleTelugu', articleTitleTelugu);
+//     formData.append('contentTelugu', articleContentTelugu);
 //     if (articleImage) {
 //       formData.append('image', articleImage);
 //     }
@@ -75,6 +84,8 @@
 //       alert('Article uploaded!');
 //       setArticleTitle('');
 //       setArticleContent('');
+//       setArticleTitleTelugu('');
+//       setArticleContentTelugu('');
 //       setArticleImage(null);
 //       fetchArticles();
 //     } catch (err) {
@@ -105,7 +116,7 @@
 
 //   // Delete video
 //   const handleDeleteVideo = async (id) => {
-//     if (!window.confirm("Are you sure you want to delete this video?")) return;
+//     if (!window.confirm('Are you sure you want to delete this video?')) return;
 
 //     try {
 //       await axios.delete(`/videos/${id}`, {
@@ -120,7 +131,7 @@
 
 //   // Delete article
 //   const handleDeleteArticle = async (id) => {
-//     if (!window.confirm("Are you sure you want to delete this article?")) return;
+//     if (!window.confirm('Are you sure you want to delete this article?')) return;
 
 //     try {
 //       await axios.delete(`/api/articles/${id}`);
@@ -155,6 +166,7 @@
 //     );
 //   }
 
+
 //   return (
 //     <div className="upload-form">
 //       {/* VIDEO UPLOAD */}
@@ -188,6 +200,17 @@
 //         onChange={(e) => setArticleContent(e.target.value)}
 //       />
 //       <input
+//         type="text"
+//         placeholder="Telugu Article Title (Optional)"
+//         value={articleTitleTelugu}
+//         onChange={(e) => setArticleTitleTelugu(e.target.value)}
+//       />
+//       <textarea
+//         placeholder="Telugu Article Content (Optional)"
+//         value={articleContentTelugu}
+//         onChange={(e) => setArticleContentTelugu(e.target.value)}
+//       />
+//       <input
 //         type="file"
 //         accept="image/*"
 //         onChange={(e) => setArticleImage(e.target.files[0])}
@@ -196,48 +219,65 @@
 
 //       <hr />
 
-//       {/* VIDEOS LIST */}
-//       <h2>Uploaded Videos</h2>
-//       {uploadedVideos.map((video) => (
-//         <div key={video._id}>
-//           <p><strong>{video.title}</strong></p>
-//           <a href={`${API_BASE}/videos/${video._id}/download`} download>
-//             Download
-//           </a>
-//           <p>Downloads: {video.downloadCount}</p>
-//           <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
-//           <button onClick={() => handleDeleteVideo(video._id)}>Delete</button>
-//           <hr />
-//         </div>
-//       ))}
+//       {/* TOGGLE BUTTONS */}
+//       <div className="toggle-buttons">
+//         <button
+//           className={activeSection === 'videos' ? 'active' : ''}
+//           onClick={() => setActiveSection('videos')}
+//         >
+//           Uploaded Videos
+//         </button>
+//         <button
+//           className={activeSection === 'articles' ? 'active' : ''}
+//           onClick={() => setActiveSection('articles')}
+//         >
+//           Uploaded Articles
+//         </button>
+//       </div>
 
 //       <hr />
 
-//       {/* ARTICLES LIST */}
-//       <h2>Articles</h2>
-//       {articles.map((article) => (
-//         <div key={article._id}>
-//           <h4>{article.title}</h4>
-//           {article.image && (
-//             <img
-//               src={`${API_BASE}${article.image}`}
-//               alt={article.title}
-//               style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
-//             />
-//           )}
-//           {/* {article.image && (
-//         <img
-//           src={`${API_BASE}/uploads/${article.image}`}
-//           alt={article.title}
-//           style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
-//       />
-//     )} */}
-
-//           <p>{article.content}</p>
-//           <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
-//           <hr />
+//       {/* CONDITIONAL SECTIONS */}
+//       {activeSection === 'videos' && (
+//         <div>
+//           <h2>Uploaded Videos</h2>
+//           {uploadedVideos.map((video) => (
+//             <div key={video._id}>
+//               <p><strong>{video.title}</strong></p>
+//               <a href={`${API_BASE}/videos/${video._id}/download`} download>
+//                 Download
+//               </a>
+//               <p>Downloads: {video.downloadCount}</p>
+//               <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
+//               <button onClick={() => handleDeleteVideo(video._id)}>Delete</button>
+//               <hr />
+//             </div>
+//           ))}
 //         </div>
-//       ))}
+//       )}
+
+//       {activeSection === 'articles' && (
+//         <div>
+//           <h2>Uploaded Articles</h2>
+//           {articles.map((article) => (
+//             <div key={article._id}>
+//               <h4>{article.title}</h4>
+//               {article.titleTelugu && <h5>{article.titleTelugu}</h5>}
+//               {article.image && (
+//                 <img
+//                   src={`${API_BASE}${article.image}`}
+//                   alt={article.title}
+//                   style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
+//                 />
+//               )}
+//               <p>{article.content}</p>
+//               {article.contentTelugu && <p>{article.contentTelugu}</p>}
+//               <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
+//               <hr />
+//             </div>
+//           ))}
+//         </div>
+//       )}
 //     </div>
 //   );
 // };
@@ -248,13 +288,18 @@
 
 
 
+
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
+// import io from 'socket.io-client';
 // import './UploadForm.scss';
 
 // // Change this to your backend base URL
-// const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.120.45.186:5000';
+// const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.209.36.186:5000';
+// //const API_BASE = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 // axios.defaults.baseURL = API_BASE;
+
+// const socket = io(API_BASE);
 
 // const UploadForm = () => {
 //   const [adminPassword, setAdminPassword] = useState('');
@@ -271,9 +316,16 @@
 //   const [articleImage, setArticleImage] = useState(null);
 //   const [articles, setArticles] = useState([]);
 
-//   // Add new states for Telugu
+//   // Telugu fields
 //   const [articleTitleTelugu, setArticleTitleTelugu] = useState('');
 //   const [articleContentTelugu, setArticleContentTelugu] = useState('');
+
+//   // Chat room states
+//   const [roomTitle, setRoomTitle] = useState('');
+//   const [rooms, setRooms] = useState([]);
+
+//   // Active section state
+//   const [activeSection, setActiveSection] = useState('videos'); // 'videos' | 'articles' | 'rooms'
 
 //   // Admin login
 //   const handleLogin = () => {
@@ -284,7 +336,7 @@
 //     }
 //   };
 
-//   // Video upload
+//   /* ---------------------- VIDEO UPLOAD ---------------------- */
 //   const handleVideoUpload = async () => {
 //     if (!videoTitle || !videoFile) {
 //       alert('Title and file are required!');
@@ -307,7 +359,7 @@
 //     }
 //   };
 
-//   // Article upload
+//   /* ---------------------- ARTICLE UPLOAD ---------------------- */
 //   const handleArticleUpload = async () => {
 //     if (!articleTitle || !articleContent) {
 //       alert('Title and content are required!');
@@ -317,21 +369,21 @@
 //     const formData = new FormData();
 //     formData.append('title', articleTitle);
 //     formData.append('content', articleContent);
-//     formData.append('titleTelugu', articleTitleTelugu); // NEW
-//     formData.append('contentTelugu', articleContentTelugu); // NEW
+//     formData.append('titleTelugu', articleTitleTelugu);
+//     formData.append('contentTelugu', articleContentTelugu);
 //     if (articleImage) {
 //       formData.append('image', articleImage);
 //     }
 
 //     try {
 //       await axios.post('/api/articles', formData, {
-//         headers: { 'Content-Type': 'multipart/form-data' }
+//         headers: { 'Content-Type': 'multipart/form-data' },
 //       });
 //       alert('Article uploaded!');
 //       setArticleTitle('');
 //       setArticleContent('');
-//       setArticleTitleTelugu(''); // Reset Telugu title
-//       setArticleContentTelugu(''); // Reset Telugu content
+//       setArticleTitleTelugu('');
+//       setArticleContentTelugu('');
 //       setArticleImage(null);
 //       fetchArticles();
 //     } catch (err) {
@@ -340,7 +392,29 @@
 //     }
 //   };
 
-//   // Fetch videos
+//   /* ---------------------- CHAT ROOM ---------------------- */
+//   const handleCreateRoom = () => {
+//     if (!roomTitle) return alert('Enter room title!');
+//     socket.emit('createRoom', { title: roomTitle });
+//     setRoomTitle('');
+//   };
+
+//   useEffect(() => {
+//     socket.on('roomCreated', (room) => {
+//       setRooms((prev) => [...prev, room]);
+//     });
+
+//     socket.on('roomsList', (data) => {
+//       setRooms(data);
+//     });
+
+//     return () => {
+//       socket.off('roomCreated');
+//       socket.off('roomsList');
+//     };
+//   }, []);
+
+//   /* ---------------------- FETCH ---------------------- */
 //   const fetchVideos = async () => {
 //     try {
 //       const res = await axios.get('/videos');
@@ -350,7 +424,6 @@
 //     }
 //   };
 
-//   // Fetch articles
 //   const fetchArticles = async () => {
 //     try {
 //       const res = await axios.get('/api/articles');
@@ -360,13 +433,13 @@
 //     }
 //   };
 
-//   // Delete video
+//   /* ---------------------- DELETE ---------------------- */
 //   const handleDeleteVideo = async (id) => {
-//     if (!window.confirm("Are you sure you want to delete this video?")) return;
+//     if (!window.confirm('Are you sure you want to delete this video?')) return;
 
 //     try {
 //       await axios.delete(`/videos/${id}`, {
-//         headers: { 'x-admin-password': process.env.REACT_APP_ADMIN_PASSWORD }
+//         headers: { 'x-admin-password': process.env.REACT_APP_ADMIN_PASSWORD },
 //       });
 //       fetchVideos();
 //     } catch (err) {
@@ -375,9 +448,8 @@
 //     }
 //   };
 
-//   // Delete article
 //   const handleDeleteArticle = async (id) => {
-//     if (!window.confirm("Are you sure you want to delete this article?")) return;
+//     if (!window.confirm('Are you sure you want to delete this article?')) return;
 
 //     try {
 //       await axios.delete(`/api/articles/${id}`);
@@ -388,15 +460,16 @@
 //     }
 //   };
 
-//   // Load data on login
+//   /* ---------------------- LOAD ON LOGIN ---------------------- */
 //   useEffect(() => {
 //     if (isAuthenticated) {
 //       fetchVideos();
 //       fetchArticles();
+//       socket.emit('getRooms');
 //     }
 //   }, [isAuthenticated]);
 
-//   // Login form
+//   /* ---------------------- RENDER ---------------------- */
 //   if (!isAuthenticated) {
 //     return (
 //       <div className="upload-form">
@@ -464,42 +537,111 @@
 
 //       <hr />
 
-//       {/* VIDEOS LIST */}
-//       <h2>Uploaded Videos</h2>
-//       {uploadedVideos.map((video) => (
-//         <div key={video._id}>
-//           <p><strong>{video.title}</strong></p>
-//           <a href={`${API_BASE}/videos/${video._id}/download`} download>
-//             Download
-//           </a>
-//           <p>Downloads: {video.downloadCount}</p>
-//           <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
-//           <button onClick={() => handleDeleteVideo(video._id)}>Delete</button>
-//           <hr />
-//         </div>
-//       ))}
+//       {/* CHAT ROOM CREATION */}
+//       <h2>Create Chat Room</h2>
+//       <input
+//         type="text"
+//         placeholder="Room Title"
+//         value={roomTitle}
+//         onChange={(e) => setRoomTitle(e.target.value)}
+//       />
+//       <button onClick={handleCreateRoom}>Create Room</button>
+
+//       <div>
+//         <h3>Available Rooms</h3>
+//         {rooms.map((room) => (
+//           <p key={room.id}>{room.title}</p>
+//         ))}
+//       </div>
 
 //       <hr />
 
-//       {/* ARTICLES LIST */}
-//       <h2>Articles</h2>
-//       {articles.map((article) => (
-//         <div key={article._id}>
-//           <h4>{article.title}</h4>
-//           {article.titleTelugu && <h5>{article.titleTelugu}</h5>}
-//           {article.image && (
-//             <img
-//               src={`${API_BASE}${article.image}`}
-//               alt={article.title}
-//               style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
-//             />
-//           )}
-//           <p>{article.content}</p>
-//           {article.contentTelugu && <p>{article.contentTelugu}</p>}
-//           <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
-//           <hr />
+//       {/* TOGGLE BUTTONS */}
+//       <div className="toggle-buttons">
+//         <button
+//           className={activeSection === 'videos' ? 'active' : ''}
+//           onClick={() => setActiveSection('videos')}
+//         >
+//           Uploaded Videos
+//         </button>
+//         <button
+//           className={activeSection === 'articles' ? 'active' : ''}
+//           onClick={() => setActiveSection('articles')}
+//         >
+//           Uploaded Articles
+//         </button>
+//         <button
+//           className={activeSection === 'rooms' ? 'active' : ''}
+//           onClick={() => setActiveSection('rooms')}
+//         >
+//           Chat Rooms
+//         </button>
+//       </div>
+
+//       <hr />
+
+//       {/* CONDITIONAL SECTIONS */}
+//       {activeSection === 'videos' && (
+//         <div>
+//           <h2>Uploaded Videos</h2>
+//           {uploadedVideos.map((video) => (
+//             <div key={video._id}>
+//               <p>
+//                 <strong>{video.title}</strong>
+//               </p>
+//               <a href={`${API_BASE}/videos/${video._id}/download`} download>
+//                 Download
+//               </a>
+//               <p>Downloads: {video.downloadCount}</p>
+//               <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
+//               <button onClick={() => handleDeleteVideo(video._id)}>
+//                 Delete
+//               </button>
+//               <hr />
+//             </div>
+//           ))}
 //         </div>
-//       ))}
+//       )}
+
+//       {activeSection === 'articles' && (
+//         <div>
+//           <h2>Uploaded Articles</h2>
+//           {articles.map((article) => (
+//             <div key={article._id}>
+//               <h4>{article.title}</h4>
+//               {article.titleTelugu && <h5>{article.titleTelugu}</h5>}
+//               {article.image && (
+//                 <img
+//                   src={`${API_BASE}${article.image}`}
+//                   alt={article.title}
+//                   style={{
+//                     maxWidth: '200px',
+//                     display: 'block',
+//                     marginBottom: '10px',
+//                   }}
+//                 />
+//               )}
+//               <p>{article.content}</p>
+//               {article.contentTelugu && <p>{article.contentTelugu}</p>}
+//               <button onClick={() => handleDeleteArticle(article._id)}>
+//                 Delete
+//               </button>
+//               <hr />
+//             </div>
+//           ))}
+//         </div>
+//       )}
+
+//       {activeSection === 'rooms' && (
+//         <div>
+//           <h2>Chat Rooms</h2>
+//           {rooms.map((room) => (
+//             <div key={room.id}>
+//               <p>{room.title}</p>
+//             </div>
+//           ))}
+//         </div>
+//       )}
 //     </div>
 //   );
 // };
@@ -509,39 +651,37 @@
 
 
 
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 import './UploadForm.scss';
 
-// Change this to your backend base URL
-const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.120.45.186:5000';
+const API_BASE = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 axios.defaults.baseURL = API_BASE;
+
+const socket = io(API_BASE);
 
 const UploadForm = () => {
   const [adminPassword, setAdminPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Video states
   const [videoTitle, setVideoTitle] = useState('');
   const [videoFile, setVideoFile] = useState(null);
   const [uploadedVideos, setUploadedVideos] = useState([]);
 
-  // Article states
   const [articleTitle, setArticleTitle] = useState('');
   const [articleContent, setArticleContent] = useState('');
+  const [articleTitleTelugu, setArticleTitleTelugu] = useState('');
+  const [articleContentTelugu, setArticleContentTelugu] = useState('');
   const [articleImage, setArticleImage] = useState(null);
   const [articles, setArticles] = useState([]);
 
-  // Telugu fields
-  const [articleTitleTelugu, setArticleTitleTelugu] = useState('');
-  const [articleContentTelugu, setArticleContentTelugu] = useState('');
+  const [roomTitle, setRoomTitle] = useState('');
+  const [rooms, setRooms] = useState([]);
 
-  // Active section state
-  const [activeSection, setActiveSection] = useState('videos'); // 'videos' or 'articles'
+  const [activeSection, setActiveSection] = useState('videos');
 
-  // Admin login
+  /* ---------------- Admin Login ---------------- */
   const handleLogin = () => {
     if (adminPassword === process.env.REACT_APP_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
@@ -550,17 +690,12 @@ const UploadForm = () => {
     }
   };
 
-  // Video upload
+  /* ---------------- Video Upload ---------------- */
   const handleVideoUpload = async () => {
-    if (!videoTitle || !videoFile) {
-      alert('Title and file are required!');
-      return;
-    }
-
+    if (!videoTitle || !videoFile) return alert('Title and file are required!');
     const formData = new FormData();
     formData.append('title', videoTitle);
     formData.append('video', videoFile);
-
     try {
       await axios.post('/upload', formData);
       alert('Video uploaded!');
@@ -573,26 +708,18 @@ const UploadForm = () => {
     }
   };
 
-  // Article upload
+  /* ---------------- Article Upload ---------------- */
   const handleArticleUpload = async () => {
-    if (!articleTitle || !articleContent) {
-      alert('Title and content are required!');
-      return;
-    }
-
+    if (!articleTitle || !articleContent) return alert('Title and content required!');
     const formData = new FormData();
     formData.append('title', articleTitle);
     formData.append('content', articleContent);
     formData.append('titleTelugu', articleTitleTelugu);
     formData.append('contentTelugu', articleContentTelugu);
-    if (articleImage) {
-      formData.append('image', articleImage);
-    }
+    if (articleImage) formData.append('image', articleImage);
 
     try {
-      await axios.post('/api/articles', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      await axios.post('/api/articles', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       alert('Article uploaded!');
       setArticleTitle('');
       setArticleContent('');
@@ -606,30 +733,48 @@ const UploadForm = () => {
     }
   };
 
-  // Fetch videos
+  /* ---------------- Chat Rooms ---------------- */
+  const handleCreateRoom = () => {
+    if (!roomTitle.trim()) return alert('Enter room title!');
+    socket.emit('createRoom', { title: roomTitle });
+    setRoomTitle('');
+  };
+
+  const handleDeleteRoom = async (roomId) => {
+    if (!window.confirm('Delete this room?')) return;
+    try {
+      await axios.delete(`/api/rooms/${roomId}`, {
+        headers: { 'x-admin-password': process.env.REACT_APP_ADMIN_PASSWORD }
+      });
+      setRooms(prev => prev.filter(r => r._id !== roomId));
+    } catch (err) {
+      console.error(err);
+      alert('Failed to delete room');
+    }
+  };
+
+  /* ---------------- Fetch Videos / Articles ---------------- */
   const fetchVideos = async () => {
     try {
       const res = await axios.get('/videos');
       setUploadedVideos(res.data);
     } catch (err) {
-      console.error('Error fetching videos:', err);
+      console.error(err);
     }
   };
 
-  // Fetch articles
   const fetchArticles = async () => {
     try {
       const res = await axios.get('/api/articles');
       setArticles(res.data);
     } catch (err) {
-      console.error('Error fetching articles:', err);
+      console.error(err);
     }
   };
 
-  // Delete video
+  /* ---------------- Delete Video / Article ---------------- */
   const handleDeleteVideo = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this video?')) return;
-
+    if (!window.confirm('Delete this video?')) return;
     try {
       await axios.delete(`/videos/${id}`, {
         headers: { 'x-admin-password': process.env.REACT_APP_ADMIN_PASSWORD }
@@ -641,10 +786,8 @@ const UploadForm = () => {
     }
   };
 
-  // Delete article
   const handleDeleteArticle = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this article?')) return;
-
+    if (!window.confirm('Delete this article?')) return;
     try {
       await axios.delete(`/api/articles/${id}`);
       fetchArticles();
@@ -654,110 +797,75 @@ const UploadForm = () => {
     }
   };
 
-  // Load data on login
+  /* ---------------- Socket / Load on Login ---------------- */
   useEffect(() => {
     if (isAuthenticated) {
       fetchVideos();
       fetchArticles();
+      socket.emit('getRooms');
     }
+
+    socket.on('roomsUpdated', (data) => setRooms(data));
+    socket.on('roomCreated', (room) => setRooms(prev => [...prev, room]));
+
+    return () => {
+      socket.off('roomsUpdated');
+      socket.off('roomCreated');
+    };
   }, [isAuthenticated]);
 
-  // Login form
-  if (!isAuthenticated) {
-    return (
-      <div className="upload-form">
-        <h2>🔒 Admin Login</h2>
-        <input
-          type="password"
-          placeholder="Enter Admin Password"
-          value={adminPassword}
-          onChange={(e) => setAdminPassword(e.target.value)}
-        />
-        <button onClick={handleLogin}>Login</button>
-      </div>
-    );
-  }
+  /* ---------------- Render ---------------- */
+  if (!isAuthenticated) return (
+    <div className="upload-form">
+      <h2>🔒 Admin Login</h2>
+      <input type="password" placeholder="Admin Password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
 
   return (
     <div className="upload-form">
-      {/* VIDEO UPLOAD */}
+      {/* Upload Sections */}
       <h2>Upload Video</h2>
-      <input
-        type="text"
-        placeholder="Video Title"
-        value={videoTitle}
-        onChange={(e) => setVideoTitle(e.target.value)}
-      />
-      <input
-        type="file"
-        accept="video/*"
-        onChange={(e) => setVideoFile(e.target.files[0])}
-      />
+      <input type="text" placeholder="Video Title" value={videoTitle} onChange={e => setVideoTitle(e.target.value)} />
+      <input type="file" accept="video/*" onChange={e => setVideoFile(e.target.files[0])} />
       <button onClick={handleVideoUpload}>Upload Video</button>
 
       <hr />
 
-      {/* ARTICLE UPLOAD */}
       <h2>Upload Article</h2>
-      <input
-        type="text"
-        placeholder="Article Title"
-        value={articleTitle}
-        onChange={(e) => setArticleTitle(e.target.value)}
-      />
-      <textarea
-        placeholder="Article Content"
-        value={articleContent}
-        onChange={(e) => setArticleContent(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Telugu Article Title (Optional)"
-        value={articleTitleTelugu}
-        onChange={(e) => setArticleTitleTelugu(e.target.value)}
-      />
-      <textarea
-        placeholder="Telugu Article Content (Optional)"
-        value={articleContentTelugu}
-        onChange={(e) => setArticleContentTelugu(e.target.value)}
-      />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setArticleImage(e.target.files[0])}
-      />
+      <input type="text" placeholder="Article Title" value={articleTitle} onChange={e => setArticleTitle(e.target.value)} />
+      <textarea placeholder="Article Content" value={articleContent} onChange={e => setArticleContent(e.target.value)} />
+      <input type="text" placeholder="Telugu Title" value={articleTitleTelugu} onChange={e => setArticleTitleTelugu(e.target.value)} />
+      <textarea placeholder="Telugu Content" value={articleContentTelugu} onChange={e => setArticleContentTelugu(e.target.value)} />
+      <input type="file" accept="image/*" onChange={e => setArticleImage(e.target.files[0])} />
       <button onClick={handleArticleUpload}>Upload Article</button>
 
       <hr />
 
-      {/* TOGGLE BUTTONS */}
+      <h2>Create Chat Room</h2>
+      <input type="text" placeholder="Room Title" value={roomTitle} onChange={e => setRoomTitle(e.target.value)} />
+      <button onClick={handleCreateRoom}>Create Room</button>
+
+      <hr />
+
+      {/* Toggle Sections */}
       <div className="toggle-buttons">
-        <button
-          className={activeSection === 'videos' ? 'active' : ''}
-          onClick={() => setActiveSection('videos')}
-        >
-          Uploaded Videos
-        </button>
-        <button
-          className={activeSection === 'articles' ? 'active' : ''}
-          onClick={() => setActiveSection('articles')}
-        >
-          Uploaded Articles
-        </button>
+        <button className={activeSection === 'videos' ? 'active' : ''} onClick={() => setActiveSection('videos')}>Videos</button>
+        <button className={activeSection === 'articles' ? 'active' : ''} onClick={() => setActiveSection('articles')}>Articles</button>
+        <button className={activeSection === 'rooms' ? 'active' : ''} onClick={() => setActiveSection('rooms')}>Rooms</button>
       </div>
 
       <hr />
 
-      {/* CONDITIONAL SECTIONS */}
+      {/* Display Lists */}
       {activeSection === 'videos' && (
         <div>
           <h2>Uploaded Videos</h2>
-          {uploadedVideos.map((video) => (
+          {uploadedVideos.map(video => (
             <div key={video._id}>
               <p><strong>{video.title}</strong></p>
-              <a href={`${API_BASE}/videos/${video._id}/download`} download>
-                Download
-              </a>
+              <a href={`${API_BASE}/videos/${video._id}/download`} download>Download</a>
               <p>Downloads: {video.downloadCount}</p>
               <p>Uploaded: {new Date(video.uploadedAt).toLocaleString()}</p>
               <button onClick={() => handleDeleteVideo(video._id)}>Delete</button>
@@ -770,21 +878,27 @@ const UploadForm = () => {
       {activeSection === 'articles' && (
         <div>
           <h2>Uploaded Articles</h2>
-          {articles.map((article) => (
+          {articles.map(article => (
             <div key={article._id}>
               <h4>{article.title}</h4>
               {article.titleTelugu && <h5>{article.titleTelugu}</h5>}
-              {article.image && (
-                <img
-                  src={`${API_BASE}${article.image}`}
-                  alt={article.title}
-                  style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }}
-                />
-              )}
+              {article.image && <img src={`${API_BASE}${article.image}`} alt={article.title} style={{ maxWidth: '200px', display: 'block', marginBottom: '10px' }} />}
               <p>{article.content}</p>
               {article.contentTelugu && <p>{article.contentTelugu}</p>}
               <button onClick={() => handleDeleteArticle(article._id)}>Delete</button>
               <hr />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeSection === 'rooms' && (
+        <div>
+          <h2>Chat Rooms</h2>
+          {rooms.map(r => (
+            <div key={r._id} className="room-item">
+              <span>{r.title}</span>
+              <button onClick={() => handleDeleteRoom(r._id)} className="delete-room">Delete</button>
             </div>
           ))}
         </div>
