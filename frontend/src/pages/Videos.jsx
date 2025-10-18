@@ -52,7 +52,12 @@ const Videos = () => {
     try {
       const res = await axios.get(`${API_BASE}/videos/${vid._id}/download`, { responseType: 'blob' });
 
-      const url = window.URL.createObjectURL(new Blob([res.data]));
+      //const url = window.URL.createObjectURL(new Blob([res.data]));
+        const blob = new Blob([res.data], { type: 'video/mp4' });
+        const url = window.URL.createObjectURL(blob);
+
+
+
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', vid.filename); // <-- original uploaded filename
