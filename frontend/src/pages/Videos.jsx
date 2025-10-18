@@ -10,6 +10,7 @@ const Videos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearch, setShowSearch] = useState(false);
 
+  // Fetch videos from backend
   const fetchVideos = async () => {
     try {
       const res = await axios.get(`${API_BASE}/videos`);
@@ -46,16 +47,15 @@ const Videos = () => {
     );
   };
 
-  // Download video
+  // Download video using original filename
   const handleDownload = async (vid) => {
     try {
       const res = await axios.get(`${API_BASE}/videos/${vid._id}/download`, { responseType: 'blob' });
 
-      // Create a blob link for file download
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', vid.filename); // use original uploaded filename
+      link.setAttribute('download', vid.filename); // <-- original uploaded filename
       document.body.appendChild(link);
       link.click();
       link.remove();
