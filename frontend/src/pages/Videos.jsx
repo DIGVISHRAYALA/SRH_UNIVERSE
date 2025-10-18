@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../utils/axiosInstance';
 import './Videos.scss';
-
+const API_BASE = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 const Videos = () => {
   const [videoList, setVideoList] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
