@@ -73,17 +73,18 @@ const uploadVideo = multer({ storage: videoStorage });
 
 
 
-const articleImageStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const imagePath = path.join(__dirname, "uploads", "articles");
-    if (!fs.existsSync(imagePath)) fs.mkdirSync(imagePath, { recursive: true });
-    cb(null, "uploads/articles/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+const articleImageStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "srh_articles",      // Folder name in Cloudinary
+    resource_type: "image",
+    format: async (req, file) => "jpg", // optional, convert all images to jpg
+    public_id: (req, file) => `${Date.now()}-${file.originalname.split('.')[0]}`,
   },
 });
+
 const uploadArticleImage = multer({ storage: articleImageStorage });
+
 
 /* ------------------------------- VIDEO API ------------------------------- */
 app.post("/upload", uploadVideo.single("video"), async (req, res) => {
@@ -275,8 +276,7 @@ app.put("/api/auth/change-password", authMiddleware, async (req, res) => {
 app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) => {
   try {
     const { title, content, titleTelugu, contentTelugu } = req.body;
-    const imagePath = req.file ? `/uploads/articles/${req.file.filename}` : null;
-
+    const imagePath = req.file ? req.file.path : null; // Cloudinary URL
     const article = new Article({
       title,
       content,
