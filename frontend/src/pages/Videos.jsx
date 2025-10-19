@@ -110,7 +110,7 @@ const Videos = () => {
           <div className="video-card" key={vid._id}>
             <h3>{highlightMatch(vid.title)}</h3>
             <video width="320" height="240" controls>
-              <source src={`${API_BASE}${vid.path}`} type="video/mp4" />
+              <source src={vid.path} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <button
