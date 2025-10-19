@@ -1,498 +1,5 @@
 
 
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-// const User = require("./models/User");
-// const express = require("express");
-// const cors = require("cors");
-// const multer = require("multer");
-// const path = require("path");
-// const fs = require("fs");
-// const mongoose = require("mongoose");
-// const dotenv = require("dotenv");
-// const os = require("os");
-// const Video = require("./models/Video");
-// const Article = require("./models/Article");
-
-// dotenv.config();
-
-// const app = express();
-// const PORT = process.env.PORT || 5000;
-// const MONGO_URL =
-//   process.env.MONGO_URL || "mongodb://127.0.0.1:27017/srh_universe";
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// // Connect to MongoDB
-// mongoose
-//   .connect(MONGO_URL)
-//   .then(() => console.log("MongoDB connected"))
-//   .catch((err) => console.error("MongoDB connection failed", err));
-
-// /* ---------------------------- Multer storages ---------------------------- */
-// const videoStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const uploadPath = path.join(__dirname, "uploads");
-//     if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
-//     cb(null, "uploads/");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-// const uploadVideo = multer({ storage: videoStorage });
-
-// const articleImageStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const imagePath = path.join(__dirname, "uploads", "articles");
-//     if (!fs.existsSync(imagePath)) fs.mkdirSync(imagePath, { recursive: true });
-//     cb(null, "uploads/articles/");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-// const uploadArticleImage = multer({ storage: articleImageStorage });
-
-// /* ------------------------------- VIDEO API ------------------------------- */
-// app.post("/upload", uploadVideo.single("video"), async (req, res) => {
-//   try {
-//     const { title } = req.body;
-//     if (!req.file) return res.status(400).json({ message: "No file uploaded" });
-
-//     const newVideo = new Video({
-//       title,
-//       filename: req.file.filename,
-//       path: `/uploads/${req.file.filename}`,
-//     });
-//     const savedVideo = await newVideo.save();
-
-//     res.status(200).json({ message: "Uploaded successfully!", video: savedVideo });
-//   } catch (err) {
-//     console.error("Error saving video:", err);
-//     res.status(500).json({ message: "Failed to save video" });
-//   }
-// });
-
-// app.get("/videos", async (req, res) => {
-//   try {
-//     const allVideos = await Video.find().sort({ uploadedAt: -1 });
-//     res.json(allVideos);
-//   } catch (err) {
-//     res.status(500).json({ message: "Failed to fetch videos" });
-//   }
-// });
-
-// app.get("/videos/:id/download", async (req, res) => {
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).send("Video not found");
-
-//     video.downloadCount = (video.downloadCount || 0) + 1;
-//     await video.save();
-
-//     res.download(path.join(__dirname, video.path));
-//   } catch (err) {
-//     res.status(500).send("Server error");
-//   }
-// });
-
-// app.delete("/videos/:id", async (req, res) => {
-//   const adminPassword = req.headers["x-admin-password"];
-//   if (!adminPassword || adminPassword !== process.env.ADMIN_PASSWORD) {
-//     return res.status(401).json({ message: "Unauthorized access" });
-//   }
-//   try {
-//     const video = await Video.findById(req.params.id);
-//     if (!video) return res.status(404).json({ message: "Video not found" });
-
-//     const filePath = path.join(__dirname, video.path);
-//     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-
-//     await Video.findByIdAndDelete(req.params.id);
-//     res.json({ message: "Video deleted successfully" });
-//   } catch (err) {
-//     res.status(500).json({ message: "Failed to delete video" });
-//   }
-// });
-
-// app.put("/videos/:id", async (req, res) => {
-//   try {
-//     const { title } = req.body;
-//     const video = await Video.findByIdAndUpdate(
-//       req.params.id,
-//       { title, lastEditedAt: new Date() },
-//       { new: true }
-//     );
-//     res.json(video);
-//   } catch (err) {
-//     res.status(500).json({ message: "Failed to update video" });
-//   }
-// });
-
-// /* ------------------------------ AUTH ROUTES ------------------------------ */
-// const generateToken = (user) =>
-//   jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-
-// app.post("/api/auth/register", async (req, res) => {
-//   try {
-//     const { username, email, password } = req.body;
-//     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-//     if (existingUser)
-//       return res.status(400).json({ message: "Username or email already exists" });
-
-//     const user = new User({ username, email, password });
-//     await user.save();
-
-//     const token = generateToken(user);
-//     res.status(201).json({
-//       token,
-//       id: user._id,
-//       username: user.username,
-//       email: user.email,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: "Registration failed" });
-//   }
-// });
-
-// app.post("/api/auth/login", async (req, res) => {
-//   try {
-//     const { usernameOrEmail, password } = req.body;
-//     const user = await User.findOne({
-//       $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
-//     });
-//     if (!user) return res.status(400).json({ message: "User not found" });
-
-//     const validPass = await bcrypt.compare(password, user.password);
-//     if (!validPass) return res.status(400).json({ message: "Invalid password" });
-
-//     const token = generateToken(user);
-//     res.json({
-//       token,
-//       id: user._id,
-//       username: user.username,
-//       email: user.email,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: "Login failed" });
-//   }
-// });
-
-// /* ---------------------------- AUTH MIDDLEWARE ---------------------------- */
-// const authMiddleware = (req, res, next) => {
-//   const token = req.headers.authorization?.split(" ")[1];
-//   if (!token) return res.status(401).json({ message: "No token provided" });
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     req.user = decoded; // { id: "..." }
-//     next();
-//   } catch {
-//     res.status(403).json({ message: "Invalid token" });
-//   }
-// };
-
-// // app.get("/api/auth/me", authMiddleware, async (req, res) => {
-// //   const user = await User.findById(req.user.id).select("-password");
-// //   res.json(user);
-// // });
-
-
-// app.get("/api/auth/me", authMiddleware, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.user.id).select("-password");
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     // Count liked articles
-//     const likedArticlesCount = await Article.countDocuments({
-//       likes: req.user.id,
-//     });
-
-//     // Count commented articles
-//     const commentedArticlesCount = await Article.countDocuments({
-//       "comments.user": req.user.id,
-//     });
-
-//     res.json({
-//       ...user.toObject(),
-//       likedArticlesCount,
-//       commentedArticlesCount,
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: "Error fetching user profile" });
-//   }
-// });
-
-
-
-// app.put("/api/auth/change-password", authMiddleware, async (req, res) => {
-//   try {
-//     const { oldPassword, newPassword } = req.body;
-//     const user = await User.findById(req.user.id);
-
-//     const isMatch = await user.matchPassword(oldPassword);
-//     if (!isMatch) return res.status(400).json({ message: "Old password incorrect" });
-
-//     user.password = newPassword; // schema hook will hash
-//     await user.save();
-
-//     res.json({ message: "Password updated successfully" });
-//   } catch (err) {
-//     res.status(500).json({ message: "Error updating password" });
-//   }
-// });
-
-// /* ----------------------------- ARTICLE ROUTES ---------------------------- */
-// // app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) => {
-// //   try {
-// //     const { title, content } = req.body;
-// //     const imagePath = req.file ? `/uploads/articles/${req.file.filename}` : null;
-
-// //     const article = new Article({ title, content, image: imagePath });
-// //     await article.save();
-
-// //     res.status(201).json(article);
-// //   } catch (err) {
-// //     res.status(500).json({ error: "Failed to upload article" });
-// //   }
-// // });
-
-
-
-// app.post("/api/articles", uploadArticleImage.single("image"), async (req, res) => {
-//   try {
-//     const { title, content, titleTelugu, contentTelugu } = req.body;
-//     const imagePath = req.file ? `/uploads/articles/${req.file.filename}` : null;
-
-//     const article = new Article({
-//       title,
-//       content,
-//       titleTelugu,
-//       contentTelugu,
-//       image: imagePath
-//     });
-
-//     await article.save();
-//     res.status(201).json(article);
-//   } catch (err) {
-//     console.error("Error uploading article:", err);
-//     res.status(500).json({ message: "Failed to upload article" });
-//   }
-// });
-
-
-// // app.get("/api/articles", async (req, res) => {
-// //   try {
-// //     const articles = await Article.find().sort({ createdAt: -1 });
-// //     res.json(articles);
-// //   } catch {
-// //     res.status(500).json({ error: "Failed to fetch articles" });
-// //   }
-// // });
-
-
-
-// // app.get("/api/articles", authMiddleware, async (req, res) => {
-// //   try {
-// //     const userId = req.user.id;
-// //     const articles = await Article.find().sort({ createdAt: -1 });
-
-// //     const formatted = articles.map(a => ({
-// //       ...a.toObject(),
-// //       likesCount: a.likes.length,
-// //       liked: a.likes.some(id => id.toString() === userId)
-// //     }));
-
-// //     res.json(formatted);
-// //   } catch (err) {
-// //     res.status(500).json({ error: "Failed to fetch articles" });
-// //   }
-// // });
-
-
-// // 🔹 Open route for everyone (basic article data)
-// app.get("/api/articles", async (req, res) => {
-//   try {
-//     const articles = await Article.find().sort({ createdAt: -1 });
-//     res.json(articles);
-//   } catch (err) {
-//     res.status(500).json({ error: "Failed to fetch articles" });
-//   }
-// });
-
-// // 🔹 Authenticated route for like-status
-// app.get("/api/articles/auth", authMiddleware, async (req, res) => {
-//   try {
-//     const userId = req.user.id;
-//     const articles = await Article.find().sort({ createdAt: -1 });
-
-//     const formatted = articles.map(a => ({
-//       ...a.toObject(),
-//       likesCount: a.likes.length,
-//       liked: a.likes.some(id => id.toString() === userId)
-//     }));
-
-//     res.json(formatted);
-//   } catch (err) {
-//     res.status(500).json({ error: "Failed to fetch articles" });
-//   }
-// });
-
-
-
-
-
-// app.delete("/api/articles/:id", async (req, res) => {
-//   try {
-//     await Article.findByIdAndDelete(req.params.id);
-//     res.json({ message: "Deleted successfully" });
-//   } catch {
-//     res.status(500).json({ error: "Failed to delete article" });
-//   }
-// });
-
-// app.put("/api/articles/:id", async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const article = await Article.findByIdAndUpdate(
-//       req.params.id,
-//       { title, content },
-//       { new: true }
-//     );
-//     res.json(article);
-//   } catch {
-//     res.status(500).json({ error: "Failed to edit article" });
-//   }
-// });
-
-// /* ------------------------- LIKES & COMMENTS ------------------------- */
-// app.post("/api/articles/:id/like", authMiddleware, async (req, res) => {
-//   try {
-//     const article = await Article.findById(req.params.id);
-//     if (!article) return res.status(404).json({ message: "Article not found" });
-
-//     if (!Array.isArray(article.likes)) article.likes = [];
-
-//     const userId = new mongoose.Types.ObjectId(req.user.id);
-//     const index = article.likes.findIndex((id) => id.equals(userId));
-
-//     const user = await User.findById(req.user.id);
-
-//     if (index === -1) {
-//       article.likes.push(userId);
-//       user.likedPosts.push(article._id);
-//     } else {
-//       article.likes.splice(index, 1);
-//       user.likedPosts = user.likedPosts.filter(
-//         (postId) => !postId.equals(article._id)
-//       );
-//     }
-
-//     await article.save();
-//     await user.save();
-
-//     res.json({
-//       likes: article.likes,
-//       likesCount: article.likes.length,
-//       liked: index === -1,
-//     });
-//   } catch (err) {
-//     console.error("Error in like route:", err);
-//     res.status(500).json({ message: "Error liking article" });
-//   }
-// });
-
-// app.post("/api/articles/:id/comment", authMiddleware, async (req, res) => {
-//   try {
-//     const { text } = req.body;
-//     const article = await Article.findById(req.params.id);
-//     if (!article) return res.status(404).json({ message: "Article not found" });
-
-//     const user = await User.findById(req.user.id);
-
-//     article.comments.push({
-//       user: user._id,
-//       username: user.username || "Unknown",
-//       text,
-//     });
-
-//     user.commentedPosts.push(article._id);
-
-//     await article.save();
-//     await user.save();
-
-//     res.json({ message: "Comment added", comments: article.comments });
-//   } catch (err) {
-//     console.error("Error in comment route:", err);
-//     res.status(500).json({ message: "Error commenting" });
-//   }
-// });
-
-// app.delete(
-//   "/api/articles/:articleId/comments/:commentId",
-//   authMiddleware,
-//   async (req, res) => {
-//     try {
-//       const { articleId, commentId } = req.params;
-//       const userId = req.user.id;
-
-//       const article = await Article.findById(articleId);
-//       if (!article) return res.status(404).json({ message: "Article not found" });
-
-//       const comment = article.comments.id(commentId);
-//       if (!comment) return res.status(404).json({ message: "Comment not found" });
-
-//       if (comment.user.toString() !== userId) {
-//         return res.status(403).json({ message: "Not authorized to delete this comment" });
-//       }
-
-//       comment.deleteOne();
-//       await article.save();
-
-//       res.json({ comments: article.comments });
-//     } catch (err) {
-//       res.status(500).json({ message: "Error deleting comment" });
-//     }
-//   }
-// );
-
-// app.get("/api/users/:id/activity", authMiddleware, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id)
-//       .populate("likedPosts", "title content")
-//       .populate("commentedPosts", "title content");
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     res.json({
-//       likedPosts: user.likedPosts,
-//       commentedPosts: user.commentedPosts,
-//     });
-//   } catch {
-//     res.status(500).json({ message: "Error fetching activity" });
-//   }
-// });
-
-
-
-// /* ------------------------------- START APP ------------------------------- */
-// app.listen(PORT, "0.0.0.0", () => {
-//   const nets = os.networkInterfaces();
-//   const addresses = [];
-//   Object.keys(nets).forEach((ifname) =>
-//     nets[ifname].forEach(
-//       (net) => net.family === "IPv4" && !net.internal && addresses.push(`${ifname}: ${net.address}`)
-//     )
-//   );
-//   console.log(`Server running on http://localhost:${PORT}`);
-//   if (addresses.length) console.log("LAN addresses:", addresses.join(", "));
-// });
-
-
-
 
 
 
@@ -511,8 +18,17 @@ const os = require("os");
 const Video = require("./models/Video");
 const Article = require("./models/Article");
 const Message = require("./models/Message");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+
 const Room = require("./models/Room");
 dotenv.config();
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "dworhjaxj",
+  api_key: process.env.CLOUDINARY_API_KEY || "817383211198579",
+  api_secret: process.env.CLOUDINARY_API_SECRET || "qZVXfylMT_Vf7hMdXclC4c_IWS0"
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -531,17 +47,31 @@ mongoose
   .catch((err) => console.error("MongoDB connection failed", err));
 
 /* ---------------------------- Multer storages ---------------------------- */
-const videoStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, "uploads");
-    if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+//const videoStorage = multer.diskStorage({
+ // destination: (req, file, cb) => {
+  //  const uploadPath = path.join(__dirname, "uploads");
+  //  if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath);
+  //  cb(null, "uploads/");
+  //},
+  //filename: (req, file, cb) => {
+   // cb(null, `${Date.now()}-${file.originalname}`);
+  //},
+//});
+//const uploadVideo = multer({ storage: videoStorage });
+
+const videoStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "srh_videos", // your folder name on Cloudinary
+    resource_type: "video", // ensure Cloudinary treats it as video
+    format: async (req, file) => "mp4", // optional
+    public_id: (req, file) => `${Date.now()}-${file.originalname.split('.')[0]}`,
   },
 });
+
 const uploadVideo = multer({ storage: videoStorage });
+
+
 
 const articleImageStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -562,10 +92,12 @@ app.post("/upload", uploadVideo.single("video"), async (req, res) => {
     if (!req.file) return res.status(400).json({ message: "No file uploaded" });
 
     const newVideo = new Video({
-      title,
-      filename: req.file.filename,
-      path: `/uploads/${req.file.filename}`,
-    });
+  title,
+  filename: req.file.originalname,
+  path: req.file.path, // this is the full Cloudinary URL (https://res.cloudinary.com/...)
+});
+
+
     const savedVideo = await newVideo.save();
 
     res.status(200).json({ message: "Uploaded successfully!", video: savedVideo });
@@ -592,11 +124,14 @@ app.get("/videos/:id/download", async (req, res) => {
     video.downloadCount = (video.downloadCount || 0) + 1;
     await video.save();
 
-    res.download(path.join(__dirname, video.path));
+    // Redirect to Cloudinary URL (browser will download)
+    res.redirect(video.path);
   } catch (err) {
+    console.error("Download error:", err);
     res.status(500).send("Server error");
   }
 });
+
 
 app.delete("/videos/:id", async (req, res) => {
   const adminPassword = req.headers["x-admin-password"];
