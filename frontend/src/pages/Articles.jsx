@@ -2469,7 +2469,9 @@ const Articles = () => {
           const showComments = expandedCommentIds.has(article._id);
           const needsToggle = showReadMore[article._id];
           const parts = splitMap[article._id] || null;
-          const imageUrl = article.image ? `${API_BASE}${article.image}` : null;
+          const imageUrl = article.image || null; // Cloudinary URL is already full path
+
+
           const isTelugu = translated[article._id];
 
           const titleToShow = isTelugu && article.titleTelugu ? article.titleTelugu : article.title;
