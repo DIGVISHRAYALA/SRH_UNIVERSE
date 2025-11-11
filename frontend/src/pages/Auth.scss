@@ -154,7 +154,6 @@
 
 
 
-
 /* ====== Auth.scss ====== */
 
 /* Fonts & reset-ish bits */
@@ -162,8 +161,8 @@
 :root {
   //--orange-1: #ff6a00;   /* dark orange */
   //--orange-2: #ff3b00;   /* darker orange */
-  --orange-1: #ff6200;   /* dark orange */
-  --orange-2: #ff5500;   /* darker orange */
+  --orange-1: #e95308;   /* dark orange */
+  --orange-2: #f46218;   /* darker orange */
   --text: #0f172a;
   --muted: #6b7280;
   --bg: #f4f5f7;
@@ -423,12 +422,84 @@ body { background: var(--bg); }
 }
 .link:hover { text-decoration: underline; }
 
-/* ====== Responsive ====== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* keep laptop/desktop rules as-is above … */
+
+/* ====== Mobile: keep the same slider + effects ====== */
 @media (max-width: 880px) {
-  .auth-card { grid-template-columns: 1fr; }
-  .forms-rail { width: 100%; grid-template-columns: 1fr; transform: translateX(0)!important; }
-  .welcome { order: -1; padding: 36px 26px; }
-  .form-panel { padding: 28px 24px; }
-  .welcome__cta { display: none; } /* small screens: show both via scroll */
+  .auth-card {
+    grid-template-columns: 1fr;                 /* stack: Welcome over Forms */
+    width: min(560px, 96vw);
+    height: clamp(560px, 92dvh, 760px);         /* fill viewport but not overflow */
+  }
+
+  .welcome {
+    order: -1;                                  /* show first */
+    padding: 28px 22px;
+  }
+
+  /* keep CTA on mobile so users can toggle modes */
+  .welcome__cta { display: inline-flex; }
+
+  /* allow inner scroll, keep momentum on iOS */
+  .forms-viewport {
+    height: auto;
+    min-height: 360px;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 0;
+  }
+
+  /* 🔑 DO NOT collapse the rail; keep 2 panels & the slide */
+  .forms-rail {
+    width: 200%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;             /* login | register */
+    will-change: transform;
+    transition: transform var(--transition);
+    transform: translateX(0%);                  /* login by default */
+  }
+  .auth-card[data-mode="register"] .forms-rail { transform: translateX(-50%); }
+
+  .form-panel {
+    padding: 24px 20px calc(40px + env(safe-area-inset-bottom, 0px));
+    gap: 14px;
+  }
+
+  .form-panel h2 { font-size: 28px; }
+  .subtle { font-size: 13px; }
+
+  .input,
+  .input-with-eye input,
+  .btn { height: 44px; }
 }
+
+/* ====== Very small phones: tighten typography a bit ====== */
+@media (max-width: 380px) {
+  .welcome__title { font-size: clamp(24px, 7vw, 30px); }
+  .welcome__desc { font-size: 14px; }
+  .form-panel h2 { font-size: 24px; }
+  .input,
+  .input-with-eye input,
+  .btn { height: 42px; font-size: 14px; }
+}
+
+/* ====== Small quality-of-life tweaks (add once) ====== */
+:root { --safe-inset-bottom: env(safe-area-inset-bottom, 0px); }
+.forms-viewport { min-height: 0; overflow-x: hidden; overflow-y: auto; }
+.forms-rail { will-change: transform; }          /* smoother GPU anim */
+
+
 
