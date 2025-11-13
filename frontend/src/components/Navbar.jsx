@@ -66,6 +66,7 @@ function Navbar() {
         <Link to="/videos" onClick={toggleSidebar}>Videos</Link>
         <Link to="/articles" onClick={toggleSidebar}>Articles</Link>
         <Link to="/live-discussion" onClick={toggleSidebar}>Game Talk</Link>
+        <Link to="/about" onClick={toggleSidebar}>About Us</Link>
         {!username ? (
           <>
             <Link to="/login" onClick={toggleSidebar}>Login</Link>
