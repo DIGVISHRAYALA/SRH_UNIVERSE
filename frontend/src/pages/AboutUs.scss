@@ -1,0 +1,226 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;600;700&display=swap');
+
+// Variables
+$page-bg: #fff5ee;
+$card-bg: #ffffff;
+$text: #111;
+$muted: #575757;
+$accent: #ff6f1a;
+$accent-dark: #e65500;
+$border-glass: rgba(0, 0, 0, 0.05);
+$shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.06);
+$radius-lg: 16px;
+$radius-md: 10px;
+$max-width: 1100px;
+
+// PAGE
+.about-page {
+  background: $page-bg;
+  min-height: 90vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+// CARD GRID
+.about-card {
+  width: 100%;
+  max-width: $max-width;
+  background: $card-bg;
+  border-radius: $radius-lg;
+  padding: 28px;
+  box-shadow: $shadow-soft;
+  border: 1px solid $border-glass;
+
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+}
+
+// LEFT COLUMN
+.left {
+  .page-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $accent-dark;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    //white-space: nowrap;
+  }
+
+  .about-content p {
+    margin-bottom: 12px;
+    color: $muted;
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+}
+
+// RIGHT COLUMN
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .suggest-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: $text;
+    letter-spacing: 0.8px;
+  }
+
+  .suggest-box {
+    background: $card-bg;
+    border-radius: $radius-md;
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px dashed rgba(0, 0, 0, 0.15);
+      resize: vertical;
+      outline: none;
+      font-size: 1rem;
+      color: $text;
+
+      &:focus {
+        border-color: $accent;
+        box-shadow: 0 6px 18px rgba(255, 111, 26, 0.15);
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+
+      .send-btn {
+        background: linear-gradient(90deg, $accent, $accent-dark);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 999px;
+        border: none;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(255, 111, 26, 0.2);
+        }
+      }
+
+      .clear-btn {
+        background: transparent;
+        padding: 10px 20px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
+  }
+
+  .note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  /* ABOUT DEVELOPER (inside right column) */
+  .right-dev {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+
+  .dev-heading {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: $accent;
+    letter-spacing: 1px;
+  }
+
+  .dev-inline {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .dev-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #000;
+  }
+
+  .dev-cred {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  .dev-extra {
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.55);
+    max-width: 350px;
+    line-height: 1.4;
+  }
+}
+
+
+// MOBILE RESPONSIVE
+@media (max-width: 980px) {
+  .about-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+   .page-heading {
+    font-size: 1.5rem;       /* prevents overflow on very small screens */
+    //white-space: nowrap;     /* still stays in one line */
+  };
+  //.page-heading { font-size: 1.5rem; }
+  .dev-name { font-size: 1.3rem; }
+}
