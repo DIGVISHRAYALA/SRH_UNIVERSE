@@ -231,6 +231,287 @@
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // SCSS Variables
+// $orange-main: #ff7518;
+// $orange-deep: #ff8c00;
+// $white: #ffffff;
+// $black: #1a1a1a;
+// $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
+
+// // Navbar Styling
+// .navbar {
+//   background: linear-gradient(to right, $black, $orange-main);
+//   padding: 0.8rem 2rem;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: sticky;
+//   top: 0;
+//   z-index: 1000;
+//   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+//   transition: background 0.4s ease-in-out;
+// }
+
+// .logo {
+//   font-size: 2rem;
+//   font-weight: 700;
+//   color: $white;
+//   font-family: 'Segoe UI', sans-serif;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   margin-right: -7rem;
+
+//   &:hover {
+//     transform: scale(1.12);
+//     color: rgba($orange-deep, 0.9);
+//     text-shadow: 0 0 10px rgba($orange-main, 0.6);
+//   }
+// }
+
+// .nav-logo {
+//   transform: translateY(-6px);
+//   height: 110px;
+//   width: auto;
+//   margin: 0 2rem;
+//   transition: transform 0.3s ease;
+
+//   &:hover {
+//     transform: translateY(-6px) scale(1.05);
+//   }
+// }
+
+// /* Hamburger Icon */
+// .hamburger-menu {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   width: 30px;
+//   height: 25px;
+//   cursor: pointer;
+//   z-index: 1100;
+  
+//   .bar {
+//     width: 100%;
+//     height: 3px;
+//     background-color: $white;
+//     transition: all 0.3s ease-in-out;
+//   }
+// }
+
+// // /* Sidebar (Side-panel) */
+// .sidebar {
+//   position: fixed;
+//   top: 0;
+//   right: -280px; // The width of the side panel
+//   width: 280px; // Updated width
+//   height: 100%;
+//   background: linear-gradient(to bottom, $black, $orange-main); // Updated background
+//   padding: 5rem 0; // Updated padding
+//   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3); // Updated box shadow
+//   transition: right 0.3s ease-in-out; // Smoother transition
+//   z-index: 999;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0rem;
+
+// /* Sidebar (Side-panel) */
+// /* Sidebar (Side-panel) */
+//   /* Sidebar (Side-panel) */
+
+
+//   &.open {
+//     right: 0;
+//   }
+
+//   .close-btn {
+//     align-self: flex-end;
+//     font-size: 2rem;
+//     color: $white;
+//     cursor: pointer;
+//     line-height: 1;
+//     margin-right: 20px; // Align close button with padding
+//   }
+
+//   a {
+//     color: $white;
+//     font-size: 1.5rem; // Updated font size
+//     font-weight: 600;
+//     text-decoration: none;
+//     padding: 1rem 2rem; // Updated padding for links
+//     width: 100%;
+//     text-align: left;
+//     transition: background-color 0.2s ease, color 0.3s ease, text-shadow 0.3s ease;
+
+//     &:hover {
+//       background-color: rgba(255, 255, 255, 0.1);
+//       color: rgba($orange-deep, 0.9);
+//       text-shadow: 0 0 10px rgba($orange-main, 0.6);
+//     }
+//   }
+// }
+
+// /* Hide desktop nav links */
+// .navbar .nav-links {
+//   display: none;
+// }
+
+// @media (max-width: 768px) {
+//   .sidebar {
+//     width: 65%;
+//   }
+//   .navbar {
+//     display: grid;
+//     grid-template-columns: auto 2fr auto;
+//     padding: 0.8rem 1rem;
+
+//     .logo {
+//       font-size: 1.1rem;
+//       justify-self: start;
+
+//       span:first-child {
+//         left: 0;
+//       }
+//     }
+
+//     .nav-logo {
+//       margin-left: 20px;
+//       justify-self: end;
+//     }
+
+//     .hamburger-menu {
+//       justify-self: end;
+//       margin-left: 0;
+//     }
+//   }
+
+//   .hamburger-menu {
+//     display: flex;
+//   }
+// }
+
+// @media (min-width: 769px) {
+//   .hamburger-menu {
+//     display: flex;
+//   }
+
+//   .nav-links {
+//     display: none;
+//   }
+// }
+
+// .sidebar {
+//   .logout-link {
+//     background: none;
+//     border: none;
+//     padding: 0;
+//     text-align: left;
+//     cursor: pointer;
+//     font: inherit;
+//     color: inherit;
+//     margin: 0.25rem 0;
+
+//     &:hover { text-decoration: underline; }
+//   }
+// }
+
+
+
+// // .logout-btn {
+// //   background-color: #ff8800; /* Red background */
+// //   color: white; /* White text */
+// //   padding: 10px 20px; /* Padding around text */
+// //   border: none; /* No border */
+// //   border-radius: 5px; /* Slightly rounded corners */
+// //   cursor: pointer; /* Indicate it's clickable */
+// //   font-size: 16px; /* Font size */
+// //   text-decoration: none; /* Remove underline if it's a link */
+// //   display: inline-block; /* Allows padding and other box model properties */
+// // }
+
+// // .logout-btn:hover {
+// //   background-color: #ff5900; /* Darker red on hover */
+// // }
+
+
+
+
+
+// /* Logout Button Styling */
+// .logout-btn {
+//   background: linear-gradient(135deg, #fc6907); // gradient orange
+//   color: $white;
+//   font-size: 1.2rem;
+//   font-weight: 600;
+//   letter-spacing: 1px;
+//   padding: 12px 25px;
+//   border: none;
+//   border-radius: 30px; // pill shaped
+//   cursor: pointer;
+//   margin: 1rem 2rem;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+//   transition: all 0.3s ease-in-out;
+
+//   &:hover {
+//     background: linear-gradient(135deg, #ff6200);
+//     transform: scale(1.07);
+//     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+//   }
+
+//   &:active {
+//     transform: scale(0.97);
+//     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // SCSS Variables
 $orange-main: #ff7518;
 $orange-deep: #ff8c00;
@@ -367,16 +648,26 @@ $sidebar-bg: #2a2a2a; // Keeping for reference but the gradient will override it
     .logo {
       font-size: 1.1rem;
       justify-self: start;
-
+      margin-right: 0 !important;
       span:first-child {
         left: 0;
       }
     }
 
-    .nav-logo {
-      margin-left: 20px;
-      justify-self: end;
-    }
+    // .nav-logo {
+    //   margin-left: 20px;
+    //   justify-self: end;
+    // }
+
+
+    /* mobile-only logo tweak: nudge logo slightly left and keep it aligned start */
+.nav-logo {
+  margin-left: 8px;     /* ↓ smaller left margin moves it left */
+  justify-self: start;  /* keep logo on the left side of the grid */
+  position: relative;   /* safe positioning if you later nudge with left/top */
+  left: -4px;           /* small negative value nudges more to the left if needed */
+}
+
 
     .hamburger-menu {
       justify-self: end;
