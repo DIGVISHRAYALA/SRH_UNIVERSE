@@ -1,5 +1,351 @@
+// .scorecard {
+//   padding: 20px;
+
+//   .scorecard-header {
+//     text-align: center;
+//     margin-bottom: 20px;
+
+//     h2 {
+//       font-size: 1.4rem;
+//       color: orange;
+//       font-weight: bold;
+//       text-transform: uppercase;
+//       letter-spacing: 1px;
+//       border-bottom: 2px solid orange;
+//       display: inline-block;
+//       padding-bottom: 6px;
+//     }
+//   }
+// }
+
+// .score-details {
+//   text-align: center;
+//   color: white;
+//   margin-bottom: 20px;
+
+//   span {
+//     font-weight: bold;
+//     color: orange;
+//   }
+// }
+
+// .scoreboard {
+//   margin-top: 20px;
+//   display: flex;
+//   justify-content: center;
+//   padding: 0 20px;
+// }
+
+// .inning {
+//   background: #1f1f1f;
+//   padding: 15px 20px;
+//   border-left: 6px solid orange;
+//   border-radius: 12px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   transition: all 0.3s ease;
+//   margin: 0 10px;
+
+//   &:hover {
+//     background: #292929;
+//     transform: scale(1.01);
+//     background-color: #ffa500;
+//   }
+
+//   .team-name {
+//     font-weight: bold;
+//     color: #ffa500;
+//     font-size: 1.1rem;
+//   }
+
+//   .team-score {
+//     font-size: 1.1rem;
+//     color: white;
+//   }
+// }
+
+// .unified-score {
+//   width: 100%;
+//   background: #202020;
+//   border-radius: 16px;
+//   box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+//   padding: 20px 0;
+//   transition: all 0.3s ease;
+
+//   &:hover {
+//     transform: scale(1.01);
+//     background: #292929;
+//   }
+
+//   .teams {
+//     display: flex;
+//     justify-content: center;
+//     padding:-100px -200px;
+
+//     .inner-container {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       width: 90%;
+//       max-width: 900px;
+//       padding: 0 20px;
+//     }
+
+//     .team-box {
+//       flex: 1;
+//       text-align: center;
+
+//     //   .team-name {
+//     //     font-weight: bold;
+//     //     font-size: 1.3rem;
+//     //     color: #ffa500;
+//     //   }
+//         .team-name {
+//   //font-weight: bold;
+//   font-size: 1.2rem;
+//   font-weight: bold;
+//   // Default SRH orange
+//   color: #ffa500;
+
+//   // Special team color overrides
+//   &.kkr {
+//     color: #9500ff; // KKR purple
+//   }
+// }
+
+
+
+//       .team-score {
+//         font-size: 1.2rem;
+//         color: rgb(255, 255, 255);
+//         margin-top: 4px;
+//         //font-weight: bold;
+//       }
+//     }
+
+//     .match-meta {
+//       flex: 1;
+//       text-align: center;
+
+//       .match-number {
+//         font-size: 1rem;
+//         color: rgb(255, 255, 255);
+//         //font-weight: bold;
+//       }
+
+//       .match-date {
+//         color: #ffffff;
+//         font-size: 0.95rem;
+//         margin-top: 5px;
+//         //font-weight: bold;
+//       }
+
+//       .match-result {
+//         margin-top: 10px;
+//         color: orange;
+//         font-weight: bold;
+//         font-size: 1.1rem;
+//         text-align: center;
+//       }
+//     }
+//   }
+// }
+
+// // @media (max-width: 768px) {
+// //   .scorecard {
+// //     padding: 10px;
+
+// //     .scorecard-header {
+// //       h2 {
+// //         font-size: 1.1rem;
+// //         padding-bottom: 4px;
+// //       }
+// //     }
+// //   }
+
+// //   .score-details {
+// //     font-size: 0.95rem;
+
+// //     span {
+// //       font-size: 1rem;
+// //     }
+// //   }
+
+// //   .scoreboard {
+// //     flex-direction: column;
+// //     align-items: center;
+// //     padding: 0 10px;
+
+// //     .inning {
+// //       margin: 10px 0;
+// //       padding: 12px 15px;
+// //       flex-direction: column;
+      
+
+
+// //       .team-name, .team-score {
+// //         font-size: 1rem;
+// //         margin-bottom: 5px;
+// //       }
+// //     }
+// //   }
+
+// //   .unified-score {
+// //     padding: 15px 10px;
+
+// //     .teams {
+// //       flex-direction: column;
+
+// //       .inner-container {
+// //         flex-direction: column;
+// //         padding: 0;
+// //         width: 100%;
+// //       }
+
+// //       .team-box,
+// //       .match-meta {
+// //         width: 100%;
+// //         padding: 10px 0;
+// //         text-align: center;
+
+// //         .team-name {
+// //           font-size: 1.1rem;
+// //         }
+
+// //         .team-score {
+// //           font-size: 1.1rem;
+// //         }
+
+// //         .match-number,
+// //         .match-date,
+// //         .match-result {
+// //           font-size: 1rem;
+// //         }
+// //       }
+// //     }
+// //   }
+// // }
+
+// // Responsive adjustments for mobile
+// @media screen and (max-width: 768px) {
+//   .scorecard {
+//     padding: 10px;
+
+//     .scorecard-header h2 {
+//       font-size: 1.1rem;
+//     }
+//   }
+
+//   .score-details {
+//     font-size: 0.95rem;
+
+//     span {
+//       font-size: 1rem;
+//     }
+//   }
+
+//   .scoreboard {
+//     padding: 0 10px;
+//     flex-wrap: nowrap;
+//     overflow-x: auto;
+
+//     .inning {
+//       flex: 0 0 auto; // Prevent shrink
+//       padding: 10px 15px;
+//       margin: 0 5px;
+
+//       .team-name,
+//       .team-score {
+//         font-size: 0.95rem;
+//       }
+//     }
+//   }
+
+//   .unified-score {
+//     padding: 10px 0;
+
+//     .teams {
+//       padding: 0 10px;
+
+//       .inner-container {
+//         flex-direction: row;
+//         flex-wrap: nowrap;
+//         overflow-x: auto;
+//         width: 100%;
+//         padding: 0 10px;
+//         gap: 12px;
+
+//         .team-box,
+//         .match-meta {
+//           flex: 0 0 auto;
+//           width: 33%;
+//           text-align: center;
+
+//           .team-name {
+//             font-size: 1rem;
+//           }
+
+//           .team-score {
+//             font-size: 1rem;
+//           }
+
+//           .match-number,
+//           .match-date,
+//           .match-result {
+//             font-size: 0.85rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* src/components/LiveSRHScore.scss
+   reference screenshot: /mnt/data/Screenshot (608).png
+*/
+
+/* Base scorecard */
 .scorecard {
   padding: 20px;
+  box-sizing: border-box;
 
   .scorecard-header {
     text-align: center;
@@ -14,10 +360,12 @@
       border-bottom: 2px solid orange;
       display: inline-block;
       padding-bottom: 6px;
+      margin: 0;
     }
   }
 }
 
+/* small details area */
 .score-details {
   text-align: center;
   color: white;
@@ -27,13 +375,19 @@
     font-weight: bold;
     color: orange;
   }
+
+  p {
+    margin: 6px 0;
+  }
 }
 
+/* simple horizontal scoreboard */
 .scoreboard {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .inning {
@@ -46,25 +400,37 @@
   align-items: center;
   transition: all 0.3s ease;
   margin: 0 10px;
+  min-width: 160px;
+  box-sizing: border-box;
 
   &:hover {
     background: #292929;
     transform: scale(1.01);
-    background-color: #ffa500;
   }
 
   .team-name {
     font-weight: bold;
     color: #ffa500;
     font-size: 1.1rem;
+    margin: 0;
   }
 
   .team-score {
     font-size: 1.1rem;
     color: white;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .overs {
+    font-size: 0.95rem;
+    color: #ddd;
   }
 }
 
+/* Unified score (desktop layout) */
 .unified-score {
   width: 100%;
   background: #202020;
@@ -72,6 +438,7 @@
   box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
   padding: 20px 0;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 
   &:hover {
     transform: scale(1.01);
@@ -81,7 +448,9 @@
   .teams {
     display: flex;
     justify-content: center;
-    padding:-100px -200px;
+    padding: 10px 0;
+    gap: 20px;
+    box-sizing: border-box;
 
     .inner-container {
       display: flex;
@@ -90,55 +459,61 @@
       width: 90%;
       max-width: 900px;
       padding: 0 20px;
+      gap: 16px;
+      box-sizing: border-box;
     }
 
     .team-box {
       flex: 1;
       text-align: center;
+      box-sizing: border-box;
 
-    //   .team-name {
-    //     font-weight: bold;
-    //     font-size: 1.3rem;
-    //     color: #ffa500;
-    //   }
-        .team-name {
-  //font-weight: bold;
-  font-size: 1.2rem;
-  font-weight: bold;
-  // Default SRH orange
-  color: #ffa500;
+      .team-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #ffa500;
+        margin: 0;
 
-  // Special team color overrides
-  &.kkr {
-    color: #9500ff; // KKR purple
-  }
-}
+        &.kkr {
+          color: #9500ff;
+        }
+      }
 
-
-
+      /* team-score now contains .score-main and .overs spans */
       .team-score {
         font-size: 1.2rem;
-        color: rgb(255, 255, 255);
+        color: #fff;
         margin-top: 4px;
-        //font-weight: bold;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .score-main {
+        font-weight: 700;
+      }
+
+      .overs {
+        font-size: 0.95rem;
+        color: #ddd;
       }
     }
 
     .match-meta {
       flex: 1;
       text-align: center;
+      box-sizing: border-box;
 
       .match-number {
         font-size: 1rem;
-        color: rgb(255, 255, 255);
-        //font-weight: bold;
+        color: #fff;
+        margin: 0;
       }
 
       .match-date {
-        color: #ffffff;
+        color: #fff;
         font-size: 0.95rem;
         margin-top: 5px;
-        //font-weight: bold;
       }
 
       .match-result {
@@ -152,82 +527,40 @@
   }
 }
 
-// @media (max-width: 768px) {
-//   .scorecard {
-//     padding: 10px;
+/* Skeleton styles (profile-like) */
+.skeleton {
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,.12), rgba(0,0,0,.05));
+  background-size: 200% 100%;
+  animation: shimmer 1.25s linear infinite;
+  box-sizing: border-box;
+}
+.skeleton.hero { height: 84px; border-radius: 10px; }
+.skeleton.row { height: 48px; border-radius: 8px; }
+.skeleton.card { height: 220px; border-radius: 12px; }
 
-//     .scorecard-header {
-//       h2 {
-//         font-size: 1.1rem;
-//         padding-bottom: 4px;
-//       }
-//     }
-//   }
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
-//   .score-details {
-//     font-size: 0.95rem;
+/* Toast placeholder if used (keeps same style as profile) */
+.pro-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  background: #ff9d3b;
+  color: #111;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(204,82,0,.22);
+  z-index: 1000;
+}
 
-//     span {
-//       font-size: 1rem;
-//     }
-//   }
-
-//   .scoreboard {
-//     flex-direction: column;
-//     align-items: center;
-//     padding: 0 10px;
-
-//     .inning {
-//       margin: 10px 0;
-//       padding: 12px 15px;
-//       flex-direction: column;
-      
-
-
-//       .team-name, .team-score {
-//         font-size: 1rem;
-//         margin-bottom: 5px;
-//       }
-//     }
-//   }
-
-//   .unified-score {
-//     padding: 15px 10px;
-
-//     .teams {
-//       flex-direction: column;
-
-//       .inner-container {
-//         flex-direction: column;
-//         padding: 0;
-//         width: 100%;
-//       }
-
-//       .team-box,
-//       .match-meta {
-//         width: 100%;
-//         padding: 10px 0;
-//         text-align: center;
-
-//         .team-name {
-//           font-size: 1.1rem;
-//         }
-
-//         .team-score {
-//           font-size: 1.1rem;
-//         }
-
-//         .match-number,
-//         .match-date,
-//         .match-result {
-//           font-size: 1rem;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// Responsive adjustments for mobile
+/* Responsive adjustments: keep the same horizontal layout on mobile (no stacking),
+   but put overs on its own line below score in mobile view */
 @media screen and (max-width: 768px) {
   .scorecard {
     padding: 10px;
@@ -245,13 +578,14 @@
     }
   }
 
+  /* Keep scoreboard horizontally scrollable but visually same as desktop */
   .scoreboard {
     padding: 0 10px;
     flex-wrap: nowrap;
     overflow-x: auto;
 
     .inning {
-      flex: 0 0 auto; // Prevent shrink
+      flex: 0 0 auto;
       padding: 10px 15px;
       margin: 0 5px;
 
@@ -259,44 +593,87 @@
       .team-score {
         font-size: 0.95rem;
       }
+
+      .team-score {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .overs {
+        font-size: 0.85rem;
+        color: #ddd;
+      }
     }
   }
 
+  /* Force unified score inner container to stay horizontal on mobile but show overs below score */
   .unified-score {
     padding: 10px 0;
 
     .teams {
-      padding: 0 10px;
+      padding: 0 8px;
 
       .inner-container {
-        flex-direction: row;
+        display: flex;
+        flex-direction: row; /* keep horizontal layout like desktop */
         flex-wrap: nowrap;
         overflow-x: auto;
         width: 100%;
-        padding: 0 10px;
+        max-width: 100%;
         gap: 12px;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
 
-        .team-box,
-        .match-meta {
-          flex: 0 0 auto;
-          width: 33%;
-          text-align: center;
+      .team-box,
+      .match-meta {
+        flex: 0 0 auto;
+        width: 33%;
+        text-align: center;
+        box-sizing: border-box;
 
-          .team-name {
-            font-size: 1rem;
-          }
+        .team-name {
+          font-size: 1rem;
+        }
 
-          .team-score {
-            font-size: 1rem;
-          }
+        .team-score {
+          /* switch to column on mobile so overs moves below */
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          margin-top: 6px;
+        }
 
-          .match-number,
-          .match-date,
-          .match-result {
-            font-size: 0.85rem;
-          }
+        .score-main {
+          font-size: 1.1rem;
+          font-weight: 700;
+        }
+
+        .overs {
+          font-size: 0.95rem;
+          color: #dcdcdc;
+          margin-top: 0;
+        }
+
+        .match-number,
+        .match-date,
+        .match-result {
+          font-size: 0.85rem;
         }
       }
     }
   }
 }
+
+/* small phones tweaks (optional) */
+@media (max-width: 480px) {
+  .inning { min-width: 140px; padding: 8px 12px; }
+  .team-name { font-size: 1rem; }
+  .team-score { font-size: 1rem; }
+  .unified-score .team-box .score-main { font-size: 1rem; }
+  .unified-score .team-box .overs { font-size: 0.9rem; }
+}
+
