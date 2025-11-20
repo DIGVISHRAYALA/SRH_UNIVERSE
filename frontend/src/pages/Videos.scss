@@ -1,5 +1,225 @@
 
 
+// .videos {
+//   padding: 2rem;
+//   background: #fff0e6;
+//   min-height: 100vh;
+
+//   .videos-header {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center; /* keep title centered */
+//     position: relative;
+//     margin-bottom: 1rem;
+
+//     h1 {
+//       font-size: 2rem;
+//       color: #e65100;
+//       margin: 0;
+//     }
+
+//     .search-container {
+//       display: flex;
+//       align-items: center;
+//       gap: 8px;
+//       position: absolute;
+//       right: 0;
+//     }
+
+//     .search-icon {
+//       cursor: pointer;
+//       font-size: 1.4rem;
+//       transition: transform 0.2s ease;
+
+//       &:hover {
+//         transform: scale(1.1);
+//       }
+//     }
+
+//     .search-bar {
+//       padding: 4px 8px;
+//       border: 1px solid #ccc;
+//       border-radius: 4px;
+//       outline: none;
+//       font-size: 0.9rem;
+//       width: 150px;
+//     }
+//   }
+
+//   .highlight {
+//     background-color: orange;
+//     color: #fff;
+//     padding: 1px 3px;
+//     border-radius: 3px;
+//   }
+
+//   .video-list {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+//     gap: 1.5rem;
+//     margin-top: 2rem;
+//   }
+
+//   .video-card {
+//     padding: 1rem;
+//     border: 1px solid #eee;
+//     border-radius: 10px;
+//     background: #ffffff;
+//     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+//     h3 {
+//       color: #333;
+//       margin-bottom: 0.5rem;
+//     }
+
+//     // .download-btn {
+//     //   display: flex;
+//     //   justify-content: center;
+//     //   align-items: center;
+//     //   margin: 1rem auto;
+//     //   padding: 0.4rem 0.8rem;
+//     //   background: #ff9800;
+//     //   color: white;
+//     //   text-decoration: none;
+//     //   border-radius: 4px;
+//     //   transition: background 0.3s ease;
+//     //   width: fit-content;
+
+//     //   &:hover {
+//     //     background: #ff5900;
+//     //   }
+//     // }
+
+//     .download-btn {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       margin: 1rem auto;
+//       padding: 0.6rem 1.2rem;   // ⬅️ Increased size
+//       background: #ff9800;
+//       color: white;
+//       text-decoration: none;
+//       border-radius: 12px;      // ⬅️ Rounded corners
+//       font-size: 1rem;          // ⬅️ Slightly bigger text
+//       cursor: pointer;          // ⬅️ Hand cursor
+//       transition: background 0.3s ease, transform 0.2s ease;
+    
+//       &:hover {
+//         background: #ff5900;
+//         cursor: pointer;           // ⬅️ Different cursor on hover
+//         transform: scale(1.05); // ⬅️ Small zoom effect
+//       }
+//     }    
+//   }
+// }
+
+// // @media (max-width: 768px) {
+// //   .videos {
+// //     padding: 1rem;
+
+// //     h1 {
+// //       font-size: 1.5rem;
+// //       margin-bottom: 1rem;
+// //     }
+
+// //     .video-list {
+// //       grid-template-columns: 1fr;
+// //       gap: 1rem;
+// //     }
+
+// //     .video-card {
+// //       padding: 0.8rem;
+
+// //       h3 {
+// //         font-size: 1rem;
+// //       }
+
+// //       .download-btn {
+// //         font-size: 0.9rem;
+// //         padding: 0.4rem 0.6rem;
+// //       }
+// //     }
+// //   }
+// // }
+
+
+// @media (max-width: 768px) {
+//   .videos {
+//     padding: 1rem;
+
+//     .videos-header {
+//       // Changes the header to a side-by-side layout for mobile
+//       justify-content: space-between;
+//       flex-direction: row;
+      
+//       h1 {
+//         font-size: 1.5rem;
+//         margin-bottom: 0; // Adjusts vertical spacing
+//         text-align: left; // Aligns title to the left
+//       }
+      
+//       .search-container {
+//         // Removes absolute positioning so it flows with the title
+//         position: static;
+//         flex-grow: 1; // Allows it to take up available space
+//         justify-content: flex-end; // Pushes content to the right
+//       }
+
+//       .search-icon {
+//         // Hides the search icon on mobile
+//         display: none;
+//       }
+
+//       .search-bar {
+//         // Overrides default behavior to always show the search bar
+//         display: block;
+//         width: 150px;
+//       }
+//     }
+
+//     .video-list {
+//       grid-template-columns: 1fr;
+//       gap: 1rem;
+//     }
+
+//     .video-card {
+//       padding: 0.8rem;
+
+//       h3 {
+//         font-size: 1rem;
+//       }
+
+//       .download-btn {
+//         font-size: 0.9rem;
+//         padding: 0.4rem 0.6rem;
+//       }
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .videos {
   padding: 2rem;
   background: #fff0e6;
@@ -8,7 +228,7 @@
   .videos-header {
     display: flex;
     align-items: center;
-    justify-content: center; /* keep title centered */
+    justify-content: center; /* keep title centered on desktop */
     position: relative;
     margin-bottom: 1rem;
 
@@ -72,108 +292,95 @@
       margin-bottom: 0.5rem;
     }
 
-    // .download-btn {
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   margin: 1rem auto;
-    //   padding: 0.4rem 0.8rem;
-    //   background: #ff9800;
-    //   color: white;
-    //   text-decoration: none;
-    //   border-radius: 4px;
-    //   transition: background 0.3s ease;
-    //   width: fit-content;
-
-    //   &:hover {
-    //     background: #ff5900;
-    //   }
-    // }
-
     .download-btn {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 1rem auto;
-      padding: 0.6rem 1.2rem;   // ⬅️ Increased size
+      padding: 0.6rem 1.2rem;
       background: #ff9800;
       color: white;
       text-decoration: none;
-      border-radius: 12px;      // ⬅️ Rounded corners
-      font-size: 1rem;          // ⬅️ Slightly bigger text
-      cursor: pointer;          // ⬅️ Hand cursor
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
       transition: background 0.3s ease, transform 0.2s ease;
-    
+
       &:hover {
         background: #ff5900;
-        cursor: pointer;           // ⬅️ Different cursor on hover
-        transform: scale(1.05); // ⬅️ Small zoom effect
+        transform: scale(1.05);
       }
-    }    
+    }
   }
 }
 
-// @media (max-width: 768px) {
-//   .videos {
-//     padding: 1rem;
-
-//     h1 {
-//       font-size: 1.5rem;
-//       margin-bottom: 1rem;
-//     }
-
-//     .video-list {
-//       grid-template-columns: 1fr;
-//       gap: 1rem;
-//     }
-
-//     .video-card {
-//       padding: 0.8rem;
-
-//       h3 {
-//         font-size: 1rem;
-//       }
-
-//       .download-btn {
-//         font-size: 0.9rem;
-//         padding: 0.4rem 0.6rem;
-//       }
-//     }
-//   }
-// }
 
 
+.toast-message {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: orange;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: fadeInOut 2s ease forwards;
+  z-index: 1000;
+
+  /* FIX for mobile layout issue */
+  max-width: 90vw;          /* prevent overflow on right */
+  text-align: center;       /* center inside text */
+  box-sizing: border-box;   /* include padding in width */
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 20px); }
+}
+
+
+/* 
+-------------------------
+ MOBILE VIEW (ONLY CHANGE)
+-------------------------
+*/
 @media (max-width: 768px) {
   .videos {
     padding: 1rem;
 
     .videos-header {
-      // Changes the header to a side-by-side layout for mobile
-      justify-content: space-between;
-      flex-direction: row;
-      
+      flex-direction: column;        /* stack */
+      justify-content: center;
+      align-items: center;
+      gap: 0.7rem;
+
       h1 {
-        font-size: 1.5rem;
-        margin-bottom: 0; // Adjusts vertical spacing
-        text-align: left; // Aligns title to the left
+        text-align: center;          /* keep title centered */
+        font-size: 1.6rem;
       }
-      
+
       .search-container {
-        // Removes absolute positioning so it flows with the title
-        position: static;
-        flex-grow: 1; // Allows it to take up available space
-        justify-content: flex-end; // Pushes content to the right
+        position: static;            /* remove absolute */
+        justify-content: center;
+        width: 100%;
       }
 
       .search-icon {
-        // Hides the search icon on mobile
-        display: none;
+        display: none;               /* hide icon on mobile */
       }
 
       .search-bar {
-        // Overrides default behavior to always show the search bar
         display: block;
-        width: 150px;
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 8px;
       }
     }
 
@@ -196,3 +403,4 @@
     }
   }
 }
+
