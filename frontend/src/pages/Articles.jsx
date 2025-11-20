@@ -2262,462 +2262,6 @@
 
 
 
-// import React, { useEffect, useState, useRef } from 'react';
-// import axios from '../utils/axiosInstance';
-// import './Articles.scss';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-
-// const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.209.36.186:5000';
-
-// const Articles = () => {
-//   const [articles, setArticles] = useState([]);
-//   const [expandedArticleIds, setExpandedArticleIds] = useState(new Set());
-//   const [expandedCommentIds, setExpandedCommentIds] = useState(new Set());
-//   const [showReadMore, setShowReadMore] = useState({});
-//   const [splitMap, setSplitMap] = useState({});
-//   const [activeCommentId, setActiveCommentId] = useState(null);
-//   const [toast, setToast] = useState(null);
-//   const [translated, setTranslated] = useState({});
-//   const [activeMenuId, setActiveMenuId] = useState(null); // NEW: For three-dot menu
-//   const refs = useRef({});
-//   const token = localStorage.getItem("token");
-//   const isLoggedIn = !!token;
-
-//   const [showSearch, setShowSearch] = useState(false);
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   useEffect(() => {
-//     fetchArticles();
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [token, isLoggedIn]);
-
-//   const fetchArticles = () => {
-//     const url = isLoggedIn ? "/api/articles/auth" : "/api/articles";
-//     axios
-//       .get(url, isLoggedIn ? { headers: { Authorization: `Bearer ${token}` } } : {})
-//       .then(res => {
-//         const sorted = (res.data || []).sort(
-//           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-//         );
-//         setArticles(sorted);
-//       })
-//       .catch(err => console.error("Error fetching articles:", err));
-//   };
-
-//   const showToast = (msg) => {
-//     setToast(msg);
-//     setTimeout(() => setToast(null), 2000);
-//   };
-
-//   // Close menu when clicking outside
-//   useEffect(() => {
-//     const handleClickOutside = (e) => {
-//       if (!e.target.closest(".options-menu") && !e.target.closest(".fa-ellipsis-v")) {
-//         setActiveMenuId(null);
-//       }
-//     };
-//     document.addEventListener("click", handleClickOutside);
-//     return () => document.removeEventListener("click", handleClickOutside);
-//   }, []);
-
-//   useEffect(() => {
-//     const t = setTimeout(() => {
-//       const newShow = {};
-//       const newSplit = {};
-
-//       articles.forEach(article => {
-//         const el = refs.current[article._id];
-//         const text = ((translated[article._id] && article.contentTelugu) ? article.contentTelugu : article.content || '').trim();
-
-//         if (!el) {
-//           newShow[article._id] = false;
-//           return;
-//         }
-
-//         const style = window.getComputedStyle(el);
-//         let lineHeight = parseFloat(style.lineHeight);
-//         if (Number.isNaN(lineHeight)) {
-//           const fontSize = parseFloat(style.fontSize) || 16;
-//           lineHeight = fontSize * 1.2;
-//         }
-
-//         const scrollH = el.scrollHeight;
-//         const lines = Math.max(1, Math.round(scrollH / lineHeight));
-
-//         newShow[article._id] = scrollH > (lineHeight * 2) + 1;
-
-//         if (!text) {
-//           newSplit[article._id] = { first: '', second: '', extraSpacing: 0 };
-//           return;
-//         }
-
-//         if (lines > 2) {
-//           const midChar = Math.floor(text.length / 2);
-//           let splitIndex = text.indexOf(' ', midChar);
-//           if (splitIndex === -1) splitIndex = text.lastIndexOf(' ', midChar);
-//           if (splitIndex === -1) splitIndex = midChar;
-
-//           const first = text.slice(0, splitIndex).trim();
-//           const second = text.slice(splitIndex).trim();
-
-//           newSplit[article._id] = { first, second, extraSpacing: 0 };
-//         } else {
-//           const extraSpacing = Math.max(0, Math.round((2 - lines) * lineHeight));
-//           newSplit[article._id] = { first: text, second: '', extraSpacing };
-//         }
-//       });
-
-//       setShowReadMore(prev => ({ ...prev, ...newShow }));
-//       setSplitMap(prev => ({ ...prev, ...newSplit }));
-//     }, 50);
-
-//     return () => clearTimeout(t);
-//   }, [articles, expandedArticleIds, translated]);
-
-//   const toggleArticleExpand = (id) => {
-//     setExpandedArticleIds(prev => {
-//       const next = new Set(prev);
-//       if (next.has(id)) next.delete(id);
-//       else next.add(id);
-//       return next;
-//     });
-//   };
-
-//   const toggleTranslation = (id) => {
-//     setTranslated(prev => ({
-//       ...prev,
-//       [id]: !prev[id]
-//     }));
-//   };
-
-//   const toggleComments = (id) => {
-//     setExpandedCommentIds(prev => {
-//       const next = new Set(prev);
-//       if (next.has(id)) next.delete(id);
-//       else next.add(id);
-//       return next;
-//     });
-//   };
-
-//   const highlightText = (text) => {
-//     if (!searchTerm) return text;
-//     const regex = new RegExp(`(${searchTerm})`, 'gi');
-//     return text.split(regex).map((part, i) =>
-//       regex.test(part) ? <mark key={i} className="highlight">{part}</mark> : part
-//     );
-//   };
-
-//   const handleLike = async (id) => {
-//     if (!isLoggedIn) {
-//       showToast("please login to get these features");
-//       return;
-//     }
-//     try {
-//       const res = await axios.post(
-//         `/api/articles/${id}/like`,
-//         {},
-//         { headers: { Authorization: `Bearer ${token}` } }
-//       );
-//       setArticles(prev =>
-//         prev.map(a => (a._id === id ? { ...a, ...res.data } : a))
-//       );
-//     } catch (err) {
-//       console.error("Error liking article:", err);
-//     }
-//   };
-
-//   const handleDeleteComment = async (articleId, commentId) => {
-//     try {
-//       const res = await axios.delete(`/api/articles/${articleId}/comments/${commentId}`);
-//       setArticles(prev =>
-//         prev.map(a =>
-//           a._id === articleId ? { ...a, comments: res.data.comments } : a
-//         )
-//       );
-//       showToast("COMMENT DELETED SUCCESSFULLY");
-//     } catch (err) {
-//       console.error("ERROR IN DELETING COMMENT", err);
-//     }
-//   };
-
-//   const handleComment = async (id, comment) => {
-//     if (!isLoggedIn) {
-//       showToast("please login to get these features");
-//       return;
-//     }
-//     if (!comment.trim()) return;
-//     try {
-//       const res = await axios.post(
-//         `/api/articles/${id}/comment`,
-//         { text: comment },
-//         { headers: { Authorization: `Bearer ${token}` } }
-//       );
-//       setArticles(prev =>
-//         prev.map(a => (a._id === id ? { ...a, comments: res.data.comments } : a))
-//       );
-//       showToast("COMMENT POSTED SUCCESSFULLY");
-//     } catch (err) {
-//       console.error("ERROR IN ADDING COMMENT", err);
-//     }
-//   };
-
-//   const filteredArticles = searchTerm
-//     ? articles.filter(a =>
-//         (a.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//          a.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//          a.titleTelugu?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//          a.contentTelugu?.toLowerCase().includes(searchTerm.toLowerCase()))
-//       )
-//     : articles;
-
-//   return (
-//     <div className="articles">
-//       <div className="articles-header">
-//         <h1>Latest Articles</h1>
-//         <div className="search-container">
-//           <span
-//             className="search-icon"
-//             onClick={() => setShowSearch(prev => !prev)}
-//           >
-//             🔍︎
-//           </span>
-//           {(showSearch || window.innerWidth <= 600) && (
-//             <input
-//               type="text"
-//               className="search-bar"
-//               placeholder="Search..."
-//               value={searchTerm}
-//               onChange={(e) => setSearchTerm(e.target.value)}
-//             />
-//           )}
-//         </div>
-//       </div>
-
-//       {filteredArticles.length === 0 ? (
-//         <p>No articles found.</p>
-//       ) : (
-//         filteredArticles.map(article => {
-//           const isExpanded = expandedArticleIds.has(article._id);
-//           const showComments = expandedCommentIds.has(article._id);
-//           const needsToggle = showReadMore[article._id];
-//           const parts = splitMap[article._id] || null;
-//           const imageUrl = article.image || null; // Cloudinary URL is already full path
-
-
-//           const isTelugu = translated[article._id];
-
-//           const titleToShow = isTelugu && article.titleTelugu ? article.titleTelugu : article.title;
-//           const contentToShow = isTelugu && article.contentTelugu ? article.contentTelugu : article.content;
-
-//           return (
-//             <div key={article._id} id={article._id} className="article-box">
-//               <div className="article-header" style={{ position: "relative" }}>
-//                 <h2>{highlightText(titleToShow)}</h2>
-//                 <i
-//                   className="fas fa-ellipsis-v"
-//                   onClick={(e) => {
-//                     e.stopPropagation();
-//                     setActiveMenuId(activeMenuId === article._id ? null : article._id);
-//                   }}
-//                   style={{ cursor: 'pointer', float: 'right', marginLeft: '10px' }}
-//                 ></i>
-
-//                 {activeMenuId === article._id && (
-//                   <div className="options-menu">
-//                     <div
-//                       className="option-item"
-//                       onClick={() => {
-//                         toggleTranslation(article._id);
-//                         setActiveMenuId(null);
-//                       }}
-//                     >
-//                       {isTelugu ? "Translate to English" : "Translate to Telugu"}
-//                     </div>
-//                   </div>
-//                 )}
-
-               
-//               </div>
-
-//               <div className="content-wrap">
-//                 <div
-//                   ref={el => { refs.current[article._id] = el; }}
-//                   className={`article-content ${isExpanded ? 'expanded' : 'clamped'}`}
-//                   aria-expanded={isExpanded}
-//                 >
-//                   {parts ? (
-//                     <>
-//                       <span className="article-text">{highlightText(parts.first)}</span>
-//                       {parts.second ? (
-//                         <>
-//                           {imageUrl && (
-//                             <div className="article-image">
-//                               <img src={imageUrl} alt={titleToShow} />
-//                             </div>
-//                           )}
-//                           <span className="article-text">{highlightText(parts.second)}</span>
-//                         </>
-//                       ) : (
-//                         <>
-//                           {imageUrl && <div style={{ height: parts.extraSpacing }} />}
-//                           {imageUrl && (
-//                             <div className="article-image">
-//                               <img src={imageUrl} alt={titleToShow} />
-//                             </div>
-//                           )}
-//                         </>
-//                       )}
-//                     </>
-//                   ) : (
-//                     <span className="article-text">{highlightText(contentToShow)}</span>
-//                   )}
-//                 </div>
-
-//                 {needsToggle && (
-//                   <button
-//                     className="read-toggle"
-//                     onClick={(e) => {
-//                       e.stopPropagation();
-//                       toggleArticleExpand(article._id);
-//                     }}
-//                   >
-//                     {isExpanded ? 'Read less' : 'Read more →'}
-//                   </button>
-//                 )}
-//               </div>
-
-//               <div className="article-actions">
-//                 <i
-//                   className={article.liked ? "fa-solid fa-heart liked" : "fa-regular fa-heart"}
-//                   onClick={(e) => {
-//                     e.stopPropagation();
-//                     handleLike(article._id);
-//                   }}
-//                 ></i>
-//                 <span className="count">{article.likesCount || 0}</span>
-
-//                 <i
-//                   className="fa-regular fa-comment"
-//                   onClick={(e) => {
-//                     e.stopPropagation();
-//                     if (!isLoggedIn) {
-//                       showToast("please login to get these features");
-//                       return;
-//                     }
-//                     toggleComments(article._id);
-//                   }}
-//                 ></i>
-//                 <span className="count">{isLoggedIn ? (article.comments?.length || 0) : 0}</span>
-//               </div>
-
-//               {showComments && isLoggedIn && (
-//                 <div className="comments-section">
-//                   <ul className="comments-list">
-//                     {(article.comments || []).map((c) => {
-//                       const currentUserId = localStorage.getItem("userId");
-//                       const commentUserId =
-//                         c.user?._id?.toString?.() || c.user?.toString?.();
-
-//                       return (
-//                         <li
-//                           key={c._id}
-//                           onClick={() => {
-//                             if (commentUserId === currentUserId) {
-//                               setActiveCommentId(c._id);
-//                             }
-//                           }}
-//                           onMouseLeave={() => setActiveCommentId(null)}
-//                           style={{
-//                             position: "relative",
-//                             cursor: commentUserId === currentUserId ? "pointer" : "default",
-//                           }}
-//                         >
-//                           <strong>{c.username || "Unknown"}:</strong> {c.text}
-
-//                           {activeCommentId === c._id && commentUserId === currentUserId && (
-//                             <span
-//                               className="delete-option"
-//                               onClick={() => handleDeleteComment(article._id, c._id)}
-//                               style={{ fontWeight: "bold", textTransform: "uppercase" }}
-//                             >
-//                               DELETE
-//                             </span>
-//                           )}
-//                         </li>
-//                       );
-//                     })}
-//                   </ul>
-
-//                   <CommentInput
-//                     onSubmit={(text) => handleComment(article._id, text)}
-//                   />
-//                 </div>
-//               )}
-
-//               <p className="meta">
-//                 Uploaded: {new Date(article.createdAt || article.uploadedAt).toLocaleString()}
-//               </p>
-//               <hr className="divider" />
-//             </div>
-//           );
-//         })
-//       )}
-
-//       {toast && <div className="toast-message">{toast}</div>}
-//     </div>
-//   );
-// };
-
-// const CommentInput = ({ onSubmit }) => {
-//   const [text, setText] = useState('');
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     onSubmit(text);
-//     setText('');
-//   };
-//   return (
-//     <form onSubmit={handleSubmit} className="comment-form">
-//       <input
-//         type="text"
-//         value={text}
-//         onChange={(e) => setText(e.target.value)}
-//         placeholder="Write a comment..."
-//       />
-//       <button type="submit">Post</button>
-//     </form>
-//   );
-// };
-
-// export default Articles;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState, useRef } from 'react';
 import axios from '../utils/axiosInstance';
 import './Articles.scss';
@@ -2734,7 +2278,7 @@ const Articles = () => {
   const [activeCommentId, setActiveCommentId] = useState(null);
   const [toast, setToast] = useState(null);
   const [translated, setTranslated] = useState({});
-  const [activeMenuId, setActiveMenuId] = useState(null); // For three-dot menu
+  const [activeMenuId, setActiveMenuId] = useState(null); // NEW: For three-dot menu
   const refs = useRef({});
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
@@ -2742,21 +2286,10 @@ const Articles = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // NEW: reactive mobile state
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
-
   useEffect(() => {
     fetchArticles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, isLoggedIn]);
-
-  // update isMobile on resize
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const fetchArticles = () => {
     const url = isLoggedIn ? "/api/articles/auth" : "/api/articles";
@@ -2768,7 +2301,7 @@ const Articles = () => {
         );
         setArticles(sorted);
       })
-      .catch(err => console.error("Error in fetching articles:", err));
+      .catch(err => console.error("Error fetching articles:", err));
   };
 
   const showToast = (msg) => {
@@ -2876,7 +2409,7 @@ const Articles = () => {
 
   const handleLike = async (id) => {
     if (!isLoggedIn) {
-      showToast("PLEASE LOGIN TO GET THESE FEATURES");
+      showToast("please login to get these features");
       return;
     }
     try {
@@ -2889,7 +2422,7 @@ const Articles = () => {
         prev.map(a => (a._id === id ? { ...a, ...res.data } : a))
       );
     } catch (err) {
-      console.error("Error in liking article:", err);
+      console.error("Error liking article:", err);
     }
   };
 
@@ -2909,7 +2442,7 @@ const Articles = () => {
 
   const handleComment = async (id, comment) => {
     if (!isLoggedIn) {
-      showToast("PLEASE LOGIN TO GET THESE FEATURES");
+      showToast("please login to get these features");
       return;
     }
     if (!comment.trim()) return;
@@ -2940,23 +2473,19 @@ const Articles = () => {
   return (
     <div className="articles">
       <div className="articles-header">
-        <h1>LATEST ARTICLES</h1>
-
+        <h1>Latest Articles</h1>
         <div className="search-container">
-          {/* Desktop: clickable icon; hidden on mobile by CSS */}
           <span
             className="search-icon"
             onClick={() => setShowSearch(prev => !prev)}
           >
             🔍︎
           </span>
-
-          {/* show on mobile OR when toggled on desktop */}
-          {(isMobile || showSearch) && (
+          {(showSearch || window.innerWidth <= 600) && (
             <input
               type="text"
               className="search-bar"
-              placeholder="search here"
+              placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -2973,6 +2502,7 @@ const Articles = () => {
           const needsToggle = showReadMore[article._id];
           const parts = splitMap[article._id] || null;
           const imageUrl = article.image || null; // Cloudinary URL is already full path
+
 
           const isTelugu = translated[article._id];
 
@@ -3005,6 +2535,8 @@ const Articles = () => {
                     </div>
                   </div>
                 )}
+
+               
               </div>
 
               <div className="content-wrap">
@@ -3069,7 +2601,7 @@ const Articles = () => {
                   onClick={(e) => {
                     e.stopPropagation();
                     if (!isLoggedIn) {
-                      showToast("PLEASE LOGIN TO GET THESE FEATURES");
+                      showToast("please login to get these features");
                       return;
                     }
                     toggleComments(article._id);
@@ -3149,7 +2681,7 @@ const CommentInput = ({ onSubmit }) => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Write a comment"
+        placeholder="Write a comment..."
       />
       <button type="submit">Post</button>
     </form>
@@ -3157,3 +2689,29 @@ const CommentInput = ({ onSubmit }) => {
 };
 
 export default Articles;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
