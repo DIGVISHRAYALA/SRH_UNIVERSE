@@ -3488,9 +3488,9 @@ const Articles = () => {
 
           <div className="content-wrap">
             <div className="article-content">
-              <div className="skeleton-thumb-placeholder">
+              <div className="skeleton-thumb">
                 {/* local placeholder — remove or replace if not wanted */}
-                <img src={"/mnt/data/WhatsApp Image 2025-11-21 at 3.33.59 PM.jpeg"} alt="placeholder" />
+                
               </div>
 
               <div className="skeleton-line short" />
