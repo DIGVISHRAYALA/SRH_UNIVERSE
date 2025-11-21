@@ -3517,7 +3517,7 @@ const Articles = () => {
         </div>
       )}
 
-      {filteredArticles.length === 0 ? (
+      {!isLoading && filteredArticles.length === 0 ? (
         <p>No articles found.</p>
       ) : (
         filteredArticles.map(article => {
