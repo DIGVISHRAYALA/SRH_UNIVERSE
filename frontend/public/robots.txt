@@ -5,4 +5,5 @@
 
 User-agent: *
 Allow: /
+Sitemap: https://srh-universe.onrender.com/sitemap.xml
 
