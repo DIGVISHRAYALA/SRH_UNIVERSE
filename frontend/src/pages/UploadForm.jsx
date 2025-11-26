@@ -323,7 +323,7 @@ const UploadForm = () => {
   const [articleImage, setArticleImage] = useState(null);
   const [articles, setArticles] = useState([]);
 
-  const [roomTitle, setRoomTitle] = useState('');
+  //const [roomTitle, setRoomTitle] = useState('');
   const [rooms, setRooms] = useState([]);
 
   const [activeSection, setActiveSection] = useState('videos');
