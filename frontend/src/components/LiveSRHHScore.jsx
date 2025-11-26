@@ -219,7 +219,7 @@ function parseScoreString(scoreStr = '') {
 function LiveSRHScore() {
   const [matchData, setMatchData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
 
   const fallbackMatch = {
     type: 'manual',
