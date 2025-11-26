@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://srh-universe.onrender.com/</loc>
+    <loc>https://srh-universe.netlify.app/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://srh-universe.onrender.com/videos</loc>
+    <loc>https://srh-universe.netlify.app/videos</loc>
   </url>
-
   <url>
-    <loc>https://srh-universe.onrender.com/articles</loc>
+    <loc>https://srh-universe.netlify.app/articles</loc>
   </url>
-
   <url>
-    <loc>https://srh-universe.onrender.com/live-discussion</loc>
+    <loc>https://srh-universe.netlify.app/live-discussion</loc>
   </url>
-
   <url>
-    <loc>https://srh-universe.onrender.com/about</loc>
+    <loc>https://srh-universe.netlify.app/about</loc>
   </url>
-
 </urlset>
