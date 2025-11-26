@@ -3216,7 +3216,7 @@ import axios from '../utils/axiosInstance';
 import './Articles.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.209.36.186:5000';
+//const API_BASE = process.env.REACT_APP_BASE_URL || 'http://10.209.36.186:5000';
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
@@ -3482,7 +3482,9 @@ const Articles = () => {
       {isLoading && (
         <div className="article-box skeleton" aria-hidden>
           <div className="article-header">
-            <h2 className="skeleton-title" />
+            
+            <h2 className="skeleton-title">Loading Articles</h2>
+
             <div style={{ width: 34 }} /> {/* keeps kebab space aligned */}
           </div>
 
