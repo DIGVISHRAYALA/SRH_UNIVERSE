@@ -5,5 +5,5 @@
 
 User-agent: *
 Allow: /
-Sitemap: https://srh-universe.netlify.app/sitemap.xml
+Sitemap: https://srh-universe.pages.dev/sitemap.xml
 
