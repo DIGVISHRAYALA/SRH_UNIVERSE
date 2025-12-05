@@ -6,7 +6,7 @@
 ![Chat](https://img.shields.io/badge/Feature-Live%20Chat-brightgreen)
 ![Cloud](https://img.shields.io/badge/Cloud-Cloudinary-lightgrey)
 
-SRH Universe is a MERN-based platform tailored for Sunrisers Hyderabad fans, providing exclusive access to downloadable edits, bilingual articles, and real-time match chat rooms.  
+SRH Universe is a MERN-based platform tailored for very SRH Universe Instagram follower and Sunrisers Hyderabad fan, providing exclusive access to downloadable edits, bilingual articles, and real-time match chat rooms.  
 The goal is to bring the entire SRH fan community into one dedicated digital home, built for speed, quality, and engagement.
 
 ---
@@ -98,8 +98,8 @@ Backend  → https://github.com/DIGVISHRAYALA/SRH_UNIVERSE/tree/main/backend
 
 ## **6.0 Screenshots**
 
-Below are real screenshots from the live site (light mode).  
-*(Place corresponding image files in `./screenshots/` folder)*
+Below are real screenshots from the live site.  
+
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/801374f8-41cd-46e6-add0-c8d00b4c5c36" alt="SRH Universe Homepage" width="1920" height="1080" />
@@ -189,11 +189,11 @@ npm start
 cd ../frontend
 npm install
 npm start
-
+```
 ---
 
 ## **10.0 Environment Variables**
-.env is in the backend/ directory and set:
+.env is there in the backend and frontend repo:
 
 ---
 
@@ -212,8 +212,6 @@ npm start
 | /api/articles/:id/comment | POST | Add comment to article |
 | /api/rooms | GET/POST | Manage chat rooms |
 | WebSocket Events | — | Real-time chat (joinRoom, chatMessage) |
-
-> You can extend this section with full request/response examples if needed.
 
 ---
 
@@ -266,6 +264,7 @@ as long as BSD license obligations are preserved.
 
 **Developer:** Rayala Digvish  
 **GitHub Profile:** https://github.com/DIGVISHRAYALA  
+**Email:** r.digvish@gmail.com  
 
 For collaboration, queries, or project demo access:  
 Contact via GitHub or request via email/LinkedIn.
