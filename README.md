@@ -118,6 +118,10 @@ Below are real screenshots from the live site.
 </p>
 
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/f54baba3-23ae-4267-985b-d2d0dfc4d1a7" alt="Chat Page" width="1920" height="1080" />
+</p>
+
+<p align="center">
   <img src="https://github.com/user-attachments/assets/2f764726-0ae6-4b27-b8eb-aab8842e0a4f" alt="About Us Page" width="1920" height="1080" />
 </p>
 
@@ -128,7 +132,6 @@ Below are real screenshots from the live site.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8e08f815-b6ab-479e-b777-b22ad268422a" alt="Profile Page" width="1920" height="1080" />
 </p>
-
 
 
 ---
