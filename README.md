@@ -1,11 +1,5 @@
 # **1.0 SRH Universe**
 
-![Status](https://img.shields.io/badge/Project-Active-green)
-![Stack](https://img.shields.io/badge/Stack-MERN-orange)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Chat](https://img.shields.io/badge/Feature-Live%20Chat-brightgreen)
-![Cloud](https://img.shields.io/badge/Cloud-Cloudinary-lightgrey)
-
 SRH Universe is a MERN-based platform tailored for very SRH Universe Instagram follower and Sunrisers Hyderabad fan, providing exclusive access to downloadable edits, bilingual articles, and real-time match chat rooms.  
 The goal is to bring the entire SRH fan community into one dedicated digital home, built for speed, quality, and engagement.
 
