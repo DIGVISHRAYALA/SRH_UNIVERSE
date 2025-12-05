@@ -129,7 +129,7 @@ Below are real screenshots from the live site.
   <img src="https://github.com/user-attachments/assets/8e08f815-b6ab-479e-b777-b22ad268422a" alt="Profile Page" width="1920" height="1080" />
 </p>
 
-> *Additional pages/screenshots can be added later as needed.*
+
 
 ---
 
