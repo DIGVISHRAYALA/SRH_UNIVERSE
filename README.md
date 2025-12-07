@@ -3,6 +3,10 @@
 SRH Universe is a MERN-based platform tailored for very SRH Universe Instagram follower and Sunrisers Hyderabad fan, providing exclusive access to downloadable edits, bilingual articles, and real-time match chat rooms.  
 The goal is to bring the entire SRH fan community into one dedicated digital home, built for speed, quality, and engagement.
 
+Website: https://srh-universe.pages.dev/
+
+Topics: mern, react, nodejs, express, socketio, mongodb, fullstack, jwt, cloudinary.
+
 ---
 
 ## **1.1 Table of Contents**
