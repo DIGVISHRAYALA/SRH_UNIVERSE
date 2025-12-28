@@ -472,23 +472,45 @@ const API_KEY =
   '71b5f26c-d381-455c-8498-de654ac2b5dd';
 
 /* ================= SAFE PARSER ================= */
-function parseScoreString(scoreStr) {
-  if (typeof scoreStr !== 'string') {
-    return { scoreMain: '', overs: '' };
-  }
+// function parseScoreString(scoreStr) {
+//   if (typeof scoreStr !== 'string') {
+//     return { scoreMain: '', overs: '' };
+//   }
 
-  const oversMatch = scoreStr.match(/\(([^)]+)\)\s*$/);
+//   const oversMatch = scoreStr.match(/\(([^)]+)\)\s*$/);
+
+//   if (oversMatch) {
+//     const overs = `(${oversMatch[1]})`;
+//     const scoreMain = scoreStr.replace(/\s*\([^)]+\)\s*$/, '').trim();
+//     return { scoreMain, overs };
+//   }
+
+//   return { scoreMain: scoreStr.trim(), overs: '' };
+// }
+
+
+
+
+function parseScoreString(scoreStr) {
+  const safeScore = String(scoreStr || '');
+
+  const oversMatch = safeScore.match(/\(([^)]+)\)\s*$/);
 
   if (oversMatch) {
-    const overs = `(${oversMatch[1]})`;
-    const scoreMain = scoreStr.replace(/\s*\([^)]+\)\s*$/, '').trim();
-    return { scoreMain, overs };
+    return {
+      scoreMain: safeScore.replace(/\s*\([^)]+\)\s*$/, '').trim(),
+      overs: `(${oversMatch[1]})`
+    };
   }
 
-  return { scoreMain: scoreStr.trim(), overs: '' };
+  return {
+    scoreMain: safeScore.trim(),
+    overs: ''
+  };
 }
 
-function LiveSRHScore() {
+
+function LiveSRHHScore() {
   const [matchData, setMatchData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [, setError] = useState(null);
@@ -633,7 +655,7 @@ function LiveSRHScore() {
               <div className="team-box">
                 <p className="team-name">{toShow.srh?.team || 'SUNRISERS HYDERABAD'}</p>
                 {(() => {
-                  const { scoreMain, overs } = extractParts(toShow.srh?.score);
+                  const { scoreMain, overs } = extractParts(toShow.srh?.score || '');
                   return (
                     <p className="team-score">
                       <span className="score-main">{scoreMain}</span>
@@ -661,7 +683,8 @@ function LiveSRHScore() {
               <div className="team-box">
                 <p className="team-name">{toShow.opp?.team || 'OPPONENT'}</p>
                 {(() => {
-                  const { scoreMain, overs } = extractParts(toShow.opp?.score);
+                  const { scoreMain, overs } = extractParts(toShow.opp?.score || '');
+
                   return (
                     <p className="team-score">
                       <span className="score-main">{scoreMain}</span>
@@ -709,5 +732,5 @@ function LiveSRHScore() {
   );
 }
 
-export default LiveSRHScore;
+export default LiveSRHHScore;
 
