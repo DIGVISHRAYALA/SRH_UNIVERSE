@@ -1,3 +1,251 @@
+// // html, body {
+// //   width: 100%;
+// //   height: 100%;
+// //   overflow-x: hidden;          // PREVENT horizontal overflow (hides accidental extra width)
+// //   -webkit-overflow-scrolling: touch;
+// // }
+
+// // .home {
+// //   width: 100%;
+// //   min-height: 100vh;
+// //   background: white;
+// //   color: black;
+// //   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+// //   display: flex;
+// //   flex-direction: column;
+// //   align-items: stretch;
+
+// //   .welcome-section {
+// //     width: 100%;
+// //     padding: 25px 20px;
+// //     background-color: white;
+// //     text-align: center;
+// //     border-bottom: 2px dashed orange;
+
+// //     h2 {
+// //       color: black;
+// //       font-size: 1.8rem;
+// //       margin-bottom: 10px;
+// //     }
+
+// //     p {
+// //       font-size: 1.1rem;
+// //       color: #333;
+// //       max-width: 900px;
+// //       margin: 0 auto 15px;
+// //       line-height: 1.6;
+// //     }
+
+// //     .social-icons {
+// //       display: flex;
+// //       justify-content: center;
+// //       gap: 20px;
+// //       margin-top: 15px;
+
+// //       a {
+// //         color: black;
+// //         font-size: 1.8rem;
+// //         transition: transform 0.3s ease, color 0.3s ease;
+
+// //         &:hover {
+// //           color: orange;
+// //           transform: scale(1.2);
+// //         }
+// //       }
+// //     }
+// //   }
+
+// //   .home-main {
+// //     width: 100%;
+// //     padding: 1px 10px;
+// //     text-align: center;
+
+// //     h1 {
+// //       font-size: 2.5rem;
+// //       color: orange;
+// //       margin-bottom: 20px;
+// //     }
+
+// //     p {
+// //       font-size: 1.2rem;
+// //       max-width: 800px;
+// //       margin: 0 auto;
+// //       color: black;
+// //     }
+// //   }
+
+// //   .trending-section {
+// //     margin-top: 10px;
+// //     padding: 0;
+// //     width: 100%;
+// //     display: flex;
+// //     justify-content: center;
+// //     align-self: stretch;
+// //     .trending-box {
+// //       width: 100%;
+// //       max-width: 100%;
+// //       background-color: rgb(255, 88, 4);
+// //       padding: 0;
+// //       border-radius: 0px;
+// //       border: 2px solid orange;
+// //       display: flex;
+// //       flex-direction: column;
+// //       transition: all 0.4s ease;
+
+// //       &:hover {
+// //         background-color: #ff7300; // deeper orange
+// //       }
+
+// //       .trending-title {
+// //         color: white;
+// //         font-size: 1.8rem;
+// //         text-align: center;
+// //         padding: 15px;
+// //         font-weight: bold;
+// //         transition: all 0.3s ease;
+// //         letter-spacing: 1px;
+
+// //         &:hover {
+// //           background-color: #ff7300;
+// //           text-shadow: 0 0 10px white;
+// //           cursor: pointer;
+// //         }
+// //       }
+
+// //       .article-link {
+// //         color: white;
+// //         text-decoration: none;
+// //         font-size: 1.1rem;
+// //         border-bottom: 1px dashed orange;
+// //         padding: 12px 20px;
+// //         transition: all 0.3s ease;
+
+// //         &:hover {
+// //           color: white;
+// //           font-size: 1.2rem;
+// //           text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+// //         }
+// //       }
+
+// //       .read-more {
+// //         align-self: flex-end;
+// //         color: rgb(255, 244, 244);
+// //         font-weight: bold;
+// //         font-size: 1rem;
+// //         text-decoration: none;
+// //         margin: 15px 20px 10px;
+// //         transition: all 0.3s ease;
+
+// //         &:hover {
+// //           color: rgb(255, 255, 255);
+// //           text-shadow: 0 0 10px rgb(248, 248, 248);
+// //         }
+// //       }
+// //     }
+// //   }
+
+// //   .home-footer {
+// //     width: 100%;
+// //     background-color: black;
+// //     color: white;
+// //     text-align: center;
+// //     font-size: 0.9rem;
+// //     padding: 15px 10px;
+// //     margin-top: auto;
+
+// //     p {
+// //       margin: 0;
+// //       line-height: 1.5;
+// //     }
+// //   }
+
+// //   // Responsive for smaller screens
+// //   @media (max-width: 768px) {
+// //     .home-main {
+// //       padding: 20px 10px;
+
+// //       h1 {
+// //         font-size: 2rem;
+// //       }
+
+// //       p {
+// //         font-size: 1rem;
+// //       }
+// //     }
+
+// //     .trending-box {
+// //       .article-link {
+// //         font-size: 1rem;
+// //         padding: 10px 15px;
+// //       }
+
+// //       .trending-title {
+// //         font-size: 1.4rem;
+// //         padding: 12px;
+// //       }
+// //     }
+// //     .rank {
+// //     color: #ffffff; // white for visibility on orange background
+// //     font-weight: bold;
+// //     margin-right: 0.4rem;
+// //     font-size: 0.95rem; // slightly smaller on mobile
+// //     }
+
+// //     .welcome-section {
+// //       h2 {
+// //         font-size: 1.5rem;
+// //       }
+
+// //       p {
+// //         font-size: 1rem;
+// //       }
+
+// //       .social-icons {
+// //         gap: 15px;
+
+// //         a {
+// //           font-size: 1.6rem;
+// //         }
+// //       }
+// //     }
+// //   }
+// // }
+
+// // .rank {
+// //   color: #ffffff; // bright orange
+// //   font-weight: bold;
+// //   margin-right: 0.4rem;
+// // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // html, body {
 //   width: 100%;
 //   height: 100%;
@@ -13,8 +261,8 @@
 //   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 //   display: flex;
 //   flex-direction: column;
-//   align-items: stretch;
-
+//   //align-items: center;
+//    align-items: stretch;
 //   .welcome-section {
 //     width: 100%;
 //     padding: 25px 20px;
@@ -76,6 +324,7 @@
 
 //   .trending-section {
 //     margin-top: 10px;
+//     //padding: 0 10px;
 //     padding: 0;
 //     width: 100%;
 //     display: flex;
@@ -190,7 +439,12 @@
 //     margin-right: 0.4rem;
 //     font-size: 0.95rem; // slightly smaller on mobile
 //     }
-
+//     .welcome-section {
+//     //padding-top: 0px;   // <--- ADD THIS
+//     //padding-bottom: 20px;
+//     padding-top: 0 !important;
+//     margin-top: -8px !important;   
+//     }
 //     .welcome-section {
 //       h2 {
 //         font-size: 1.5rem;
@@ -216,20 +470,6 @@
 //   font-weight: bold;
 //   margin-right: 0.4rem;
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -473,6 +713,113 @@ html, body {
 
 
 
+/* =========================================================
+   TRENDING BOX SKELETON (REALISTIC DARK THEME)
+   ========================================================= */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+
+/* Skeleton title */
+.trending-title.skeleton {
+  height: 22px;
+  width: 70%;
+  margin-bottom: 16px;
+}
+
+/* Skeleton article lines */
+.skeleton-line {
+  height: 16px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* Skeleton read more */
+.skeleton-readmore {
+  height: 16px;
+  width: 120px;
+  margin-top: 14px;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================================================
+   TOAST MESSAGE (SLOW SERVER NOTICE)
+   ========================================================= */
+
+.toast-message {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: orange;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: fadeInOut 2s ease forwards;
+  z-index: 1000;
+
+  max-width: 90vw;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+}
+
+/* =========================================================
+   MOBILE ADJUSTMENTS
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .trending-title.skeleton {
+    width: 85%;
+  }
+
+  .skeleton-line {
+    height: 14px;
+  }
+
+  .toast-message {
+    font-size: 0.95rem;
+    padding: 10px 16px;
+  }
+}
 
 
 
