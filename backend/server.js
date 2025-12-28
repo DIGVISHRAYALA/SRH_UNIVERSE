@@ -889,7 +889,8 @@ const videoStorage = new CloudinaryStorage({
     public_id: (req, file) => `${Date.now()}-${file.originalname.split('.')[0]}`,
   },
 });
-
+const adminAnalyticsRoutes = require("./routes/adminAnalytics");
+app.use("/api/admin/analytics", adminAnalyticsRoutes);
 const uploadVideo = multer({ storage: videoStorage });
 
 
