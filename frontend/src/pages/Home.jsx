@@ -128,7 +128,7 @@ function Home() {
     // 🔔 Show toast ONLY if loading > 5 seconds
     const toastTimer = setTimeout(() => {
       showToast("Firing up the updates… hang tight!");
-    }, 100);
+    }, 5000);
 
     axios.get('/api/articles')
       .then((res) => {
@@ -202,7 +202,7 @@ function Home() {
       {isLoading && (
         <div className="trending-section">
           <div className="trending-box">
-            <h2 className="trending-title skeleton"></h2>
+            
 
             <div className="skeleton skeleton-line"></div>
             <div className="skeleton skeleton-line"></div>
