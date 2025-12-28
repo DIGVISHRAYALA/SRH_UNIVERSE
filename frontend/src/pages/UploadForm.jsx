@@ -659,18 +659,33 @@ const UploadForm = () => {
   //   }
   // };
 
-  const handleLogin = () => {
-  const ADMIN_USERNAME = "digvish"; // hard-coded admin name
+//   const handleLogin = () => {
+//   const ADMIN_USERNAME = "digvish"; // hard-coded admin name
+
+//   if (
+//     adminUsername.trim().toLowerCase() === ADMIN_USERNAME &&
+//     adminPassword === process.env.REACT_APP_ADMIN_PASSWORD
+//   ) {
+//     setIsAuthenticated(true);
+//   } else {
+//     alert("Invalid admin username or password");
+//   }
+// };
+
+
+const handleLogin = () => {
+  const ADMIN_USERNAME = "digvish";
 
   if (
     adminUsername.trim().toLowerCase() === ADMIN_USERNAME &&
-    adminPassword === process.env.REACT_APP_ADMIN_PASSWORD
+    adminPassword.trim() === process.env.REACT_APP_ADMIN_PASSWORD
   ) {
     setIsAuthenticated(true);
   } else {
     alert("Invalid admin username or password");
   }
 };
+
 
 
   /* ================= FETCH ================= */
