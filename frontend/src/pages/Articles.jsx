@@ -3483,7 +3483,7 @@ const Articles = () => {
         <div className="article-box skeleton" aria-hidden>
           <div className="article-header">
             
-            <h2 className="skeleton-title">Loading Articles</h2>
+            
 
             <div style={{ width: 34 }} /> {/* keeps kebab space aligned */}
           </div>
