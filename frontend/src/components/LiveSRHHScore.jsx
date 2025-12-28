@@ -757,9 +757,9 @@ import React from "react";
 import "./LiveSRHScore.scss";
 
 // ⚠️ kept for future use (not used now)
-const API_KEY =
-  process.env.REACT_APP_CRICAPI_KEY ||
-  "71b5f26c-d381-455c-8498-de654ac2b5dd";
+// const API_KEY =
+//   process.env.REACT_APP_CRICAPI_KEY ||
+//   "71b5f26c-d381-455c-8498-de654ac2b5dd";
 
 const LiveSRHHScore = () => {
   // 🔥 MANUAL SCORECARD DATA (edit only this object)
