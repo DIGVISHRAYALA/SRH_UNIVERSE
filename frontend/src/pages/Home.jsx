@@ -118,7 +118,7 @@ function Home() {
 
   const showToast = (msg) => {
     setToast(msg);
-    setTimeout(() => setToast(null), 2000); // 2 seconds
+    setTimeout(() => setToast(null), 5000); // 2 seconds
   };
 
   useEffect(() => {
