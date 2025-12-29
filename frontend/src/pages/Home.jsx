@@ -121,37 +121,79 @@ function Home() {
     setTimeout(() => setToast(null), 5000); // 2 seconds
   };
 
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   const startTime = Date.now();
+
+  //   // 🔔 Show toast ONLY if loading > 5 seconds
+  //   const toastTimer = setTimeout(() => {
+  //     showToast("Firing up the updates… hang tight!");
+  //   }, 5000);
+
+  //   axios.get('/api/articles')
+  //     .then((res) => {
+  //       if (res.data && res.data.length > 0) {
+  //         const sorted = res.data.sort(
+  //           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  //         );
+  //         setLatestArticles(sorted.slice(0, 3));
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error('Error fetching articles:', err);
+  //     })
+  //     .finally(() => {
+  //       clearTimeout(toastTimer); // cancel toast if API responds early
+
+  //       // ensure skeleton shows at least 400ms
+  //       const elapsed = Date.now() - startTime;
+  //       const delay = Math.max(400 - elapsed, 0);
+
+  //       setTimeout(() => setIsLoading(false), delay);
+  //     });
+  // }, []);
+
+
+
   useEffect(() => {
-    setIsLoading(true);
-    const startTime = Date.now();
+  setIsLoading(true);
+  const startTime = Date.now();
 
-    // 🔔 Show toast ONLY if loading > 5 seconds
-    const toastTimer = setTimeout(() => {
-      showToast("Firing up the updates… hang tight!");
-    }, 5000);
+  // 🔔 Toast 1 after 5 seconds
+  const toastTimer1 = setTimeout(() => {
+    showToast("Firing up the updates… hang tight!");
+  }, 5000);
 
-    axios.get('/api/articles')
-      .then((res) => {
-        if (res.data && res.data.length > 0) {
-          const sorted = res.data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setLatestArticles(sorted.slice(0, 3));
-        }
-      })
-      .catch((err) => {
-        console.error('Error fetching articles:', err);
-      })
-      .finally(() => {
-        clearTimeout(toastTimer); // cancel toast if API responds early
+  // 🔔 Toast 2 after 10 seconds (5s after first)
+  const toastTimer2 = setTimeout(() => {
+    showToast("Almost there… getting things ready!");
+  }, 10000);
 
-        // ensure skeleton shows at least 400ms
-        const elapsed = Date.now() - startTime;
-        const delay = Math.max(400 - elapsed, 0);
+  axios.get('/api/articles')
+    .then((res) => {
+      if (res.data && res.data.length > 0) {
+        const sorted = res.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setLatestArticles(sorted.slice(0, 3));
+      }
+    })
+    .catch((err) => {
+      console.error('Error fetching articles:', err);
+    })
+    .finally(() => {
+      // ❌ cancel both toasts if API finishes
+      clearTimeout(toastTimer1);
+      clearTimeout(toastTimer2);
 
-        setTimeout(() => setIsLoading(false), delay);
-      });
-  }, []);
+      setToast(null); // hide toast immediately
+
+      const elapsed = Date.now() - startTime;
+      const delay = Math.max(400 - elapsed, 0);
+      setTimeout(() => setIsLoading(false), delay);
+    });
+}, []);
+
 
   return (
     <div className="home">
