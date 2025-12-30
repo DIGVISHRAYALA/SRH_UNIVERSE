@@ -774,9 +774,9 @@ html, body {
   padding: 12px 20px;
   border-radius: 8px;
   font-weight: bold;
-  animation: fadeInOut 2s ease forwards;
+  animation: fadeInOut 5s ease forwards;
   z-index: 1000;
-
+  animation-fill-mode: both;
   max-width: 90vw;
   text-align: center;
   box-sizing: border-box;
