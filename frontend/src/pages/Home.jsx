@@ -102,7 +102,7 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../utils/axiosInstance';
 import './Home.scss';
@@ -112,6 +112,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 function Home() {
   const [latestArticles, setLatestArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const loadingRef = useRef(true);
 
   // Toast state
   const [toast, setToast] = useState(null);
@@ -155,18 +156,62 @@ function Home() {
 
 
 
+//   useEffect(() => {
+//   setIsLoading(true);
+//   const startTime = Date.now();
+
+//   // 🔔 Toast 1 after 5 seconds
+//   const toastTimer1 = setTimeout(() => {
+//     showToast("Firing up the updates… hang tight!");
+//   }, 5000);
+
+//   // 🔔 Toast 2 after 10 seconds (5s after first)
+//   const toastTimer2 = setTimeout(() => {
+//     showToast("Almost there… getting things ready!");
+//   }, 10000);
+
+//   axios.get('/api/articles')
+//     .then((res) => {
+//       if (res.data && res.data.length > 0) {
+//         const sorted = res.data.sort(
+//           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+//         );
+//         setLatestArticles(sorted.slice(0, 3));
+//       }
+//     })
+//     .catch((err) => {
+//       console.error('Error fetching articles:', err);
+//     })
+//     .finally(() => {
+//       // ❌ cancel both toasts if API finishes
+//       clearTimeout(toastTimer1);
+//       clearTimeout(toastTimer2);
+
+//       setToast(null); // hide toast immediately
+
+//       const elapsed = Date.now() - startTime;
+//       const delay = Math.max(400 - elapsed, 0);
+//       setTimeout(() => setIsLoading(false), delay);
+//     });
+// }, []);
+
+
   useEffect(() => {
   setIsLoading(true);
+  loadingRef.current = true;
+
   const startTime = Date.now();
 
-  // 🔔 Toast 1 after 5 seconds
   const toastTimer1 = setTimeout(() => {
-    showToast("Firing up the updates… hang tight!");
+    if (loadingRef.current) {
+      setToast("Firing up the updates… hang tight!");
+    }
   }, 5000);
 
-  // 🔔 Toast 2 after 10 seconds (5s after first)
   const toastTimer2 = setTimeout(() => {
-    showToast("Almost there… getting things ready!");
+    if (loadingRef.current) {
+      setToast("Almost there… getting things ready!");
+    }
   }, 10000);
 
   axios.get('/api/articles')
@@ -182,17 +227,27 @@ function Home() {
       console.error('Error fetching articles:', err);
     })
     .finally(() => {
-      // ❌ cancel both toasts if API finishes
+      loadingRef.current = false;
+
       clearTimeout(toastTimer1);
       clearTimeout(toastTimer2);
 
-      setToast(null); // hide toast immediately
-
       const elapsed = Date.now() - startTime;
       const delay = Math.max(400 - elapsed, 0);
-      setTimeout(() => setIsLoading(false), delay);
+
+      setTimeout(() => {
+        setToast(null);
+        setIsLoading(false);
+      }, delay);
     });
+
+  return () => {
+    loadingRef.current = false;
+    clearTimeout(toastTimer1);
+    clearTimeout(toastTimer2);
+  };
 }, []);
+
 
 
   return (
