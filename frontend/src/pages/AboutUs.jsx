@@ -82,7 +82,7 @@ export default function AboutUs() {
               <div className="dev-name">DIGVISH RAYALA</div>
               <div className="dev-cred">B.Tech, CSE — 3rd Year, LPU</div>
               <div className="dev-extra">
-                A fan-driven project built with love and dedication over 5 years.
+                A fan-driven project built with love and dedication.
               </div>
             </div>
           </div>
