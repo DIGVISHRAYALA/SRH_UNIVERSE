@@ -117,10 +117,10 @@ function Home() {
   // Toast state
   const [toast, setToast] = useState(null);
 
-  const showToast = (msg) => {
-    setToast(msg);
-    setTimeout(() => setToast(null), 5000); // 2 seconds
-  };
+  // const showToast = (msg) => {
+  //   setToast(msg);
+  //   setTimeout(() => setToast(null), 5000); // 2 seconds
+  // };
 
   // useEffect(() => {
   //   setIsLoading(true);
