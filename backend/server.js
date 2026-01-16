@@ -853,7 +853,7 @@ const Article = require("./models/Article");
 const Message = require("./models/Message");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-
+const { getAIReply } = require("./ai");
 
 const Room = require("./models/Room");
 dotenv.config();
@@ -1322,7 +1322,34 @@ io.on("connection", (socket) => {
 
 
 
-  socket.on("chatMessage", async ({ roomId, token, text }) => {
+//   socket.on("chatMessage", async ({ roomId, token, text }) => {
+//   if (!roomId || !text || !token) return;
+
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     const user = await User.findById(decoded.id);
+//     if (!user) return;
+
+//     const msg = new Message({
+//       roomId,
+//       user: user.username, // <- always use username from DB
+//       text,
+//       time: new Date()     // Add timestamp if missing
+//     });
+//     await msg.save();
+
+//     io.to(roomId).emit("message", msg);
+//   } catch (err) {
+//     console.error("Invalid token on chatMessage:", err);
+//   }
+// });
+
+
+
+
+  
+
+socket.on("chatMessage", async ({ roomId, token, text }) => {
   if (!roomId || !text || !token) return;
 
   try {
@@ -1330,19 +1357,40 @@ io.on("connection", (socket) => {
     const user = await User.findById(decoded.id);
     if (!user) return;
 
-    const msg = new Message({
+    /* ------------------ 1️⃣ SAVE & EMIT USER MESSAGE ------------------ */
+    const userMsg = new Message({
       roomId,
-      user: user.username, // <- always use username from DB
+      user: user.username,
       text,
-      time: new Date()     // Add timestamp if missing
+      time: new Date()
     });
-    await msg.save();
 
-    io.to(roomId).emit("message", msg);
+    await userMsg.save();
+    io.to(roomId).emit("message", userMsg);
+
+    /* ------------------ 2️⃣ CHECK FOR AI MENTION ------------------ */
+    if (text.startsWith("@srh_universe.ai")) {
+      const question = text.replace("@srh_universe.ai", "").trim();
+      if (!question) return;
+
+      // ⏳ small delay so it feels natural
+      setTimeout(async () => {
+        const aiReply = await getAIReply(question);
+
+        /* ❌ DO NOT SAVE AI MESSAGE TO DB */
+        io.to(roomId).emit("message", {
+          user: "srh_universe.ai",
+          text: aiReply,
+          time: new Date()
+        });
+      }, 1200);
+    }
+
   } catch (err) {
     console.error("Invalid token on chatMessage:", err);
   }
 });
+
 
 
  
