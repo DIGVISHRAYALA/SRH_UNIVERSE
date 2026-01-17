@@ -554,26 +554,44 @@
      --------------------------------------------------- */
 
   /* wrapper uses flex so items always center and wrap */
-  .skeleton-row {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;  /* center children horizontally */
-    align-items: flex-start;
-    gap: 1.5rem;
-    flex-wrap: wrap;          /* wrap to next line on narrow viewports */
-    margin-top: 0.5rem;       /* small spacing under title */
-    padding: 0 0.5rem;        /* small padding so skeletons don't touch edges */
-  }
+  // .skeleton-row {
+  //   width: 100%;
+  //   box-sizing: border-box;
+  //   display: flex;
+  //   justify-content: center;  /* center children horizontally */
+  //   align-items: flex-start;
+  //   gap: 1.5rem;
+  //   flex-wrap: wrap;          /* wrap to next line on narrow viewports */
+  //   margin-top: 0.5rem;       /* small spacing under title */
+  //   padding: 0 0.5rem;        /* small padding so skeletons don't touch edges */
+  // }
 
-  /* each skeleton card is a flex child with fixed basis */
-  .skeleton-row .video-card.skeleton {
-    flex: 0 0 320px;   /* fixed width, but will wrap */
-    pointer-events: none;
-    box-sizing: border-box;
-    width: 320px;      /* explicit width to match real video */
-    margin: 0;         /* layout from flex wrapper */
-  }
+  // /* each skeleton card is a flex child with fixed basis */
+  // .skeleton-row .video-card.skeleton {
+  //   flex: 0 0 320px;   /* fixed width, but will wrap */
+  //   pointer-events: none;
+  //   box-sizing: border-box;
+  //   width: 320px;      /* explicit width to match real video */
+  //   margin: 0;         /* layout from flex wrapper */
+  // }
+
+
+
+.skeleton-row {
+  grid-column: 1 / -1;               /* 🔥 FIX: span full grid */
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 320px);
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.skeleton-row .video-card.skeleton {
+  width: 100%;
+  max-width: 320px;
+  pointer-events: none;
+}
 
   .video-card.skeleton .skeleton-title,
   .video-card.skeleton .skeleton-thumb,
@@ -704,16 +722,30 @@
     }
 
     /* skeletons wrap to single-column look on mobile */
-    .skeleton-row {
-      padding: 0 0.75rem;
-      gap: 1rem;
-    }
+    // .skeleton-row {
+    //   padding: 0 0.75rem;
+    //   gap: 1rem;
+    // }
 
-    .skeleton-row .video-card.skeleton {
-      width: 100%;
-      max-width: 480px;
-      flex: 0 0 100%;
-    }
+    // .skeleton-row .video-card.skeleton {
+    //   width: 100%;
+    //   max-width: 480px;
+    //   flex: 0 0 100%;
+    // }
+
+@media (max-width: 768px) {
+  .skeleton-row {
+    grid-column: 1 / -1;   /* ✅ STILL REQUIRED */
+    grid-template-columns: 1fr;
+    padding: 0 0.75rem;
+    gap: 1rem;
+  }
+
+  .skeleton-row .video-card.skeleton {
+    width: 100%;
+    max-width: 480px;
+  }
+}
 
     .video-card {
       padding: 0.8rem;
