@@ -120,6 +120,10 @@ Below are real screenshots from the live site.
 </p>
 
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/34eaf93d-41a6-4cc9-b148-27736c34e833" alt="AI assistant Page" width="1920" height="1080" />
+</p>
+
+<p align="center">
   <img src="https://github.com/user-attachments/assets/2f764726-0ae6-4b27-b8eb-aab8842e0a4f" alt="About Us Page" width="1920" height="1080" />
 </p>
 
@@ -194,7 +198,8 @@ npm start
 ---
 
 ## **10.0 Environment Variables**
-.env is there in the backend and frontend repo:
+Sensitive configuration values are managed using `.env` files in both the **frontend** and **backend** directories.  
+These files are excluded from version control for security reasons.
 
 ---
 
@@ -213,6 +218,7 @@ npm start
 | /api/articles/:id/comment | POST | Add comment to article |
 | /api/rooms | GET/POST | Manage chat rooms |
 | WebSocket Events | — | Real-time chat (joinRoom, chatMessage) |
+| /api/ai/chat | POST | Generate SRH-focused AI reply for live discussion (srh_universe.ai) |
 
 ---
 
@@ -232,20 +238,19 @@ npm start
 2. User can browse videos and articles  
 3. Videos are stored in Cloudinary and served via CDN — ensuring HD quality and fast download  
 4. Articles support English and Telugu; authenticated users can like/comment  
-5. Fans join live chat rooms during matches → messaging synced via Socket.IO  
-6. Admin uploads/deletes content → instantly reflected across the platform  
+5. Fans join live chat rooms during matches → messaging synced via Socket.IO
+6. An AI assistant (**@srh_universe.ai**) participates in live chat by generating SRH-focused replies using historical data and match insights  
+7. Admin uploads/deletes content → instantly reflected across the platform  
 
 ---
 
 ## **14.0 Future Enhancements**
 
-- Live score & performance statistics integration  
-- Search and filtering by player, match type, and date  
-- Push notifications for new uploads and match discussions  
-- Social login (Google/Facebook)  
-- Admin analytics dashboard (downloads, active users, engagement)  
+- Official SRH Universe merchandise store (hoodies, jerseys, caps, accessories) with secure checkout  
+- Community-driven offline & hybrid events such as open-ground IPL match screenings and fan meetups  
+- Interactive cricket-based games and fan challenges integrated into the website to boost engagement  
 - UI/UX improvements including dark mode  
-- Personalization & recommendations based on user interest  
+- Personalization & recommendations based on user interest
 
 ---
 
